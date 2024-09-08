@@ -7,4 +7,4 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Práctica1](UT%20DHCP%20práctica.md)
 
-[Configurar VBox como red interna](UT%20DHCP%20configuracion%20VBox.md)
+[Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
