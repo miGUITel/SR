@@ -1,10 +1,16 @@
 # SR
 Material del móduolo Servicios en Red del Grado Medio SMR
 
-# UT DHCP
+# UT01 INTRODUCCIÓN
 
-[Teoría](./UT%20DHCP%20teoría.md)
 
-[Práctica1](UT%20DHCP%20práctica.md)
+
+# UT02 DHCP
+
+
+[Teoría](./UT_DHCP_teoría.md)
+
+[Práctica1](UT_DHCP_práctica.md.md)
 
 [Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
+

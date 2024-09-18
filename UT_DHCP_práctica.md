@@ -1,4 +1,4 @@
-¡Excelente! Aquí te propongo un ejercicio práctico para que tus alumnos comprendan el funcionamiento de **DHCP** en un entorno controlado. Este ejercicio puede realizarse utilizando una máquina virtual o un entorno de laboratorio con acceso a un servidor DHCP y varios dispositivos cliente (pueden ser PCs, portátiles o máquinas virtuales).
+Este ejercicio puede realizarse utilizando una máquina virtual o un entorno de laboratorio con acceso a un servidor DHCP y varios dispositivos cliente (pueden ser PCs, portátiles o máquinas virtuales).
 
 ### Objetivos del ejercicio:
 1. Comprender el proceso de asignación dinámica de direcciones IP a través de DHCP.
