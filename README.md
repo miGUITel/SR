@@ -7,6 +7,8 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Servicios básicos de la capa de Aplicación](./UT01_servicios.md)
 
+[Direcciones anycast](./UT01_anycast.md)
+
 # UT02 DHCP
 
 
