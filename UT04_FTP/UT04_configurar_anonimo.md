@@ -18,6 +18,7 @@ Dentro de la configuración, busca la sección donde se menciona la configuraci�
   Group                         nogroup
   # Permitir solo descargas, no subir ni borrar archivos
   UserAlias                      anonymous ftp
+  RequireValidShell off
   <Directory *>
     <Limit WRITE>
       DenyAll
@@ -39,7 +40,7 @@ Dentro de la configuración, busca la sección donde se menciona la configuraci�
 - **MaxClients**: Número máximo de clientes anónimos que pueden conectarse al mismo tiempo.
 - **DisplayLogin y DisplayFirstChdir**: Muestra un mensaje de bienvenida y un mensaje en el primer cambio de directorio. Estos archivos (`welcome.msg` y `.message`) deben existir en el directorio raíz FTP para mostrar el mensaje.
 
-### 3. **Crear un directorio FTP para el usuario anónimo**
+### 3. **Crear un directorio FTP para el usuario anónimo (si no existe)**
 
 Necesitas crear el directorio donde los usuarios anónimos tendrán acceso. Por defecto, este directorio es `/srv/ftp`, pero puedes ajustarlo según tus necesidades.
 
@@ -72,7 +73,7 @@ Asegúrate de que los archivos tengan los permisos correctos para permitir su le
 sudo chmod 644 /srv/ftp/archivo.txt
 ```
 
-### 5. **(Opcional) Permitir que los usuarios anónimos suban archivos**
+### 5. **(Opcional y peligroso!!) Permitir que los usuarios anónimos suban archivos**
 
 Si deseas permitir que los usuarios anónimos suban archivos, modifica el bloque `<Directory *>` en la configuración anónima:
 
