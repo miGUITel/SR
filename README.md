@@ -24,4 +24,4 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 # UT04 FTP
 
-[Guía instalación proftpd](./UT04%20FTP/UT04_instalar_proftpd.md)
+[Guía instalación proftpd](./UT04_FTP/UT04_instalar_proftpd.md)
