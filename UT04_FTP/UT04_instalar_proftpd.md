@@ -120,3 +120,5 @@ Si necesitas hacer más configuraciones específicas como añadir usuarios virtu
 - Asegúrate de que el firewall permita conexiones FTP, si tienes uno activado.
 - Considera utilizar FTP sobre TLS si deseas asegurar la transferencia de datos.
 - Verifica que las configuraciones de permisos de usuario estén adecuadamente configuradas para evitar accesos no autorizados.
+
+[Configura el usuario anónimo](./UT04_configurar_anonimo.md)
