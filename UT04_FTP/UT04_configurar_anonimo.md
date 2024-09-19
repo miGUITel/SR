@@ -27,8 +27,6 @@ Dentro de la configuración, busca la sección donde se menciona la configuraci�
   
   # Limitar el ancho de banda del usuario anónimo
   MaxClients 10
-  DisplayLogin                    welcome.msg
-  DisplayFirstChdir               .message
 </Anonymous>
 ```
 
