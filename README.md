@@ -13,6 +13,7 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 # UT02 DHCP
 
+[Convertir MAC en IPv6](./UT02_DHCP/SR02TA05_MACaIPv6.md/)
 
 [Teoría](./UT_DHCP_teoría.md)
 
