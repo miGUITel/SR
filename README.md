@@ -18,6 +18,10 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Práctica1](UT_DHCP_práctica.md)
 
+[Instalación en WS19](./UT02_DHCP/SR02_instalar_configurar_ws19.md)
+
+[Comprobar en WS19](./UT02_DHCP/SR02_comprobar_ws19.md)
+
 [Instalar isc-dhcp](./UT01/UT01_instalar_isc-dhcp.md)
 
 [Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
