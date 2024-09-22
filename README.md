@@ -28,3 +28,5 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 # CONSEJOS GENERALES
 [Editar archivos de configuración en linux](./UT00_editar_conf.md)
+
+[Conectar DISCO USB a virtual box](./UT00/SR00_vBox_conectar_USB.md)
