@@ -1,6 +1,8 @@
+# CAPTURAS PENDIENTES DE LA CONFIGURACIÓN, PASO 3
 Este manual cubrirá la instalación y configuración del servicio DHCP (Dynamic Host Configuration Protocol) en Windows Server 2019, utilizando **PowerShell** y **Administrador del servidor**.
 
 ### **Índice**
+0. Configuración ip estática
 1. Instalación de DHCP con PowerShell
 2. Instalación de DHCP con el Administrador del servidor
 3. Configuración del DHCP
@@ -10,7 +12,13 @@ Este manual cubrirá la instalación y configuración del servicio DHCP (Dynamic
 
 ---
 
-## 1. Instalación de DHCP con PowerShell
+## Configurar ip estática
+
+Para que las interfaces de red no dependan de otro DHCP.
+
+[configurar ip estática](./SR0209_ip_estatica.md)
+
+## Alternativa 1 - Instalación de DHCP con PowerShell
 
 ### **Paso 1: Abrir PowerShell como administrador**
 - Ve al **Menú Inicio** y busca **Windows PowerShell**.
@@ -23,10 +31,12 @@ Ejecuta el siguiente comando para instalar el rol DHCP:
 Install-WindowsFeature -Name DHCP -IncludeManagementTools
 ```
 
+![alt text](image.png)
+
 Esto instalará tanto el servicio DHCP como las herramientas de administración necesarias.
 
-### **Paso 3: Autorizar el servidor DHCP en Active Directory**
-Si tu servidor forma parte de un dominio, es necesario autorizarlo en **Active Directory**:
+### **Paso 3 (*opcional*): Autorizar el servidor DHCP en Active Directory**
+*Si tu servidor forma parte de un dominio*, es necesario autorizarlo en **Active Directory**:
 
 ```powershell
 Add-DhcpServerInDC -DnsName "NombreDelServidor" -IpAddress "DirecciónIPDelServidor"
@@ -42,10 +52,10 @@ Get-WindowsFeature -Name DHCP*
 ```
 
 Deberías ver que el servicio está instalado y habilitado.
-
+![alt text](image-1.png)
 ---
 
-## 2. Instalación de DHCP con el Administrador del Servidor
+## Alternativa 2 - Instalación de DHCP con el Administrador del Servidor
 
 ### **Paso 1: Abrir el Administrador del servidor**
 - Ve al **Menú Inicio** y selecciona **Administrador del servidor**.
@@ -69,9 +79,6 @@ Deberías ver que el servicio está instalado y habilitado.
 - Haz clic en **Completar la configuración DHCP** y luego selecciona **Autorizar el servidor**.
 
 ---
-Para adaptar la guía a la configuración de la tabla que me proporcionaste, he actualizado los valores correspondientes para reflejar los parámetros especificados en la imagen. Aquí tienes la versión modificada de la guía:
-
----
 
 ## 3. Configuración detallada del DHCP
 
@@ -81,6 +88,8 @@ En este caso, nos basaremos en la configuración de dos subredes y algunas reser
 1. Abre la consola DHCP desde el Administrador del Servidor o ejecuta el comando `dhcpmgmt.msc` en el cuadro de búsqueda de Inicio.
 2. En la consola, expande el nodo de tu servidor en el panel izquierdo.
 3. Trabajaremos con **IPv4** en este ejemplo, ya que es la configuración relevante.
+
+![alt text](image-5.png)
 
 ### Paso 2: Crear un Ámbito (Scope)
 
@@ -134,13 +143,13 @@ Se configurarán dos dispositivos con direcciones IP reservadas basadas en sus d
 - **Nombre de la reserva**: PC1
 - **Dirección IP reservada**: 172.16.0.66
 - **Dirección MAC**: 08:00:27:00:01:0C
-- **Gateway**: 172.16.0.1
+
 
 #### PC 2
 - **Nombre de la reserva**: PC2
 - **Dirección IP reservada**: 172.16.1.244
 - **Dirección MAC**: 08:00:27:D2:2E:33
-- **Gateway**: 172.16.1.1
+
 
 Una vez completada la configuración de las reservas, haz clic en **Agregar** para asegurarte de que los dispositivos siempre reciban la misma IP asignada.
 
