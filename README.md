@@ -27,6 +27,10 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
 
+# UT03 DNS
+
+[Apuntes](./UT03/SR03.md)
+
 # UT04 FTP
 
 [Guía instalación proftpd](./UT04_FTP/UT04_instalar_proftpd.md)
