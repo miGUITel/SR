@@ -1,4 +1,4 @@
-# CAPTURAS PENDIENTES DE LA CONFIGURACIÓN, PASO 3
+# UT02 TA09
 Este manual cubrirá la instalación y configuración del servicio DHCP (Dynamic Host Configuration Protocol) en Windows Server 2019, utilizando **PowerShell** y **Administrador del servidor**.
 
 ### **Índice**
@@ -53,6 +53,8 @@ Get-WindowsFeature -Name DHCP*
 
 Deberías ver que el servicio está instalado y habilitado.
 ![alt text](image-1.png)
+*Podría ser necesario reiniciar el servidor*
+
 ---
 
 ## Alternativa 2 - Instalación de DHCP con el Administrador del Servidor
@@ -104,10 +106,13 @@ Primero crearemos los dos ámbitos, uno para cada subred.
      - **IP de inicio**: 172.16.0.100
      - **IP de fin**: 172.16.0.200
    - **Longitud de la máscara de subred**: 255.255.255.0 (Clase C).
+![alt text](image-6.png)
 3. En **Agregar Exclusiones**, si lo deseas, excluye cualquier dirección fuera del rango. Si no, puedes omitir este paso.
+   1. ![alt text](image-7.png)
 4. En **Duración de las concesiones**, dejamos los valores predeterminados o ajustamos según la configuración deseada:
    - **Por defecto**: 10 minutos
    - **Máximo**: 2 horas
+   - ![alt text](image-8.png)
 5. Haz clic en **Siguiente** para continuar.
 
 #### Subred 2
@@ -126,7 +131,9 @@ Primero crearemos los dos ámbitos, uno para cada subred.
 
 1. Para **Subred 1**:
    - **Gateway**: 172.16.0.1
+   - ![alt text](image-9.png)
    - **Servidores DNS**: 172.16.0.4, 172.16.0.5
+   - ![alt text](image-10.png)
 2. Para **Subred 2**:
    - **Gateway**: 172.16.1.1
    - **Servidores DNS**: Los mismos que Subred 1 (172.16.0.4, 172.16.0.5).
@@ -159,6 +166,9 @@ Una vez completada la configuración de las reservas, haz clic en **Agregar** pa
 2. En la consola DHCP, haz clic derecho sobre cada ámbito y selecciona **Activar**.
 3. El servidor DHCP estará ahora listo para asignar direcciones IP a los dispositivos en las dos subredes configuradas.
 
+### Paso 6: Desactivar las actualizaciones dinámicas del DNS
+Click derecho - propiedades (pestaña DNS)
+![alt text](image-11.png)
 ---
 
 
