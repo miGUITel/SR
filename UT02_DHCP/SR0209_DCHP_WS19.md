@@ -144,10 +144,10 @@ Esto permitirá que los clientes en ambas subredes se comuniquen a través de su
 
 Se configurarán dos dispositivos con direcciones IP reservadas basadas en sus direcciones MAC.
 
+1. Haz clic derecho en **Reservas** bajo el ámbito correspondiente y selecciona **Nueva Reserva**.
+
 ![alt text](image-13.png)
 ![alt text](image-12.png)
-
-1. Haz clic derecho en **Reservas** bajo el ámbito correspondiente y selecciona **Nueva Reserva**.
    
 #### PC 1
 - **Nombre de la reserva**: PC1
@@ -173,10 +173,6 @@ Una vez completada la configuración de las reservas, haz clic en **Agregar** pa
 Click derecho - propiedades (pestaña DNS)
 ![alt text](image-11.png)
 
-
-
-
 ---
 
 
-**Tip:** Toma capturas de pantalla en las etapas críticas, como la creación del ámbito y la configuración de exclusiones, para futuras referencias o documentación interna.
