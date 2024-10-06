@@ -11,19 +11,21 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Interfaces de red en linux](./UT01/UT01_interfaces_red.md)
 
-# UT02 DHCP
-
 [Convertir MAC en IPv6](./UT02_DHCP/SR02TA05_MACaIPv6.md/)
 
-[Teoría](./UT_DHCP_teoría.md)
+# UT02 DHCP
 
-[Práctica1](UT_DHCP_práctica.md)
+[Protocolo DHCP, mensajes](./UT_DHCP_teoría.md)
+
+[TA03 Tipos de asignación de IP](./UT02_DHCP/SR02TA03t.md)
+
+[Propuesta práctica linux](UT_DHCP_práctica.md)
 
 [Instalación en WS19](./UT02_DHCP/SR0209_DCHP_WS19.md)
 
 [Comprobar en WS19](./UT02_DHCP/SR02_comprobar_ws19.md)
 
-[Instalar isc-dhcp](./UT01/UT01_instalar_isc-dhcp.md)
+[Instalar isc-dhcp en Linux](./UT01/UT01_instalar_isc-dhcp.md)
 
 [Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
 

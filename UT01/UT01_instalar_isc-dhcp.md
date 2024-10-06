@@ -1,4 +1,4 @@
-Para instalar y configurar un servidor **ISC DHCP** en Linux Mint en modo anónimo, sigue estos pasos:
+Para instalar y configurar un servidor **ISC DHCP** en Linux, sigue estos pasos:
 
 ### 1. **Instalar el servidor DHCP ISC**
 
