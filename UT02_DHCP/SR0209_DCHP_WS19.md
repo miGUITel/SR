@@ -169,6 +169,12 @@ Una vez completada la configuración de las reservas, haz clic en **Agregar** pa
 ### Paso 6: Desactivar las actualizaciones dinámicas del DNS
 Click derecho - propiedades (pestaña DNS)
 ![alt text](image-11.png)
+
+### Añadir una reserva
+![alt text](image-13.png)
+![alt text](image-12.png)
+
+
 ---
 
 
