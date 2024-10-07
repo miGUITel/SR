@@ -2,7 +2,7 @@
 Este manual cubrirá la instalación y configuración del servicio DHCP (Dynamic Host Configuration Protocol) en Windows Server 2019, utilizando **PowerShell** y **Administrador del servidor**.
 
 ### **Índice**
-0. Configuración ip estática
+0. Configuración ip fija
 1. Instalación de DHCP con PowerShell
 2. Instalación de DHCP con el Administrador del servidor
 3. Configuración del DHCP
@@ -12,11 +12,11 @@ Este manual cubrirá la instalación y configuración del servicio DHCP (Dynamic
 
 ---
 
-## Configurar ip estática
+## Configurar ip fija
 
 Para que las interfaces de red no dependan de otro DHCP.
 
-[configurar ip estática](./SR0209_ip_estatica.md)
+[configurar ip fija](./SR0209_ip_estatica.md)
 
 ## Alternativa 1 - Instalación de DHCP con PowerShell
 

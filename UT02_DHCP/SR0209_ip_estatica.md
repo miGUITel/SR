@@ -1,6 +1,6 @@
-Para asignar dos direcciones IP estáticas a las interfaces de red en un servidor con Windows Server 2019, debes seguir estos pasos. Cada interfaz de red recibirá una dirección IP estática diferente, basándonos en las dos subredes mencionadas en la tabla: 172.16.0.220/24 y 172.16.1.220/24.
+Para asignar dos direcciones IP fijas a las interfaces de red en un servidor con Windows Server 2019, debes seguir estos pasos. Cada interfaz de red recibirá una dirección IP estática diferente, basándonos en las dos subredes mencionadas en la tabla: 172.16.0.220/24 y 172.16.1.220/24.
 
-### Pasos para asignar direcciones IP estáticas a las interfaces de red:
+### Pasos para asignar direcciones IP fijas a las interfaces de red:
 
 Usar el Administrador de conexiones de red
 
@@ -12,7 +12,7 @@ Usar el Administrador de conexiones de red
 2. **Seleccionar la primera interfaz de red**:
    - Identifica la interfaz que deseas configurar con la dirección **172.16.0.220**. Normalmente, las interfaces están nombradas como "Ethernet 1", "Ethernet 2", etc. Puedes hacer clic derecho sobre la interfaz y seleccionar **Propiedades** para ver detalles y confirmar que es la correcta.
 
-3. **Configurar la IP estática en la primera interfaz**:
+3. **Configurar la IP fija en la primera interfaz**:
    - Haz clic derecho sobre la primera interfaz de red y selecciona **Propiedades**.
    - En la lista de opciones, selecciona **Protocolo de Internet versión 4 (TCP/IPv4)** y luego haz clic en **Propiedades**.
    - Selecciona la opción **Usar la siguiente dirección IP** y luego introduce la siguiente configuración:
@@ -29,7 +29,7 @@ Usar el Administrador de conexiones de red
 4. **Seleccionar la segunda interfaz de red**:
    - Repite el mismo proceso, pero esta vez selecciona la segunda interfaz de red, que configuraremos con la dirección IP de la segunda subred (172.16.1.220).
 
-5. **Configurar la IP estática en la segunda interfaz**:
+5. **Configurar la IP fija en la segunda interfaz**:
    - Haz clic derecho sobre la segunda interfaz de red y selecciona **Propiedades**.
    - Selecciona **Protocolo de Internet versión 4 (TCP/IPv4)** y luego **Propiedades**.
    - Configura los siguientes valores:
