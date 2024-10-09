@@ -101,6 +101,10 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
    `cat /var/log/syslog | grep dhcpd`
 
    nos dará una explicación del error y la línea del archivo de configuración en la que se encuentra éste.
+
+   Errores comunes:
+      - mala tabulación
+      - no poner ; al final de las líneas que lo necesitan
 ---
 
 ### Paso 2: Configuración de los clientes
@@ -142,7 +146,9 @@ Una vez configurado el servidor y los clientes, los alumnos pueden verificar el 
 
 1. **En el cliente:**
    - En Linux, pueden usar `ip a` para ver si la interfaz de red ha obtenido una dirección IP. También pueden usar `dhclient -v` para observar el proceso de solicitud de IP.
- - ![alt text](image-21.png)
+  
+      ![alt text](image-21.png)
+
    - En Windows, pueden usar `ipconfig` para ver la dirección IP asignada. También pueden usar `ipconfig /renew` para forzar la renovación de la IP.
 
 2. **En el servidor:**
@@ -153,14 +159,14 @@ Una vez configurado el servidor y los clientes, los alumnos pueden verificar el 
    ```bash
    sudo tail -f /var/log/syslog | grep dhcp
    ```
-   ![alt text](image-24.png) En la imagen observamos cómo, al conectarse por primera vez, el cliente comienza el intercambio de mensajes con DHCPDISCOVER.
+      ![alt text](image-24.png) En la imagen observamos cómo, al conectarse por primera vez, el cliente comienza el intercambio de mensajes con DHCPDISCOVER.
    Sin embargo, al reiniciar el cliente, como la concesión sigue activa, el cliente envía un DHCPREQUEST y el servidor responde con un DHCPACK.
 
    - Pueden comprobar la lista de ips prestadas con:
    ```bash
    dhcp-lease-list
    ```
-![alt text](image-22.png)
+      ![alt text](image-22.png)
 
 ---
 
