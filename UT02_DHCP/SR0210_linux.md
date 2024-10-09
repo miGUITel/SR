@@ -6,7 +6,7 @@ Este ejercicio puede realizarse utilizando una máquina virtual o un entorno de 
 3. Observar cómo un cliente obtiene su configuración de red utilizando DHCP.
 4. Entender el concepto de tiempo de arrendamiento y renovación.
 
-### Material necesario:
+#### Material necesario:
 - 1 Servidor Linux (puede ser una máquina virtual) para actuar como servidor DHCP.
 - 1 o 2 dispositivos cliente (pueden ser PCs o máquinas virtuales con sistemas operativos como Windows o Linux).
 - Una red local (puede ser una red virtual o física).
@@ -24,13 +24,38 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
    ```bash
    sudo apt update
    sudo apt install isc-dhcp-server
+   poweroff
    ```
+
+   ![alt text](image-14.png)
+
+   Apagamos el equipo para poder modificar la configuración física en vBox.
+
+   1.1 **Configurar las interfaces de red físicamente (vBox)**
+
+   En virtual box, configuramos dos adaptadores de red, **en modo red interna**, uno en la red llamada *subred1* y otro en la llamada *subred2*.
+
+   ![alt text](image-15.png)
+
+   1.2 **Configurar la red logicamente (linux)**
+
+   Con ips fijas:
+
+   En linux, editamos el archivo de configuración `/etc/netplan/00-installer-config.yaml`:
+
+   ![alt text](image-16.png)
+
+   Comprobamos la configuración con `sudo netplan apply` y `ifconfig -a`:
+
+   ![alt text](image-17.png)
+
+
 
 2. **Configurar el archivo de configuración del DHCP:**
 
-   El archivo de configuración del servidor DHCP suele encontrarse en `/etc/dhcp/dhcpd.conf`. Los alumnos deben editarlo para definir un rango de direcciones IP que el servidor DHCP asignará a los clientes.
+   El archivo de configuración del servidor DHCP se encuentra en `/etc/dhcp/dhcpd.conf`. Los alumnos deben editarlo para definir un rango de direcciones IP que el servidor DHCP asignará a los clientes.
 
-   Ejemplo de configuración mínima:
+   Ejemplo de configuración mínima sin ámbitos: (se recomienda guardar una copia con `cp`)
 
    ```bash
    subnet 192.168.1.0 netmask 255.255.255.0 {
@@ -48,6 +73,12 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
    - **option routers** especifica la dirección IP de la puerta de enlace predeterminada (gateway).
    - **option domain-name-servers** establece los servidores DNS que se proporcionarán a los clientes.
    - **default-lease-time** y **max-lease-time** definen el tiempo de arrendamiento de la IP (en segundos).
+  
+  **Para nuestro ejemplo:**
+
+  
+   ![alt text](image-18.png)
+   ![alt text](image-19.png)
 
 3. **Iniciar el servicio DHCP:**
 
@@ -63,7 +94,13 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
    ```bash
    sudo systemctl status isc-dhcp-server
    ```
+   ![alt text](image-20.png)
 
+   **En caso de error:**
+
+   `cat /var/log/syslog | grep dhcpd`
+
+   nos dará una explicación del error y la línea del archivo de configuración en la que se encuentra éste.
 ---
 
 ### Paso 2: Configuración de los clientes
@@ -100,8 +137,12 @@ En este paso, los alumnos configurarán los dispositivos cliente (pueden ser PCs
 
 Una vez configurado el servidor y los clientes, los alumnos pueden verificar el proceso de obtención de una IP por parte de los clientes y ver los mensajes que intercambian con el servidor.
 
+0. **Configuración física (vBox)**
+   - Configurar el adaptador de red en modo red interna, en la misma red en la que está trabajando el servidor dhcp.
+
 1. **En el cliente:**
    - En Linux, pueden usar `ip a` para ver si la interfaz de red ha obtenido una dirección IP. También pueden usar `dhclient -v` para observar el proceso de solicitud de IP.
+ - ![alt text](image-21.png)
    - En Windows, pueden usar `ipconfig` para ver la dirección IP asignada. También pueden usar `ipconfig /renew` para forzar la renovación de la IP.
 
 2. **En el servidor:**
@@ -110,8 +151,16 @@ Una vez configurado el servidor y los clientes, los alumnos pueden verificar el 
    Comando para ver los logs en tiempo real:
 
    ```bash
-   sudo tail -f /var/log/syslog
+   sudo tail -f /var/log/syslog | grep dhcp
    ```
+   ![alt text](image-24.png) En la imagen observamos cómo, al conectarse por primera vez, el cliente comienza el intercambio de mensajes con DHCPDISCOVER.
+   Sin embargo, al reiniciar el cliente, como la concesión sigue activa, el cliente envía un DHCPREQUEST y el servidor responde con un DHCPACK.
+
+   - Pueden comprobar la lista de ips prestadas con:
+   ```bash
+   dhcp-lease-list
+   ```
+![alt text](image-22.png)
 
 ---
 
@@ -145,4 +194,51 @@ Al final del ejercicio, los alumnos deben ser capaces de:
 - Configurar un servidor DHCP básico y observar el proceso de asignación y renovación de IP.
 - Reflexionar sobre la importancia del tiempo de arrendamiento y cómo afecta a la gestión de direcciones IP en una red.
 
-Puedes pedir a tus alumnos que expliquen qué ventajas tiene utilizar DHCP en una red grande en lugar de asignar IPs estáticas, o cómo evitarían problemas como conflictos de IP.
+## Resumen de archivos de configuración y comandos:
+
+1. **/etc/netplan/00-installer-config.yaml**  
+   - Configuración de red, IP estática
+
+2. **/etc/dhcp/dhcpd.conf**  
+   - Rango IP, Configuración DHCP
+
+3. **/etc/network/interfaces** (en algunos casos de clientes Linux)  
+   - Configuración DHCP, Cliente de red
+
+4. **/var/log/syslog**  
+   - Registros, Diagnóstico DHCP
+
+### Comandos de Linux:
+1. **sudo apt update && sudo apt install isc-dhcp-server**  
+   - Actualización, Instalación DHCP
+
+2. **sudo netplan apply**  
+   - Aplicar configuración, Red
+
+3. **ifconfig -a** o **ip a**  
+   - Información red, Estado interfaces
+
+4. **sudo systemctl start isc-dhcp-server**  
+   - Iniciar servicio, DHCP
+
+5. **sudo systemctl enable isc-dhcp-server**  
+   - Inicio automático, DHCP
+
+6. **sudo systemctl status isc-dhcp-server**  
+   - Estado servicio, DHCP
+
+7. **cat /var/log/syslog | grep dhcpd**  
+   - Diagnóstico, Filtrar registros
+
+8. **dhclient -v**  
+   - Solicitud IP, Cliente DHCP
+
+9. **sudo tail -f /var/log/syslog | grep dhcp**  
+   - Monitoreo en tiempo real, DHCP
+
+10. **sudo systemctl restart isc-dhcp-server**  
+    - Reiniciar servicio, DHCP
+
+11. **dhcp-lease-list**  
+    - Lista IP, Arrendamientos DHCP
+

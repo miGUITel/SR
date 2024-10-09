@@ -19,7 +19,7 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [TA03 Tipos de asignación de IP](./UT02_DHCP/SR02TA03t.md)
 
-[Propuesta práctica linux](UT_DHCP_práctica.md)
+[Propuesta práctica linux](./UT02_DHCP/SR0210_linux.md)
 
 [Instalación en WS19](./UT02_DHCP/SR0209_DCHP_WS19.md)
 
