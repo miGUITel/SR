@@ -105,6 +105,8 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
    Errores comunes:
       - mala tabulación
       - no poner ; al final de las líneas que lo necesitan
+
+   [Editar archivos de configuración en linux: consejos](./UT00_editar_conf.md)
 ---
 
 ### Paso 2: Configuración de los clientes

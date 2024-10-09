@@ -19,15 +19,16 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [TA03 Tipos de asignación de IP](./UT02_DHCP/SR02TA03t.md)
 
-[Propuesta práctica linux](./UT02_DHCP/SR0210_linux.md)
-
-[Instalación en WS19](./UT02_DHCP/SR0209_DCHP_WS19.md)
-
-[Comprobar en WS19](./UT02_DHCP/SR02_comprobar_ws19.md)
-
-[Instalar isc-dhcp en Linux](./UT01/UT01_instalar_isc-dhcp.md)
-
 [Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
+
+[TA09 Instalación en WS19](./UT02_DHCP/SR0209_DCHP_WS19.md)
+
+[TA09 Comprobar en WS19](./UT02_DHCP/SR02_comprobar_ws19.md)
+
+[TA10 Instalar y configurar en linux](./UT02_DHCP/SR0210_linux.md)
+
+
+[General: Instalar isc-dhcp en Linux](./UT01/UT01_instalar_isc-dhcp.md)
 
 # UT03 DNS
 
