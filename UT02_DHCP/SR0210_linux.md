@@ -248,5 +248,5 @@ Al final del ejercicio, los alumnos deben ser capaces de:
     - Reiniciar servicio, DHCP
 
 11. **dhcp-lease-list**  
-    - Lista IP, Arrendamientos DHCP
+    - Lista IP, Concesiones activas
 
