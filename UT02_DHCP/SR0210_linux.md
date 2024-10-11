@@ -71,7 +71,7 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
    - **subnet** define la red que se está utilizando (en este caso, 192.168.1.0/24).
    - **range** define el rango de direcciones IP que el servidor DHCP asignará a los clientes (desde 192.168.1.10 hasta 192.168.1.50).
    - **option routers** especifica la dirección IP de la puerta de enlace predeterminada (gateway).
-   - **option domain-name-servers** establece los servidores DNS que se proporcionarán a los clientes.
+   - **option domain-name-servers** establece los servidores **DNS** que se proporcionarán a los clientes.
    - **default-lease-time** y **max-lease-time** definen el tiempo de arrendamiento de la IP (en segundos).
   
   **Para nuestro ejemplo:**
@@ -98,13 +98,21 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
 
    **En caso de error:**
 
+   `sudo dhcpd -t -cd /etc/dhcp/dhcpd.conf`
+   
+   revisa el archivo de configuración
+   
+   o
+   
    `cat /var/log/syslog | grep dhcpd`
 
-   nos dará una explicación del error y la línea del archivo de configuración en la que se encuentra éste.
+   revisa las anotaciones en el log del sistema.
+
+   Nos dará una explicación del error y la línea del archivo de configuración en la que se encuentra éste.
 
    Errores comunes:
-      - mala tabulación
-      - no poner ; al final de las líneas que lo necesitan
+      - mala tabulación -> utiliza 2 espacios `__`
+      - no poner `;` al final de las líneas que lo necesitan
 
    [Editar archivos de configuración en linux: consejos](./UT00_editar_conf.md)
 ---
