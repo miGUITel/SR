@@ -45,7 +45,7 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
 
    ![alt text](image-16.png)
 
-   Comprobamos la configuración con `sudo netplan apply` y `ifconfig -a`:
+   Comprobamos la configuración con `sudo netplan apply` y `ifconfig -a` o `ip a`:
 
    ![alt text](image-17.png)
 
@@ -227,36 +227,32 @@ Al final del ejercicio, los alumnos deben ser capaces de:
    - Registros, Diagnóstico DHCP
 
 ### Comandos de Linux:
-1. **sudo apt update && sudo apt install isc-dhcp-server**  
-   - Actualización, Instalación DHCP
+1. `sudo apt install isc-dhcp-server`  
+   - Instalación DHCP
 
-2. **sudo netplan apply**  
-   - Aplicar configuración, Red
+2. `sudo netplan apply`  
+   - Aplicar configuración de Red
 
-3. **ifconfig -a** o **ip a**  
+3. `ifconfig -a` o `ip a`  
    - Información red, Estado interfaces
 
-4. **sudo systemctl start isc-dhcp-server**  
-   - Iniciar servicio, DHCP
+4.   `sudo dhcpd -t -cd /etc/dhcp/dhcpd.conf`
+   
+     - **Buscar errores en el archivo de configuración**
 
-5. **sudo systemctl enable isc-dhcp-server**  
-   - Inicio automático, DHCP
-
-6. **sudo systemctl status isc-dhcp-server**  
-   - Estado servicio, DHCP
-
-7. **cat /var/log/syslog | grep dhcpd**  
+5. `sudo systemctl [start, restart, enable, status] isc-dhcp-server`  
+   - [Iniciar, reiniciar, inicio automático, estado] servicio dhcp
+  
+6. `cat /var/log/syslog | grep dhcpd`  
    - Diagnóstico, Filtrar registros
 
-8. **dhclient -v**  
+7. `dhclient -v`  
    - Solicitud IP, Cliente DHCP
 
-9. **sudo tail -f /var/log/syslog | grep dhcp**  
-   - Monitoreo en tiempo real, DHCP
+8.  `sudo tail -f /var/log/syslog | grep dhcp`  
+   
+    - Monitoreo en tiempo real, DHCP
 
-10. **sudo systemctl restart isc-dhcp-server**  
-    - Reiniciar servicio, DHCP
-
-11. **dhcp-lease-list**  
+9.  `dhcp-lease-list`  
     - Lista IP, Concesiones activas
 
