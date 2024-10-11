@@ -27,6 +27,7 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [TA10 Instalar y configurar en linux](./UT02_DHCP/SR0210_linux.md)
 
+[Solucionar errores DHCP](./UT02_DHCP/SR02TA10_errorres.md)
 
 [General: Instalar isc-dhcp en Linux](./UT01/UT01_instalar_isc-dhcp.md)
 

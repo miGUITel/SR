@@ -114,7 +114,9 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
       - mala tabulación -> utiliza 2 espacios `__`
       - no poner `;` al final de las líneas que lo necesitan
 
-   [Editar archivos de configuración en linux: consejos](./UT00_editar_conf.md)
+   [Editar archivos de configuración en linux: consejos](../UT00_editar_conf.md)
+
+   [Solucionar errores DHCP](../UT02_DHCP/SR02TA10_errorres.md)
 ---
 
 ### Paso 2: Configuración de los clientes
