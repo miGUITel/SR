@@ -24,16 +24,39 @@ El proceso de obtención de una dirección IP y otros parámetros de red a trav�
 
 ```text
 Cliente                  Servidor DHCP
-   |                           |
+   |                            |
    |--DHCPDISCOVER------------->|
-   |                           |
+   |                            |
    |<--DHCPOFFER----------------|
-   |                           |
+   |                            |
    |--DHCPREQUEST-------------->|
-   |                           |
+   |                            |
    |<--DHCPACK------------------|
-   |                           |
+   |                            |
+   |                            |
+   |   (T1)                     |
+   |                            |
+   |--DHCPREQUEST-unicast------>|
+   |                            |
+   |<--¿DHCPACK?----------------|
+   |                            |
+   |   (T2)                     |
+   |                            |
+   |--DHCPREQUEST-broadcast---->|
+   |                            |
+   |<--¿DHCPACK?----------------|
+   |                            |
+   |   (LT)                     |   
+   |                            |
+   |--DHCPDISCOVER------------->|
+   |                            |
+   |                            |
+   |                            |
+   |--DHCPRELEASE-------------->|
+   |                            |
 ```
+
+<p><a href="https://commons.wikimedia.org/wiki/File:DHCP_-_A_new_Address_Allocating_Sequence_Diagram-en(TYPO_FIXED).svg#/media/File:DHCP_-_A_new_Address_Allocating_Sequence_Diagram-en(TYPO_FIXED).svg"><img src="https://upload.wikimedia.org/wikipedia/commons/1/14/DHCP_-_A_new_Address_Allocating_Sequence_Diagram-en%28TYPO_FIXED%29.svg" alt="File:DHCP - A new Address Allocating Sequence Diagram-en(TYPO FIXED).svg" height="567" width="509"></a><br>De <a href="//commons.wikimedia.org/w/index.php?title=User:Catdotjs&amp;action=edit&amp;redlink=1" class="new" title="User:Catdotjs (page does not exist)">Catdotjs</a> - <span class="int-own-work" lang="es">Trabajo propio</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=145547002">Enlace</a></p>
 
 ### Otros conceptos importantes en DHCP:
 
@@ -54,6 +77,17 @@ Cliente                  Servidor DHCP
 - **Automatización:** El DHCP elimina la necesidad de configurar manualmente direcciones IP en cada dispositivo, lo que es especialmente útil en redes grandes.
 - **Eficiencia:** Permite reutilizar direcciones IP y administrar mejor los recursos de red, evitando conflictos de IP.
 - **Flexibilidad:** Facilita el ingreso y salida de dispositivos a la red, ya que las configuraciones son dinámicas y temporales.
+
+### DHCP Relay
+
+El **DHCP Relay** es una función que permite a los clientes DHCP, que están en una red diferente a la del servidor DHCP, obtener direcciones IP y otros parámetros de configuración. Esto es especialmente útil en redes grandes o segmentadas donde un único servidor DHCP debe servir a múltiples subredes.
+
+Cuando un cliente envía una solicitud de DHCP en una subred que no tiene un servidor DHCP local, el dispositivo que actúa como DHCP Relay (generalmente un router o switch) intercepta esta solicitud. El DHCP Relay entonces reenvía la solicitud al servidor DHCP ubicado en otra subred. El servidor DHCP responde a esta solicitud a través del DHCP Relay, que finalmente envía la respuesta al cliente.
+
+El DHCP Relay usa el protocolo **DHCP Relay Agent Information Option (opción 82)**, que permite identificar de qué subred proviene la solicitud, facilitando la asignación de direcciones IP adecuadas para cada segmento de red. En resumen, el DHCP Relay permite la comunicación entre clientes y servidores DHCP en diferentes redes, optimizando la administración centralizada de direcciones IP y otras configuraciones.
+
+<p><a href="https://commons.wikimedia.org/wiki/File:DHCP_Relay.svg#/media/%D5%8A%D5%A1%D5%BF%D5%AF%D5%A5%D6%80:DHCP_Relay.svg"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/DHCP_Relay.svg" alt="DHCP Relay.svg" height="5851" width="7938"></a><br>By <a href="//commons.wikimedia.org/w/index.php?title=User:Gmelander&amp;action=edit&amp;redlink=1" class="new" title="User:Gmelander (page does not exist)">Gmelander</a> - <span class="int-own-work" lang="hy">Բեռնողի սեփական աշխատանք</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=52484989">Link</a></p>
+
 
 ### Conclusión:
 
