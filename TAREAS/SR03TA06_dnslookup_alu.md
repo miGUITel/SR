@@ -100,10 +100,10 @@ Aprenderán a utilizar la herramienta `nslookup` para realizar consultas DNS y o
 
 ---
 
-### **AMPLIACIÓN:**
+### **AMPLIACIÓN:** para tener un 10, realiza dos de los siguientes puntos
 
-1. REPITE las consultas para otro dominio, como **www.google.com**
-2. OPCIONAL hazlo también para otros dos dominios reales
+1. OPCIONAL repite las consultas para otro dominio distinto, como **www.google.com EN TU CASA**
+2. OPCIONAL hazlo también para otros dos dominios reales **EN TU CASA**
 3. OPCIONAL utiliza dig y/o host para repetir la práctica
 
 ---
