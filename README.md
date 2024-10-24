@@ -35,6 +35,8 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Apuntes](./UT03/SR03.md)
 
+[Guion TA04: DNS en WS19](./TAREAS/SR03TA04_dns_win.md)
+
 # UT04 FTP
 
 [Guía instalación proftpd](./UT04_FTP/UT04_instalar_proftpd.md)
