@@ -35,6 +35,8 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Apuntes](./UT03/SR03.md)
 
+[Configuración de archivos de registros DNS en linux](./TAREAS/SR03TA03_bind9files.md)
+
 [Guion TA04: DNS en WS19 - Crear servidores](./TAREAS/SR03TA04_dns_win.md)
 
 [Guion TA04: DNS en WS19 - Configurar DNS](./TAREAS/SR03TA04_dns_win_2.md)
