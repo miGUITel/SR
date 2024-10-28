@@ -1,5 +1,39 @@
 Aquí tienes una guía más detallada para configurar archivos de zona en BIND9, usando un ejemplo completo de archivo de zona (`db.example.com`) con explicaciones sobre cada tipo de registro DNS, su propósito y cómo se utiliza en la práctica.
 
+### EJEMPLO COMPLETO
+
+```bash
+$TTL 86400
+@   IN  SOA ns1.example.com. admin.example.com. (
+        2024102803 ; Serial
+        3600       ; Refresh
+        1800       ; Retry
+        1209600    ; Expire
+        86400 )    ; Minimum TTL
+
+; Servidores de nombres
+    IN  NS  ns1.example.com.
+    IN  NS  ns2.example.com.
+
+; Registros de host
+ns1 IN  A    192.168.1.1
+ns2 IN  A    192.168.1.2
+
+; Registros A para la resolución de nombres
+www    IN  A    192.168.1.3
+ftp    IN  A    192.168.1.4
+telnet IN  A    192.168.1.6
+
+; Registro SRV para Telnet
+_telnets._tcp.example.com. 86400 IN SRV 10 60 23 telnet.example.com.
+
+; Registros MX para correo electrónico
+@   IN  MX  5  backup-mail.example.com.
+@   IN  MX  10 mail.example.com.
+backup-mail IN  A   192.168.1.7
+mail        IN  A   192.168.1.5
+```
+
 ---
 
 ### ¿Qué es un archivo de zona en BIND9?
