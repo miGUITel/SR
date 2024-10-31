@@ -2,7 +2,7 @@
 
 Para configurar los tres servidores DNS en Windows Server 2019, debes seguir una serie de pasos detallados para establecer la zona principal, configurar el servidor secundario y delegar la zona del subdominio. A continuación, se presenta un paso a paso claro para cada servidor.
 
-## Configuración del Servidor DNS Primario (Dominio: ejemplo.local)
+# `1` Configuración del Servidor DNS Primario (Dominio: ejemplo.local)
 
 ### 1. Deshabilitar la Recursión
 
@@ -33,7 +33,7 @@ Para configurar los tres servidores DNS en Windows Server 2019, debes seguir una
 
 - Crea una nueva zona de búsqueda inversa para la red `172.16.0.x`.
 - Introduce solo los dos primeros octetos, ya que se trata de una clase B.
-- Se podrán añadir automáticamente al darlos de alta en el siguiente paso.
+- Los registros inverdos PTR Se podrán añadir automáticamente al darlos de alta en el siguiente paso.
 
 ### 4. Configuración del Registro SOA
 
@@ -55,28 +55,46 @@ Para configurar los tres servidores DNS en Windows Server 2019, debes seguir una
 ![alt text](51.png) 
 
 - Añade los siguientes registros A según la configuración:
+  
+  **EN PRIMER LUGAR, LOS QUE CORRESONDEN A LOS SERVIDORES DNS**
+- 
   - `ns1.ejemplo.local` con IP `172.16.0.4` (servidor primario).
   - `ns2.ejemplo.local` con IP `172.16.0.5` (servidor secundario).
-  - Configura el registro `ns` creado en la zona con los datos de `ns1`.
+  
+**Configura el registro `ns` creado en la zona con los datos de `ns1`.**
   
 ![alt text](<52 configura ns1.png>)
 
-  - Otros registros como `mailserver1`, `mailserver2`, `www`, `ftp`, y `pc1` según la tabla proporcionada.
+  > **NO AÑADAS EL DELEGADO SUBDOMINIO TODAVÍA, A PESAR DE QUE LO HACE EN EL VÍDEO**
+
+  - Otros registros `A` como `mailserver1`, `mailserver2`, `www`, `ftp`, y `pc1` según la tabla proporcionada.
   
 ![alt text](<52 TODOS LOS REGISTROS.png>)
 
-  - Configura el registro nuevo -> registro de servicio -> \_telnet: puerto 23.
+> Después de dar de alta los registros tipo `A` de los servidores de correo, debes configurar su regitro **MX**.
+
+![alt text](image.png)
+
+* A continuación define el alias con CNAME:
+
+![alt text](image-1.png)
+
+  - Después configura el **Servicio de Telnet:** registro nuevo -> registro de servicio -> \_telnet: puerto 23.
+
+![alt text](image-2.png)
 
 ![alt text](<53 registro nuevo.png>) ![alt text](<53 telnet.png>)
 
-- Configura la transferencia de zona:
+### Configura la transferencia de zona:
   - Alta de `ns2`: clic derecho -> propiedades -> Servidores de nombres -> Agregar.
 
 ![alt text](54.png)
 
   - Propiedades -> Transferencia de zona -> Solo servidores de nombres.
 
-## Configuración del Servidor DNS Secundario (Dominio: ejemplo.local)
+> Antes de pasar a configurar el servidor secundario, asegúrate de que los registros `ns` apuntan a ns1 y ns2, tanto en la zona directa como en la inversa.
+
+# `2` Configuración del Servidor DNS Secundario (Dominio: ejemplo.local)
 
 ### 1. Creación de la Zona Secundaria
 
@@ -95,7 +113,7 @@ Para configurar los tres servidores DNS en Windows Server 2019, debes seguir una
 - Asegúrate de que la transferencia de zona esté habilitada en el servidor primario.
 - En el servidor primario, abre la configuración de la zona `ejemplo.local`, ve a la pestaña "Transferencias de zona" y selecciona "Permitir transferencias de zona" solo a los servidores que especifiques, agregando la IP `172.16.0.5`.
 
-## Configuración del Servidor Delegado para el Subdominio (Dominio: subdominio.ejemplo.local)
+# `3` Configuración del Servidor Delegado para el Subdominio (Dominio: subdominio.ejemplo.local)
 
 ### 1. Creación de la Zona Principal del Subdominio
 
@@ -125,34 +143,39 @@ Para configurar los tres servidores DNS en Windows Server 2019, debes seguir una
 
 ## Configuración de Reenviadores
 
-### 1. Configuración de Reenviadores
+### 1. Configuración de Reenviadores (en el servidor delegado)
 
 ![alt text](58.png) 
 
 - Los reenviadores permiten que un servidor DNS envíe consultas a otros servidores DNS específicos cuando no puede resolver un nombre por sí mismo. Esto es útil para mejorar la eficiencia de la resolución y controlar el flujo de consultas DNS.
 - Abre la consola de Administración de DNS.
-- Haz clic derecho sobre el servidor DNS y selecciona "Propiedades".
-- Ve a la pestaña "Reenviadores".
+- Haz clic derecho sobre el servidor DNS y selecciona "**Propiedades**".
+- Ve a la pestaña "**Reenviadores**".
 - Añade los reenviadores `ns1` y `ns2` con sus respectivas direcciones IP (`172.16.0.4` y `172.16.0.5`).
 - Asegúrate de que los reenviadores estén configurados correctamente para garantizar una resolución rápida y eficiente de nombres que el servidor no pueda responder directamente.
 
-### 2. Configuración de Reenviador Condicional
+### 2. Configuración de Reenviador Condicional (en los 3 servidores)
+
+![alt text](image-3.png)
+
+- Un reenviador condicional permite que el servidor DNS envíe consultas específicas a un servidor determinado según el dominio que se está resolviendo.
+- En el explorador del DNS, en la carpeta Reenviadores condicionales, **Nuevo reenviador condicional**.
 
 ![alt text](59.png) 
 
-- Un reenviador condicional permite que el servidor DNS envíe consultas específicas a un servidor determinado según el dominio que se está resolviendo.
-- Abre la consola de Administración de DNS.
-- Haz clic derecho sobre el servidor DNS y selecciona "Propiedades".
-- Ve a la pestaña "Reenviadores" y selecciona "Nuevo..." para crear un reenviador condicional.
 - Introduce el dominio `externo.com` y la dirección IP del reenviador condicional (`83.44.227.152`).
 - De esta manera, cualquier consulta para `externo.com` se enviará al servidor especificado para resolver el nombre.
 
 ### 3. Delegación desde el Servidor Primario
 
+- Crea un registro A para `delegadosubdominio` con la IP `172.16.0.50`.
+
+![alt text](image-4.png)
+
+- En el servidor primario (`ejemplo.local`), abre la configuración de la zona y crea una nueva delegación.
+
 ![alt text](60.png) 
 
-- Crea un registro A para `delegadosubdominio` con la IP `172.16.0.50`.
-- En el servidor primario (`ejemplo.local`), abre la configuración de la zona y crea una nueva delegación.
 - Introduce el nombre del subdominio: `subdominio.ejemplo.local` y especifica la IP del servidor delegado (`172.16.0.50`).
 
 ## Configuración de Reenviador a Google y Reenviador Condicional para el Servidor Primario
