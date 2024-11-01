@@ -1,4 +1,11 @@
 # Configuración de Servidores DNS en Windows Server 2019
+## Errores de configuración habituales, posibles soluciones:
+
+>Renovar las direcciones MAC
+
+>Comprobar que la dirección ip fija del servidor coincide con la que indica su registro A (ns1)
+
+>Al configurar la transferencia de zona, en el servidro primario: "El servidor DNS seleccionado como secundario no contiene una zona autoritativa". Lógico, todavía no tiene la zona copiada. Cuando se complete la configuración en el secundario sí la tendrá.
 
 Para configurar los tres servidores DNS en Windows Server 2019, debes seguir una serie de pasos detallados para establecer la zona principal, configurar el servidor secundario y delegar la zona del subdominio. A continuación, se presenta un paso a paso claro para cada servidor.
 
