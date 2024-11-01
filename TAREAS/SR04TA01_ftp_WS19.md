@@ -1,13 +1,13 @@
 **Guion para Práctica: Instalación y Configuración de FTP en Windows Server 2019**
 
-### Objetivo:
+## Objetivo:
 Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell para la instalación y la interfaz gráfica para la configuración. Los alumnos aprenderán a gestionar usuarios, permisos y conexiones de red para garantizar un acceso controlado.
 
-### Pasos a seguir:
+## Pasos a seguir:
 
 > RECUERDA CONFIGURAR LA IP FIJA DEL SERVIDOR
 
-**1. Instalación del Servidor FTP usando PowerShell**
+## **1. Instalación del Servidor FTP usando PowerShell**
    - Abrir PowerShell como administrador.
    - Ejecutar el siguiente comando para instalar IIS y el servicio FTP:
      ```powershell
@@ -18,7 +18,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
   
   ![alt text](image-5.png)
 
-**2. Crear Usuarios y Grupos Locales (modo gráfico)**
+## **2. Crear Usuarios y Grupos Locales (modo gráfico)**
    > Usaremos estos usuarios para probar las conexiones ftp con distintos permisos.
    - Abrir "Administración de Equipos" y navegar hasta "Usuarios y grupos locales".
 
@@ -38,7 +38,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
 
 ![alt text](image-23.png)
 
-**3. Crear los Grupos Locales**
+## **3. Crear los Grupos Locales**
    - Crear los siguientes grupos para organizar los usuarios del FTP:
      - **Informáticos** (formado por Informático1 e Informático2).
      - **Contables** (formado por Contable1 y Contable2).
@@ -48,7 +48,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
 
 ![alt text](image-10.png)
 
-**4. Crear el Sitio FTP a través de IIS**
+## **4. Crear el Sitio FTP a través de IIS**
    - Abrir el "Administrador de IIS" y agregar un nuevo sitio FTP.
 
 ![alt text](image-11.png)
@@ -62,7 +62,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
 
 ![alt text](image-13.png)
 
-**5. Configurar Accesos al Servidor FTP**
+## **5. Configurar Accesos al Servidor FTP**
 
 ![alt text](image-14.png)
 
@@ -84,7 +84,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
    - ![alt text](image-18.png)
    
 
-**6. Configurar Permisos de la Carpeta en el Sistema Operativo**
+## **6. Configurar Permisos de la Carpeta en el Sistema Operativo**
    - Navegar a la carpeta creada en el paso 4.1 (**INICIALES_LOCAL** (donde INICIALES representa las iniciales del nombre completo del alumno, por ejemplo, FJLM_LOCAL para Francisco Javier López Mota)).
    - ![alt text](image-19.png)
    - ![alt text](image-20.png)
@@ -93,7 +93,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
      - **Lectura** para el grupo **Contables**.
    - Asegurarse de que los permisos están alineados con las reglas definidas en el IIS.
 
-**7. Conectar al Servidor FTP desde CMD**
+## **7. Conectar al Servidor FTP desde CMD**
    - Abrir el símbolo del sistema (CMD).
    - **7.1.** Crear un directorio de prueba para comprobar el acceso al servidor FTP:
      ```cmd
@@ -104,10 +104,10 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
    - ![alt text](image-21.png)
    - Verificar que el directorio ha sido creado exitosamente.
 
-### Consideraciones Adicionales:
+## Consideraciones Adicionales:
 - **Seguridad**: Aunque se esté configurando sin SSL, en un entorno real se debería habilitar SSL para proteger las credenciales de los usuarios.
 - **Documentación**: Anotar los usuarios, contraseñas y permisos configurados para futuras referencias.
 
-### Objetivo de Evaluación:
+## Objetivo de Evaluación:
 - Verificar que los alumnos han comprendido la configuración completa del servidor FTP y la gestión de usuarios y permisos, así como la conexión al servidor usando herramientas de línea de comandos. Además, cada alumno deberá personalizar la configuración con sus iniciales y número de lista para el directorio compartido y la red, respectivamente.
 
