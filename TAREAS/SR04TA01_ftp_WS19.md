@@ -49,16 +49,18 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
 ![alt text](image-10.png)
 
 ## **4. Crear el Sitio FTP a través de IIS**
-   - Abrir el "Administrador de IIS" y agregar un nuevo sitio FTP.
+   - Crear una carpeta local llamada **INICIALES_LOCAL** (donde INICIALES representa las iniciales del nombre completo del alumno, por ejemplo, FJLM_LOCAL para Francisco Javier López Mota) que servirá de directorio raíz para los archivos.
+     - Asegúrate de que los permisos de la carpeta sean compatibles tanto con el sistema operativo como con el servidor FTP.
+   
+   - **4.1.** Abrir el "Administrador de IIS" y agregar un nuevo sitio FTP.
 
 ![alt text](image-11.png)
 ---
 ![alt text](image-12.png)
-
-   - **4.1.** Dar nombre al sitio FTP y crear una carpeta local llamada **INICIALES_LOCAL** (donde INICIALES representa las iniciales del nombre completo del alumno, por ejemplo, FJLM_LOCAL para Francisco Javier López Mota) que servirá de directorio raíz para los archivos.
-     - Asegúrate de que los permisos de la carpeta sean compatibles tanto con el sistema operativo como con el servidor FTP.
-   - **4.2.** Habilitar los nombres de host virtuales para permitir que diferentes dominios apunten al mismo servidor FTP.
-   - **4.3.** Configurar sin SSL (Secure Sockets Layer) para simplificar la configuración en este entorno de prueba.
+  
+   - **4.2.** Dar nombre al sitio FTP
+   - **4.3.** Habilitar los nombres de host virtuales para permitir que diferentes dominios apunten al mismo servidor FTP.
+   - **4.4.** Configurar sin SSL (Secure Sockets Layer) para simplificar la configuración en este entorno de prueba.
 
 ![alt text](image-13.png)
 
