@@ -58,7 +58,7 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
 ---
 ![alt text](image-12.png)
   
-   - **4.2.** Dar nombre al sitio FTP
+   - **4.2.** Dar nombre al sitio FTP (p.e. iniciales.local)
    - **4.3.** Habilitar los nombres de host virtuales para permitir que diferentes dominios apunten al mismo servidor FTP.
    - **4.4.** Configurar sin SSL (Secure Sockets Layer) para simplificar la configuración en este entorno de prueba.
 
@@ -99,8 +99,12 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
    - Abrir el símbolo del sistema (CMD).
    - **7.1.** Crear un directorio de prueba para comprobar el acceso al servidor FTP:
      ```cmd
-     ftp 172.16.X.9 | nombre_de_usuario
+     ftp 172.16.X.9
      REM (donde X es el número de lista del alumno, por ejemplo, 43 si el alumno es el número 43)
+     Usuario (ip:(none)): nombreFtpVirtual.local|usuario
+     REM (donde nombreFtpVirtual.local es el nombre que le has dado a tu ftp virtual y usuario es el nombre de usuario con el que te quieres conectar)
+     Contraseña:
+     REM introduce la contraseña del usuario con el que te quieres conectar    
      mkdir prueba_directorio
      ```
    - ![alt text](image-21.png)
