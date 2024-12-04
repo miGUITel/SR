@@ -15,7 +15,7 @@ Upgrade-Insecure-Requests: 1
 
 ### Explicación detallada
 
-1. **`Host: www.sintesis.com`**  
+1. **`Host: www.iesinfantaelena.com`**  
    - **Descripción**: Indica el dominio al que se está realizando la solicitud HTTP.  
    - **Función**: Especifica el servidor o dominio objetivo de la petición. Esto es útil en servidores que alojan múltiples sitios (Virtual Hosting).  
 
