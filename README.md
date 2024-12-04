@@ -53,9 +53,11 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Cabecera de una petición http](./SR05WEB/SR0501_explicaPeticionWeb.md)
 
+[Cabecera de una respuesta http](./SR05WEB/SR0501_explicaRespuestaWeb.md)
+
 [Ejemplo petición get](./SR05WEB/SR0502_ejemploGet.md)
 
-[Ejemplo petición get](./SR05WEB/SR0503_ejemploPost.md)
+[Ejemplo petición post](./SR05WEB/SR0503_ejemploPost.md)
 
 # CONSEJOS GENERALES
 [Editar archivos de configuración en linux](./UT00_editar_conf.md)
