@@ -2,6 +2,11 @@
 
 **Objetivo de la tarea**: Configurar un servidor FTP en Ubuntu Server utilizando ProFTPD, siguiendo las instrucciones indicadas, para gestionar el intercambio de archivos en una red local. Se deben personalizar algunos aspectos del servidor para que sea único para cada alumno.
 
+> **nota**: La modificación de los archivos de cofiguración en linux es delicada. Recuerda:
+> Se cuidadoso con la tabulación.
+> Si después de modificar el archivo, el servidor ftp no funciona, comprueba el contenido del final del archivo `/var/log/syslog`.
+> -
+
 ---
 
 ### **Paso 1: Preparación del Entorno**
