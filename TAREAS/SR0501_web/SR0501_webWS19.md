@@ -122,6 +122,33 @@
 ![alt text](<5.92 httpS.png>)
 ![alt text](<5.91 httpS.png>)
 ![alt text](<5.93 conectar net.png>)
+
+### 12. Comprobar el registro de conexiones
+
+En el directorio `C:\inetpub\logs\LogFiles` encontrarás los archivos de log agrupados por nombre del sitio y fecha.
+
+![alt text](image-3.png)
+
+
+1. **Navegar a la carpeta:**
+   - Ve a la ruta identificada (por defecto `C:\inetpub\logs\LogFiles`).
+
+2. **Abrir el archivo de log más reciente:**
+   - Busca los archivos con nombres como `u_exYYYYMMDD.log`, donde `YYYYMMDD` representa la fecha.
+
+3. **Interpretar los encabezados del log:**
+   Los archivos están en formato **W3C** y contienen columnas clave:
+   - **`date`**: Fecha de la solicitud (formato AAAA-MM-DD).
+   - **`time`**: Hora exacta de la solicitud (formato HH:MM:SS en UTC).
+   - **`c-ip`**: Dirección IP del cliente que realizó la solicitud.
+   - **`cs-method`**: Método HTTP utilizado (como GET, POST, etc.).
+   - **`cs-uri-stem`**: Recurso solicitado (por ejemplo, `/index.html` o `/api/data`).
+   - **`sc-status`**: Código de estado HTTP de la respuesta (200 para éxito, 404 para no encontrado, etc.).
+   - **`sc-bytes`**: Número de bytes enviados al cliente.
+   - **`cs-bytes`**: Número de bytes recibidos del cliente.
+   - **`time-taken`**: Tiempo (en milisegundos) que el servidor tardó en procesar la solicitud.
+
 ---
+
 
 
