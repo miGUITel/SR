@@ -59,6 +59,10 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Ejemplo petición post](./SR05WEB/SR0503_ejemploPost.md)
 
+[Dominios y hosts virtuales](./TAREAS/SR0502_apache/ServerNameApache.md)
+
+[Restart vs Reload](./TAREAS/SR0502_apache/restartVSreload.md)
+
 # CONSEJOS GENERALES
 [Editar archivos de configuración en linux](./UT00_editar_conf.md)
 

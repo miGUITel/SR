@@ -1,6 +1,7 @@
 # Guion para la Instalación de un Servidor Web en Windows Server 2019
 
 ### 1. Instalar IIS con PowerShell
+>Asegúrate de que tienes conexión a internet
    - Abre PowerShell como administrador.
    - Ejecuta el siguiente comando para instalar el servidor web (IIS):
      ```powershell
@@ -11,7 +12,7 @@
    - Abre **Administración de Equipos**.
    - Ve a **Usuarios y Grupos Locales** y crea un nuevo usuario con tus INICIALES.
    - Establece una contraseña y configura el usuario con permisos básicos para fines de administración.
-   - ![alt text](5.2.png)
+  ![alt text](5.2.png)
 
 ### 3. Crear Directorios para los Sitios Web en wwwroot
    - Abre el explorador de archivos y navega a la carpeta `C:\inetpub\wwwroot`.
