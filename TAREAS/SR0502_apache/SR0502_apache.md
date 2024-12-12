@@ -278,3 +278,9 @@ Habilita los sitios creados y desactiva el sitio por defecto:
 
 ---
 
+#### 11. **Revisión del log de apache para comprobar las conexiones**
+
+[ampliacion](../../SR05WEB/SR0504_USwebLog.md)
+
+---
+
