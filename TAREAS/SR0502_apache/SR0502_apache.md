@@ -50,7 +50,7 @@ sudo systemctl status apache2
 Comprueba que la página por defecto es accesible desde el navegador (utiliza la dirección IP de la máquina virtual en el navegador de otra máquina).
   
 Explora el archivo de configuración:
-    ```bash
+    ```
      vim /etc/apache2/apache2.conf
      ```
 ![alt text](image.png)
@@ -112,7 +112,7 @@ Explora el archivo de configuración:
 
 #### 5. **Instalación del módulo de autenticación externa**
 Instala el módulo necesario para autenticación externa:
-     ```bash
+     ```
      sudo apt install libapache2-mod-authnz-external pwauth -y
      ```
 ![alt text](image-1.png)
@@ -121,7 +121,7 @@ Activa los módulos de autenticacion básica y externa:
   
 ```bash
 sudo a2enmod auth_basic
-sudo s2enmod authnz_external
+sudo a2enmod authnz_external
 ```
 
 ![alt text](image-2.png)
