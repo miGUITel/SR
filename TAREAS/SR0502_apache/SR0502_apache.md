@@ -3,7 +3,7 @@
 ---
 
 #### 1. **Configuración previa de la máquina virtual**
-   - Configura la red en modo puente en la máquina virtual para permitir que obtenga una dirección IP desde el servidor DHCP.
+   - Configura la red en modo puente en la máquina virtual para permitir que obtenga una dirección IP desde el servidor DHCP y conexión a Internet.
    - Habilita DHCP en Ubuntu Server editando el archivo de configuración de red de *netplan*:
      1. Abre el archivo de configuración:
         ```bash
@@ -47,7 +47,8 @@ ls /etc/apache2
 sudo systemctl status apache2
 ```
 
-Comprueba que la página por defecto es accesible desde el navegador (utiliza la dirección IP de la máquina virtual en el navegador de otra máquina).
+> Comprueba que la página por defecto es accesible desde el navegador (utiliza la dirección IP de la máquina virtual en el navegador de otra máquina):
+> ![alt text](apache-default-page.png)
   
 Explora el archivo de configuración:
     ```
@@ -135,11 +136,12 @@ sudo a2enmod authnz_external
      sudo apt install openssl
      ```
    - Crea el certificado:
+     - *(make...: crea, ./ssleay.conf: archivo plantilla, ./ejemplo_local: nombre del archivo donde se guardará)*
      ```bash
      sudo make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/ssl/private/ejemplo_local
      ```
 ![alt text](image-3.png)
-> ## Cambiar www.ejemplo.local por el nombre de vuestro sitio:
+> ## Cambiar **www.ejemplo.local** por el nombre de vuestro sitio:
 > 
 ![alt text](image-4.png)
 
@@ -212,8 +214,9 @@ sudo a2enmod authnz_external
 
     # Habilitación de SSL
     SSLEngine on
-    # Ruta al archivo del certificado SSL
+    # Ruta al archivo del certificado SSL (Contiene clave pública y privada, ya que es un certificado autofirmado)
     SSLCertificateFile /etc/ssl/private/ejemplo_local
+    # Si fuera un certificado real deberíamos añadir una línea con el archivo que contiene la clave privada
 </VirtualHost>
 
 
@@ -257,9 +260,9 @@ Habilita los sitios creados y desactiva el sitio por defecto:
        ```
      - **En Windows:**
        Edita el archivo `C:\Windows\System32\drivers\etc\hosts`
-     - Añade estas líneas:
+     - Añade estas líneas: (cambiando los nombres de host virtuales por los tuyos)
        ```
-       [IP de la MV] www.ejemplo.local
+       [IP de la MV] www.ejemplo.local 
        [IP de la MV] www.ejemplo.net
        ```
 
