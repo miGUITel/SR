@@ -229,7 +229,7 @@ sudo a2enmod authnz_external
 #### 8. **Habilitación y deshabilitación de sitios virtuales**
 Puedes consultrar los sitios existentes:
 
-`ls /etc/apache2/sites-availabel`
+`ls /etc/apache2/sites-available`
 
 En el directorio econtrarás los archivos de configuracion de los sitios que has creado y el archivo de configuración del sitio por defecto.
 
