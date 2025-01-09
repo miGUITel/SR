@@ -107,7 +107,7 @@
    - Haz clic en **Autenticación** y asegúrate de que **Autenticación Anónima** esté activada, permitiendo acceso público sin necesidad de credenciales.
 ![alt text](<5.72 habilitar autentica anonimo.png>)
 ### 10. Modificar el Archivo de Hosts
-   - Abre el archivo `hosts` ubicado en `C:\Windows\System32\drivers\etc\hosts` con permisos de administrador.
+   - Abre el archivo `hosts` ubicado en `C:\Windows\System32\drivers\etc\hosts` con **permisos de administrador**.
    - Añade las siguientes líneas: (con los nombres de host que correspondan a tu escenario)
      ```plaintext
      127.0.0.1   sitio1.local 
