@@ -41,6 +41,8 @@
 
 ![alt text](z4.png)
 
+**UBUNTU SERVER**
+
 5. **Configurar Ubuntu Server en DHCP:**
 
    - Confirmar que la interfaz de red esté configurada para obtener dirección IP automáticamente.
@@ -52,8 +54,6 @@
      ```
      sudo netplan apply
      ```
-
-**UBUNTU SERVER**
 
 6. **Actualizar repositorios:**
 
@@ -93,6 +93,7 @@
     ```
     who
     ```
+![alt text](image.png)
 
 **CONECTAR ENTRE ELLOS**
 
