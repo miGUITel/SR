@@ -4,10 +4,12 @@ Para visualizar el log donde se registran las peticiones de los clientes web en 
 
 ### **Ubicación del archivo `access.log`**
 1. En sistemas basados en Debian/Ubuntu (como Linux Mint):
-   - El archivo de log de acceso suele estar en:
+   - Los archivos de log se encuentran en el directorio:
      ```
-     /var/log/apache2/access.log
+     /var/log/apache2/
      ```
+     En él econtrarás distintos archivos con distintos logs.
+     Si estamos utilizando sitios virtuales, debemos revisar el archivo `other_vhost_access.log`
 2. Si has configurado un **`CustomLog`** en tu archivo de configuración de Apache, el log podría estar en una ubicación personalizada. Busca en tu archivo de configuración (`apache2.conf` o los archivos de VirtualHost) algo como:
      ```apache
      CustomLog /ruta/personalizada/access.log combined
