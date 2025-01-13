@@ -15,6 +15,7 @@
 
       - *puede tardar un bastante dependiendo del estado de los servidores de microsof*t
    - ALTERNATIVA: `DISM /Online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0`
+   - REINICIAR
 
 3. **Configurar arranque automático:**
 
