@@ -13,6 +13,9 @@
    - Cliente SSH: `Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0`
    - Servidor SSH: `Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0`
 
+      - *puede tardar un bastante dependiendo del estado de los servidores de microsof*t
+   - ALTERNATIVA: `DISM /Online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0`
+
 3. **Configurar arranque automático:**
 
    - Activar y configurar el servicio OpenSSH:
