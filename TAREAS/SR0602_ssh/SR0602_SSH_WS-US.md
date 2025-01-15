@@ -50,6 +50,7 @@
 5. **Configurar Ubuntu Server en DHCP:**
 
    - Confirmar que la interfaz de red esté configurada para obtener dirección IP automáticamente.
+     - - [guía](https://miguitel.github.io/SR/linux/SR00linux.html#configuraci%C3%B3n-de-red-con-netplan-ampliaci%C3%B3n)
    - Editar el archivo de configuración de red (ejemplo para Netplan):
      ```
      sudo nano /etc/netplan/01-netcfg.yaml
