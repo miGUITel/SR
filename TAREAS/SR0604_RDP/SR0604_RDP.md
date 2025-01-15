@@ -1,10 +1,8 @@
-**Tarea: Configuración de Servicios de Acceso Remoto RDP en Windows Server 2019 y Ubuntu Server 20.04**
+**Tarea: Configuración de RDP en Windows Server 2019 y Pruebas desde Clientes Windows y Ubuntu**
 
 ### Introducción
 
-El objetivo de esta guia es aprender a configurar y utilizar el servicio de acceso remoto mediante el protocolo RDP (Remote Desktop Protocol) tanto en un entorno Windows Server 2019 como en Ubuntu Server 20.04.
-
-Al finalizar, serás capaz de establecer conexiones remotas de manera segura y eficiente, probando configuraciones gráficas y en línea de comandos.
+El objetivo de esta tarea es aprender a configurar el servicio de acceso remoto mediante el protocolo RDP (Remote Desktop Protocol) en un entorno Windows Server 2019 y probar su funcionamiento desde dos clientes distintos: uno con Windows 10 y otro con Ubuntu Desktop. Al finalizar, serás capaz de establecer conexiones remotas de manera segura y eficiente entre diferentes sistemas operativos.
 
 ---
 
@@ -17,102 +15,59 @@ Al finalizar, serás capaz de establecer conexiones remotas de manera segura y e
      - Línea de comandos (PowerShell):
        ```powershell
        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
-       Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+       Enable-NetFirewallRule -DisplayGroup "Escritorio Remoto"
        ```
 
-2. **Prueba de conexión desde un cliente Windows**
+2. **Creación de un usuario autorizado**
 
-   - Desde un cliente Windows, abre la herramienta "Conexión a Escritorio Remoto" (mstsc).
-   - Introduce la dirección IP.
-   - Accede utilizando las credenciales del servidor.
+   - Crea un nuevo usuario en el servidor:
+     1. Abre "Administración de equipos" → "Usuarios y grupos locales" → "Usuarios".
+     2. Haz clic derecho en "Usuarios" y selecciona "Nuevo usuario".
+     3. Introduce un nombre de usuario, contraseña y desmarca "El usuario debe cambiar la contraseña en el siguiente inicio de sesión" si lo prefieres.
+     4. Haz clic en "Crear" y luego en "Cerrar".
 
-3. **Verificación**
+   - Añade el usuario al grupo "Usuarios de Escritorio Remoto":
+     1. Ve a "Administración de equipos" → "Usuarios y grupos locales" → "Grupos".
+     2. Haz doble clic en el grupo "Usuarios de Escritorio Remoto".
+     3. Haz clic en "Agregar" y escribe el nombre del usuario creado.
+     4. Haz clic en "Aceptar" para guardar los cambios.
 
-   - Comprueba que puedes conectarte al servidor y navega por su interfaz gráfica.
+3. **Configuración de red**
+   - Asegúrate de que el servidor tiene asignada una dirección IP fija o que puedes localizarlo mediante su nombre en la red.
+   - Verifica la conectividad desde los clientes mediante un comando `ping` hacia la dirección IP del servidor.
 
+4. **Prueba del servicio**
+   - Desde el servidor, comprueba que el servicio de Escritorio Remoto está habilitado y activo.
+   - Realiza una prueba inicial de conexión local para verificar que el servicio funciona correctamente.
 
 ---
 
-### Parte 2: Configuración de RDP en Ubuntu Server 20.04
+### Parte 2: Pruebas de conexión desde los clientes
 
-#### 2.1. Preparación del sistema
+#### 2.1. Cliente Windows 10
+1. **Iniciar la conexión desde Windows**:
+   - Abre la herramienta "Conexión a Escritorio Remoto" (mstsc).
+   - Introduce la dirección IP o el nombre del servidor configurado.
+   - Introduce las credenciales de usuario del servidor.
 
-1. **Actualización de los repositorios**:
+2. **Verificación**:
+   - Comprueba que puedes interactuar con el servidor de manera fluida.
 
-   ```bash
-   sudo apt-get update -y
-   ```
-
-2. **Instalación del servidor RDP (xrdp)**:
-
-   ```bash
-   sudo apt-get install xrdp -y
-   ```
-
-#### 2.2. Configuración del entorno gráfico
-
-1. **Instalación de LXDE como entorno gráfico ligero**:
-
-   ```bash
-   sudo apt-get install xorg lxde-core lxde-icon-theme -y
-   ```
-
-2. **Configurar inicio en modo gráfico**:
-
-   - Crea el archivo de configuración para iniciar sesión gráfica:
+#### 2.2. Cliente Ubuntu Desktop
+1. **Instalación del cliente RDP en Ubuntu**:
+   - Instala la herramienta `vinagre`, que permite conectarte mediante RDP:
      ```bash
-     echo lxsession > ~/.xsession
-     sudo cp ~/.xsession /etc/skel/.xsession
+     sudo apt-get update -y
+     sudo apt-get install vinagre -y
      ```
 
-#### 2.3. Configuración del firewall
+2. **Conexión al servidor**:
+   - Abre `vinagre` y selecciona el protocolo RDP.
+   - Introduce la dirección IP o el nombre del servidor.
+   - Añade las credenciales de usuario del servidor y conecta.
 
-1. **Permitir conexiones RDP en el firewall**:
-   ```bash
-   sudo ufw allow 3389
-   ```
+3. **Verificación**:
+   - Asegúrate de que puedes acceder al escritorio remoto del servidor.
 
-#### 2.4. Prueba de conexión
-
-1. **Iniciar sesión gráfica en Ubuntu Server**:
-
-   - Conéctate desde otro dispositivo utilizando un cliente RDP como "Conexión a Escritorio Remoto" (Windows) o VINAGRE (Ubuntu).
-
-2. **Uso de VINAGRE**:
-
-   - Abre la aplicación VINAGRE en un cliente Ubuntu y conecta al servidor.
-   - Introduce la dirección IP y las credenciales del servidor.
-
-3. **Verificación**
-
-   - Realiza una captura de pantalla mostrando la sesión gráfica activa.
-
----
-
-### Parte 3: Informe y entrega
-
-1. **Informe escrito**:
-   - Describe los pasos que seguiste y las configuraciones realizadas.
-   - Incluye capturas de pantalla que demuestren:
-     - Activación y conexión en Windows Server 2019.
-     - Activación y conexión en Ubuntu Server 20.04.
-
-2. **Preguntas reflexivas** (responde en el informe):
-   - ¿Qué diferencias observas entre las configuraciones de RDP en Windows y Ubuntu?
-   - ¿Qué retos enfrentaste durante la configuración y cómo los resolviste?
-   - ¿En qué casos podría ser más útil un entorno gráfico frente a uno de texto para la administración remota?
-
-3. **Entrega**:
-   - Sube tu informe y capturas de pantalla al aula virtual antes de la fecha límite.
-
----
-
-### Objetivos de Aprendizaje
-
-- Configurar y utilizar servicios de acceso remoto en entornos Windows y Linux.
-- Comparar y contrastar diferentes configuraciones de acceso remoto.
-- Identificar problemas de conectividad y solucionarlos.
-- Documentar procesos técnicos de forma clara y precisa.
-
----
-
+4. **Aternativa**:
+   - La herramienta `Remmina` es una alternativa a vinagre.
