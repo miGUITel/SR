@@ -64,7 +64,7 @@ groups nombre_usuario
 
 #### Configuración de red con netplan [ampliación](./SR005redNetPlan.md)
 1. Editar el archivo de configuración en **/etc/netplan/**:
-   - Para IP fija:
+   - Para IP fija: (**recuerda cambiar enp1s0 por el nombre de tu interfaz de red**)
 ```yaml
 network:
   version: 2
@@ -83,7 +83,14 @@ network:
     enp1s0:
       dhcp4: true
 ```
-2. Aplicar la configuración:
+2. Probar la configuración:
+```bash
+sudo netplan try
+```
+
+*error gateway4 deprecated* [explicación](./SR005bDeprecated.md)
+
+3. Aplicar la configuración:
 ```bash
 sudo netplan apply
 ```
