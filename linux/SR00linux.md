@@ -1,5 +1,6 @@
 ### Guion Básico de Linux
 - [Guion Básico de Linux](#guion-básico-de-linux)
+  - [Cambiar el nombre del equipo host](#Cambiar-el-nombre-del-equipo)
   - [Esquema de directorios ampliación](#esquema-de-directorios-ampliación)
   - [Creación de usuarios y contraseñas ampliación](#creación-de-usuarios-y-contraseñas-ampliación)
   - [Creación de grupos ampliación](#creación-de-grupos-ampliación)
@@ -10,6 +11,44 @@
   - [Qué es un repositorio](#qué-es-un-repositorio)
   - [Instalación de componentes (apt)](#instalación-de-componentes-apt)
   - [Inicio, parada, reinicio de componentes: systemctl](#inicio-parada-reinicio-de-componentes-systemctl)
+
+#### Cambiar el nombre del equipo editando archivos manualmente
+
+1. **Editar el archivo `/etc/hostname`**  
+   Abre el archivo y reemplaza el nombre del host por el nuevo:
+   ```bash
+   sudo nano /etc/hostname
+   ```
+   Ejemplo:
+   ```
+   antiguo-nombre
+   ```
+   Cambiar a:
+   ```
+   nuevo-nombre
+   ```
+
+2. **Editar el archivo `/etc/hosts`**  
+   Abre el archivo y asegúrate de que el nuevo nombre esté asociado a `127.0.1.1`:
+   ```bash
+   sudo nano /etc/hosts
+   ```
+   Ejemplo del archivo:
+   ```
+   127.0.0.1   localhost
+   127.0.1.1   antiguo-nombre
+   ```
+   Cambiar a:
+   ```
+   127.0.0.1   localhost
+   127.0.1.1   nuevo-nombre
+   ```
+
+3. **Reiniciar para aplicar los cambios**  
+   Aunque no siempre es necesario, reiniciar el sistema asegura que todos los servicios reconozcan el nuevo nombre:
+   ```bash
+   sudo reboot
+   ```
 
 #### Esquema de directorios [ampliación](./SR001directorios.md)
 - **/**: Directorio raíz. Contiene todos los directorios del sistema.
