@@ -1,4 +1,4 @@
-### Guion Básico de Linux
+### Guion Básico  de  Linux
 - [Guion Básico de Linux](#guion-básico-de-linux)
   - [Cambiar el nombre del equipo host](#Cambiar-el-nombre-del-equipo)
   - [Esquema de directorios ampliación](#esquema-de-directorios-ampliación)
