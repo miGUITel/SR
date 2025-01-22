@@ -69,6 +69,8 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Tunelización](./SR06_REM/SR0601_tuneliza.md)
 
+[SSH con claves pública y privada](./SR06_REM/SR0602_SSH_conclave.md)
+
 # CONSEJOS GENERALES
 [Editar archivos de configuración en linux](./UT00_editar_conf.md)
 
