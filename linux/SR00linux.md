@@ -102,7 +102,7 @@ groups nombre_usuario
 ---
 
 #### Configuración de red con netplan [ampliación](./SR005redNetPlan.md)
-1. Editar el archivo de configuración en **/etc/netplan/**:
+1. Editar el archivo de configuración que econtrarás detro de **/etc/netplan/**:
    - Para IP fija: (**recuerda cambiar enp1s0 por el nombre de tu interfaz de red**)
 ```yaml
 network:
