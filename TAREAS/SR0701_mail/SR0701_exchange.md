@@ -72,7 +72,8 @@ Después de esto, **reinicia el servidor**.
 9. Ponemos nombre a la organización: **SMR2tunombre**
    1.  ![alt text](image-6.png)
 10. **No habilites la Protección contra Malware** (opcional).
-11. **Espera a que se complete la instalación**.
+11. **Espera a que se complete la instalación**. *(TEN PACIENCIA ;-)*
+    1.  Si la comprobación de requisitos previos produce errores (no advertencias) vuelve al punto [2](#2-instalación-de-los-requisitos-previos) y [2bis](#2bis-instala-los-requisitos-previos-si-aún-no-están-instalados)
 
 ---
 

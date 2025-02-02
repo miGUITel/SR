@@ -73,7 +73,7 @@ Active Directory requiere un servidor DNS para su correcto funcionamiento. Si el
 ---
 
 ## **2.4 Instala los requisitos previos si aún no están instalados:**
- - **.NET Framework 4.8:** Descarga desde [este enlace](https://support.microsoft.com/kb/4503548) e instálalo.
+ - **.NET Framework 4.8:** Descarga desde [este enlace](https://support.microsoft.com/kb/4503548) e instálalo. [directo](https://go.microsoft.com/fwlink/?linkid=2088631)
  - **UCMA 4.0:** Descarga desde [este enlace](http://go.microsoft.com/fwlink/?LinkId=260990) e instálalo.
  - **Visual C++ Redistributable 2013:** Descarga la versión **x64** desde [aquí](https://www.microsoft.com/download/details.aspx?id=40784) e instálala.
  - **Módulo de Reescritura de URL de IIS:** Descarga desde [Microsoft IIS](https://www.iis.net/downloads/microsoft/url-rewrite) e instálalo. Luego reinicia IIS con:
