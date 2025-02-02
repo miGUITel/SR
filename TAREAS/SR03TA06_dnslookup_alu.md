@@ -1,4 +1,4 @@
-
+# PENDIENTE DE REVISIÓN, DEBEN UTILIZAR DOMINIOS COMO GOOGLE.COM, deben hacerla en casa, PUES EN EL CENTRO LOS DNS DE LA CONSEJERÍA pueden INTERFERIR
 
 ## **Uso de `nslookup` para Consultar el Funcionamiento del DNS**
 
@@ -18,10 +18,12 @@ Aprenderán a utilizar la herramienta `nslookup` para realizar consultas DNS y o
 
    - **Pregunta:**
      - ¿Qué dirección IP devuelve la consulta? ¿Por qué crees que se devuelve esta IP?
+  
 
  ### **2. Consulta de un servidor DNS específico**
 
-3. Realiza la misma consulta pero a un servidor DNS específico (por ejemplo, el de Google: `8.8.8.8`):
+
+1. Realiza la misma consulta pero a un servidor DNS específico (por ejemplo, el de Google: `8.8.8.8`):
 
    ```bash
    nslookup ejemplo.com 8.8.8.8
