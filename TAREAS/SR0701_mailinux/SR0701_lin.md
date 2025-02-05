@@ -24,7 +24,11 @@ Postfix se usará para **enviar correos**, mientras que Dovecot permitirá **rec
 Ejecutar en el servidor:
 ```bash
 sudo apt update
-sudo apt install postfix dovecot-core dovecot-imapd dovecot-pop3d mailutils -y
+sudo apt install postfix
+sudo apt install dovecot-core
+sudo apt install dovecot-imapd
+sudo apt install dovecot-pop3d
+sudo apt install mailutils
 ```
 
 Durante la instalación de **Postfix**, aparecerá un menú de configuración. Elegir:  
