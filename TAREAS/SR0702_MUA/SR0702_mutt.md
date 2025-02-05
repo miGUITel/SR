@@ -1,4 +1,4 @@
-## Instalación de un cliente ligero para comprobar que **dovecot** funciona correctamente utilizando IMAP
+# **02.** Instalación de un cliente ligero para comprobar que **dovecot** funciona correctamente utilizando IMAP
 
 ### **1. Instalar Mutt**
 Si aún no lo tienes instalado, puedes hacerlo con el siguiente comando:
@@ -56,13 +56,17 @@ La primera vez, te pedirá que aceptes un certificado autofirmado. Pulsa a para 
 
 Si todo está bien, deberías ver la bandeja de entrada y poder navegar entre los correos.
 
+![alt text](image.png)
 ---
 
 ### **4. Enviar un correo de prueba**
 Desde Mutt, pulsa `m` para redactar un correo, introduce un destinatario (`otro_usuario@correo.midominio.com`), escribe el asunto y el cuerpo del mensaje.
-
+![alt text](image-1.png) ![alt text](image-2.png)
 Cuando termines:
-- Pulsa `Ctrl + X`, luego `Y` y `Enter` para enviarlo.
+- Pulsa `Ctrl + X`, luego `Y` y `Enter` para finalizar la redacción.
+- En la interfaz de mutt, pulsa y para enviar:
+
+![alt text](image-3.png)
 
 ---
 

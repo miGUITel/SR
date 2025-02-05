@@ -1,4 +1,4 @@
-# **Configuración de un cliente Mutt para usar nuestro servidor de correo (IMAP y SMTP)**
+# **03.** Configuración de un cliente Mutt para usar nuestro servidor de correo (IMAP y SMTP)
 
 Esta guía explica cómo configurar **Mutt** en un equipo **distinto dentro de la misma** red para que se conecte al servidor de correo que hemos configurado con **Postfix y Dovecot**.  
 
@@ -60,6 +60,8 @@ Ejecuta en el **cliente**:
 ```bash
 sudo apt update && sudo apt install mutt msmtp -y
 ```
+Elegir NO en la instalación de msmtp:
+![alt text](image.png)
 
 ---
 
@@ -177,6 +179,14 @@ mutt -s "Prueba desde Mutt con msmtp" usuario@localhost < /dev/null
 ```
 
 Si el correo llega correctamente, ¡todo está funcionando! 🎉
+
+> #
+> 
+> acede a mutt y prueba a enviar y recibir correos desde el servidos y el cliente.
+>
+> #
+
+![alt text](image-1.png)
 
 ---
 

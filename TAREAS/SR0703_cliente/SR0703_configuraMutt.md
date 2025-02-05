@@ -1,4 +1,4 @@
-La diferencia clave entre usar **IMAP remoto** (`imap://192.168.1.100/`) y **acceder directamente al Maildir local** (`~/Maildir/`) en la configuración de Mutt radica en **cómo y desde dónde Mutt accede a los correos**.
+La diferencia clave entre usar **IMAP remoto** (`imap://192.168.1.100/`) y **acceder directamente al Maildir local** (`~/Maildir/`) en la configuración de Mutt radica en **cómo y desde dónde Mutt accede a los correos (ESTOY EN EL CLIENTE O EN EL SERVIDOR)**.
 
 ---
 

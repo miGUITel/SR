@@ -1,4 +1,4 @@
-### **Práctica: Instalación y Configuración de un Servidor de Correo en Linux**  
+# **01.** Instalación y Configuración de un Servidor de Correo en Linux
 
 📌 **Objetivo:**  
 En esta práctica, los alumnos instalarán y configurarán un servidor de correo en **Ubuntu Server** utilizando **Postfix** como servidor SMTP y **Dovecot** como servidor IMAP/POP3. Se configurará un servicio de correo **interno**, sin necesidad de dominios públicos ni certificados SSL, permitiendo a los alumnos enviar y recibir correos dentro de la red local.  
@@ -57,6 +57,9 @@ myorigin = $mydomain
 
 # Interfaces activas (todas las direcciones de red)
 inet_interfaces = all
+
+# Formato de las direcciones de correo
+mydestination = $myhostname, $mydomain, localhost.localdomain, localhost
 
 # Redes permitidas para enviar correos sin autenticación (ajustar según la red)
 mynetworks = 127.0.0.0/8, 192.168.1.0/24
@@ -131,7 +134,9 @@ Repetir este paso para cada usuario.
 📌 **Enviar un correo desde la terminal**  
 Desde el usuario `alumno1`, probar el envío de un correo a `alumno2`:
 ```bash
-echo "Este es un correo de prueba" | mail -s "Prueba de correo" alumno2@correo.midominio.com
+echo "Este es un correo de prueba" | mail -s "Prueba de correo" alumno2@midominio.com
+
+# también funciona alumno2@correo.midominio.com (nombre del host en postfix)
 ```
 📌 **Leer correos desde la terminal**  
 El usuario `alumno2` puede revisar su correo con:
