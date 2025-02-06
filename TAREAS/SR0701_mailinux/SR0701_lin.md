@@ -50,9 +50,11 @@ sudo nano /etc/postfix/main.cf
 Asegurarse de que incluya las siguientes líneas:
 
 ```ini
-# Nombre del servidor
+# Nombre del servidor (modifica correo.midominio.com con tu info)
 myhostname = correo.midominio.com
+# Nombre de tu dominio (modifica midominio.com con tu info)
 mydomain = midominio.com
+# Comprueba que está igual:
 myorigin = $mydomain
 
 # Interfaces activas (todas las direcciones de red)
@@ -61,7 +63,7 @@ inet_interfaces = all
 # Formato de las direcciones de correo
 mydestination = $myhostname, $mydomain, localhost.localdomain, localhost
 
-# Redes permitidas para enviar correos sin autenticación (ajustar según la red)
+# Redes permitidas para enviar correos sin autenticación (ajustar según la RED)
 mynetworks = 127.0.0.0/8, 192.168.1.0/24
 
 # Ubicación de los buzones de los usuarios (Maildir)
