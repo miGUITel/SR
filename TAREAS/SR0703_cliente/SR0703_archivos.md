@@ -82,6 +82,7 @@ ls -l /var/mail/
 ---
 
 # **📌 Resumen de archivos de configuración clave**
+
 | Archivo | Ubicación | Configuración |
 |---------|----------|--------------|
 | `/etc/postfix/main.cf` | **Servidor** | Configura Postfix: dominios, políticas de reenvío, interfaces de red |
