@@ -1,3 +1,5 @@
+# [01](../SR0701_mailinux/SR0701_lin.md) - [02](../SR0702_MUA/SR0702_mutt.md) - [03](../SR0703_cliente/SR0703_CliSer.md)
+
 # **03.** Configuración de un cliente Mutt para usar nuestro servidor de correo (IMAP y SMTP)
 
 Esta guía explica cómo configurar **Mutt** en un equipo **distinto dentro de la misma** red para que se conecte al servidor de correo que hemos configurado con **Postfix y Dovecot**.  
@@ -234,4 +236,4 @@ Si **no puedes enviar correos desde el cliente**:
 ✅ **Hemos configurado msmtp como MTA para que Mutt pueda enviar correos a través de Postfix.**  
 ✅ **Hemos probado el envío y recepción con Mutt y solucionado posibles errores.**  
 
-🚀 Ahora puedes usar tu servidor de correo con clientes en otros equipos de la red.
+# [01](../SR0701_mailinux/SR0701_lin.md) - [02](../SR0702_MUA/SR0702_mutt.md) - [03](../SR0703_cliente/SR0703_CliSer.md)

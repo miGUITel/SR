@@ -1,3 +1,4 @@
+# [01](../SR0701_mailinux/SR0701_lin.md) - [02](../SR0702_MUA/SR0702_mutt.md) - [03](../SR0703_cliente/SR0703_CliSer.md)
 # **01.** Instalación y Configuración de un Servidor de Correo en Linux
 
 📌 **Objetivo:**  
@@ -149,3 +150,4 @@ mail -f ~/Maildir
 ---
 
 
+# [01](../SR0701_mailinux/SR0701_lin.md) - [02](../SR0702_MUA/SR0702_mutt.md) - [03](../SR0703_cliente/SR0703_CliSer.md)

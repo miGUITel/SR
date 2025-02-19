@@ -1,3 +1,6 @@
+# [01](../SR0701_mailinux/SR0701_lin.md) - [02](../SR0702_MUA/SR0702_mutt.md) - [03](../SR0703_cliente/SR0703_CliSer.md)
+
+
 # **02.** Instalación de un cliente ligero para comprobar que **dovecot** funciona correctamente utilizando IMAP
 
 ### **1. Instalar Mutt**
@@ -106,3 +109,5 @@ Si algo no funciona:
 Con esta configuración, deberías poder:
 ✅ Acceder a tu buzón local con Mutt vía **IMAP** (sin cifrado).  
 ✅ Enviar y recibir correos entre usuarios del servidor usando **Postfix y Dovecot**.  
+
+# [01](../SR0701_mailinux/SR0701_lin.md) - [02](../SR0702_MUA/SR0702_mutt.md) - [03](../SR0703_cliente/SR0703_CliSer.md)
