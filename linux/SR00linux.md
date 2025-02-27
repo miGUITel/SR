@@ -101,38 +101,21 @@ groups nombre_usuario
 
 ---
 
-#### Configuración de red con netplan [ampliación](./SR005redNetPlan.md)
-1. Editar el archivo de configuración que econtrarás detro de **/etc/netplan/**:
-   - Para IP fija: (**recuerda cambiar enp1s0 por el nombre de tu interfaz de red**)
-```yaml
-network:
-  version: 2
-  ethernets:
-    enp1s0:
-      addresses: [192.168.1.100/24]
-      gateway4: 192.168.1.1
-      nameservers:
-        addresses: [8.8.8.8, 8.8.4.4]
-```
-   - Para DHCP:
-```yaml
-network:
-  version: 2
-  ethernets:
-    enp1s0:
-      dhcp4: true
-```
-2. Probar la configuración:
-```bash
-sudo netplan try
-```
+#### Configuración de red [ampliación](./SR005ConfigRed.md)
 
-*error gateway4 deprecated* [explicación](./SR005bDeprecated.md)
+## Puede hacerse gráficamente
+  1. Cambia la configuración en `Configuración de Red`
+  2. Elige Auto para dhcp o Manual
+  3. Reinicia la red, desconectando y conectando
 
-3. Aplicar la configuración:
-```bash
-sudo netplan apply
-```
+## El entorno gráfico funciona con NetworkManager
+  1. Puede gestionarse mediante comandos
+  2. O también editando archivos de configuración
+
+## Netplan es la opción para servidores
+  1. Debes modificar los archivos situados en `/etc/netplan`
+  2. Ejecuta `netplan apply` después
+
 
 ---
 
