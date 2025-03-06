@@ -53,6 +53,8 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 # UT05 WEB
 
+[Lista pasos crear sitio web WS19](/SR05WEB/SR0505_listaWS19.md)
+
 [Cabecera de una petición http](./SR05WEB/SR0501_explicaPeticionWeb.md)
 
 [Cabecera de una respuesta http](./SR05WEB/SR0501_explicaRespuestaWeb.md)
