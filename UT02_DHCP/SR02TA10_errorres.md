@@ -8,7 +8,7 @@ Puedes seguir estos pasos para diagnosticar y solucionar el problema:
 
 2. **Verificar la Configuración**: A menudo, el problema está en el archivo de configuración. Verifica que no haya errores de sintaxis en `/etc/dhcp/dhcpd.conf`. Puedes hacer una validación rápida ejecutando:
    ```bash
-   sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf
+   sudo dhcpd -t -d
    ```
    Esto te indicará si hay algún problema en el archivo de configuración.
 
