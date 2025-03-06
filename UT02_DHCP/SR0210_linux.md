@@ -98,7 +98,7 @@ En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Li
 
    **En caso de error:**
 
-   `sudo dhcpd -t -cd /etc/dhcp/dhcpd.conf`
+   `sudo dhcpd -t -d`
    
    revisa el archivo de configuración
    
