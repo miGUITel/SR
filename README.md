@@ -17,6 +17,8 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Practicar escenarios de red y ping](./UT01/escenariosRedPing.md)
 
+Configurar la tarjeta de red en [WS19](./UT01/tut/01_red_en_WS19.md) [UBUNTU DESCKTOP](./UT01/tut/01_red_en_Udkp.md) [UBUNTU SERVER](./UT01/tut/01_red_en_US.md)
+
 [Interfaces de red en linux](./UT01/UT01_interfaces_red.md)
 
 # UT02 DHCP
