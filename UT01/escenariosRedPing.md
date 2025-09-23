@@ -1,5 +1,7 @@
 Aquí tienes cinco escenarios con dirección de red, dirección de broadcast y rango de hosts, aplicando subnetting en redes Clase C. Cada escenario requiere que los alumnos configuren tres equipos en la red y verifiquen la conectividad mediante **ping**.
 
+### Debes se capaz de configurar todos los escenarios con sistemas WS19, UBUNTU DESCKTOP y UBUNTU SERVER
+
 ---
 
 ### **Escenario 1: Red Clase C con máscara /26 (62 hosts)**

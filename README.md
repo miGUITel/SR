@@ -3,17 +3,21 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 # UT01 INTRODUCCIÓN
 
+### Teoría
+
 [Protocolos básicos en la capa OSI](./UT01_protocolos_tabla.md)
 
 [Servicios básicos de la capa de Aplicación](./UT01_servicios.md)
 
 [Direcciones anycast](./UT01_anycast.md)
 
-[Interfaces de red en linux](./UT01/UT01_interfaces_red.md)
-
 [Convertir MAC en IPv6](./UT02_DHCP/SR02TA05_MACaIPv6.md/)
 
+### Práctica
+
 [Practicar escenarios de red y ping](./UT01/escenariosRedPing.md)
+
+[Interfaces de red en linux](./UT01/UT01_interfaces_red.md)
 
 # UT02 DHCP
 
