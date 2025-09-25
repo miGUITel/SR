@@ -22,49 +22,27 @@ Aquí tienes cinco escenarios con dirección de red, dirección de broadcast y r
 - **Dirección de broadcast:** `192.168.2.63`
 - **Rango de hosts:** `192.168.2.33 - 192.168.2.62`
 - **Máscara de subred:** `255.255.255.224`
-- **Equipos a configurar:**  
-  - PC1: `192.168.2.35`  
-  - PC2: `192.168.2.40`  
-  - PC3: `192.168.2.50`  
 - **Prueba de conectividad:** `ping` entre los tres equipos.
 
 ---
 
 ### **Escenario 3: Red Clase C con máscara /28 (14 hosts)**
 - **Dirección de red:** `192.168.3.64/28`
-- **Dirección de broadcast:** `192.168.3.79`
-- **Rango de hosts:** `192.168.3.65 - 192.168.3.78`
 - **Máscara de subred:** `255.255.255.240`
-- **Equipos a configurar:**  
-  - PC1: `192.168.3.66`  
-  - PC2: `192.168.3.70`  
-  - PC3: `192.168.3.75`  
 - **Prueba de conectividad:** `ping` entre los tres equipos.
 
 ---
 
 ### **Escenario 4: Red Clase C con máscara /29 (6 hosts)**
 - **Dirección de red:** `192.168.4.128/29`
-- **Dirección de broadcast:** `192.168.4.135`
-- **Rango de hosts:** `192.168.4.129 - 192.168.4.134`
-- **Máscara de subred:** `255.255.255.248`
-- **Equipos a configurar:**  
-  - PC1: `192.168.4.130`  
-  - PC2: `192.168.4.132`  
-  - PC3: `192.168.4.134`  
 - **Prueba de conectividad:** `ping` entre los tres equipos.
 
 ---
 
 ### **Escenario 5: Red Clase C con máscara /30 (2 hosts útiles, solo punto a punto)**
-- **Dirección de red:** `192.168.5.200/30`
-- **Dirección de broadcast:** `192.168.5.203`
-- **Rango de hosts:** `192.168.5.201 - 192.168.5.202`
-- **Máscara de subred:** `255.255.255.252`
 - **Equipos a configurar:**  
-  - PC1: `192.168.5.201`  
-  - PC2: `192.168.5.202`  
-  - PC3: **No puede usarse**, ya que solo hay dos hosts posibles. En este caso, podría configurarse un router para interconectar dos redes.  
+  - PC1: `192.168.5.201`
+  - PC2: `elige ip adecuada`  
 - **Prueba de conectividad:** `ping` entre los dos equipos.
 
 ---
