@@ -21,6 +21,8 @@ Configurar la tarjeta de red en [WS19](./UT01/tut/01_red_en_WS19.md) [UBUNTU DES
 
 [Interfaces de red en linux](./UT01/UT01_interfaces_red.md)
 
+[APIPA](./UT01/apipa.md)
+
 # UT02 DHCP
 
 [Protocolo DHCP, mensajes](./UT_DHCP_teoría.md)
