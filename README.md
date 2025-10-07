@@ -93,3 +93,5 @@ Configurar la tarjeta de red en [WS19](./UT01/tut/01_red_en_WS19.md) [UBUNTU DES
 [Conectar DISCO USB a virtual box](./UT00/SR00_vBox_conectar_USB.md)
 
 [Uso de linux](./linux/SR00linux.md)
+
+[Consejos virtual box](./extra/vbox.md)
