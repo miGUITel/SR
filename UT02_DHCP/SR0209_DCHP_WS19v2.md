@@ -21,7 +21,7 @@ Antes de comenzar la instalación del servicio, debemos asegurarnos de que la m�
 5. Comprueba que tiene acceso a Internet (abre el navegador o ejecuta en PowerShell:
 
    ```powershell
-   ping www.google.com
+   ping 8.8.8.8
    ```
 
    )
@@ -41,6 +41,7 @@ Realizaremos la instalación del rol **mientras el servidor tiene conexión a In
 ### Paso 2: Iniciar el asistente de roles
 
 * En la esquina superior derecha, haz clic en **Administrar** → **Agregar roles y características**.
+![alt text](image-25.png)
 * Pulsa **Siguiente** varias veces hasta llegar a **Selección de roles de servidor**.
 
 ### Paso 3: Seleccionar el rol DHCP
@@ -48,10 +49,12 @@ Realizaremos la instalación del rol **mientras el servidor tiene conexión a In
 * Marca la casilla **Servidor DHCP**.
 * Acepta la instalación de las características adicionales si se solicitan.
 * Haz clic en **Siguiente** → **Instalar**.
+![alt text](image-26.png)
 
 ### Paso 4: Completar la instalación
 
 * Espera a que finalice el proceso.
+![alt text](image-27.png)
 * Cuando aparezca la ventana de confirmación, selecciona **Completar configuración DHCP**.
 * En la nueva ventana, haz clic en **Siguiente** hasta llegar a **Autorizar** → **Finalizar**.
 
@@ -87,6 +90,7 @@ De lo contrario, si dependiera de otro DHCP, podría cambiar su dirección y los
 2. Haz clic en **Cambiar configuración del adaptador**.
 3. Haz clic derecho sobre la tarjeta de red → **Propiedades**.
 4. Selecciona **Protocolo de Internet versión 4 (TCP/IPv4)** → **Propiedades**.
+![alt text](image-28.png)
 5. Marca **Usar la siguiente dirección IP** y escribe:
 
    * **Dirección IP:** 172.16.0.1
