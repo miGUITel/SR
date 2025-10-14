@@ -118,14 +118,14 @@ De lo contrario, si dependiera de otro DHCP, podría cambiar su dirección y los
    (También puedes ejecutar `dhcpmgmt.msc` desde el menú Inicio.)
 2. Expande el nombre del servidor y selecciona **IPv4**.
 
-![alt text](image-5.png)
+![alt text](image-29.png)
 
 ---
 
 ### Paso 2: Crear un nuevo ámbito (Scope)
 
 1. Haz clic derecho sobre **IPv4** → **Nuevo ámbito**.
-
+![alt text](image-30.png)
 2. En el asistente, introduce los siguientes datos:
 
    * **Nombre del ámbito:** Red-Aula
