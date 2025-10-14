@@ -55,8 +55,8 @@ Realizaremos la instalación del rol **mientras el servidor tiene conexión a In
 
 * Espera a que finalice el proceso.
 ![alt text](image-27.png)
-* Cuando aparezca la ventana de confirmación, selecciona **Completar configuración DHCP**.
-* En la nueva ventana, haz clic en **Siguiente** hasta llegar a **Autorizar** → **Finalizar**.
+* **SI APARECE** la ventana de confirmación, selecciona **Completar configuración DHCP**.
+* **SI APARECE** en la nueva ventana, haz clic en **Siguiente** hasta llegar a **Autorizar** → **Finalizar**.
 
 > 💡 Si el servidor no forma parte de un dominio, la autorización se realiza localmente y no requiere Active Directory.
 
