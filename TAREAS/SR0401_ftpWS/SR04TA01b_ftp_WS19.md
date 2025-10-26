@@ -1,13 +1,17 @@
-- [**1. Instalación del Servidor FTP usando PowerShell**](#1-instalación-del-servidor-ftp-usando-powershell)
-- [**2. Crear Usuarios y Grupos Locales (modo gráfico)**](#2-crear-usuarios-y-grupos-locales-modo-gráfico)
-- [**3. Crear los Grupos Locales**](#3-crear-los-grupos-locales)
-- [**4. Crear el Sitio FTP a través de IIS**](#4-crear-el-sitio-ftp-a-través-de-iis)
-- [**5. Configurar Accesos al Servidor FTP**](#5-configurar-accesos-al-servidor-ftp)
-- [**6. Configurar Permisos de la Carpeta en el Sistema Operativo**](#6-configurar-permisos-de-la-carpeta-en-el-sistema-operativo)
-- [**7. Conectar al Servidor FTP desde el CMD del propio servidor**](#7-conectar-al-servidor-ftp-desde-el-cmd-del-propio-servidor)
+- [**SR0401b Práctica: Configuración de FTP en WS19 con múltiples usuarios y conexiones**](#sr0401b-práctica-configuración-de-ftp-en-ws19-con-múltiples-usuarios-y-conexiones)
+  - [**1. Instalación del Servidor FTP usando PowerShell**](#1-instalación-del-servidor-ftp-usando-powershell)
+  - [**2. Crear Usuarios y Grupos Locales (modo gráfico)**](#2-crear-usuarios-y-grupos-locales-modo-gráfico)
+  - [**3. Crear los Grupos Locales**](#3-crear-los-grupos-locales)
+  - [**4. Crear el Sitio FTP a través de IIS**](#4-crear-el-sitio-ftp-a-través-de-iis)
+  - [**5. Configurar Accesos al Servidor FTP**](#5-configurar-accesos-al-servidor-ftp)
+  - [**6. Configurar Permisos de la Carpeta en el Sistema Operativo**](#6-configurar-permisos-de-la-carpeta-en-el-sistema-operativo)
+  - [**7. Conectar al Servidor FTP desde el CMD del propio servidor**](#7-conectar-al-servidor-ftp-desde-el-cmd-del-propio-servidor)
+
+# **SR0401b Práctica: Configuración de FTP en WS19 con múltiples usuarios y conexiones**
 
 **Objetivo:**
-Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell para la instalación y la interfaz gráfica para la configuración. Los alumnos aprenderán a gestionar usuarios, permisos y conexiones de red para garantizar un acceso controlado.
+- Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell para la instalación y la interfaz gráfica para la configuración.
+- Los alumnos aprenderán a gestionar usuarios, permisos y conexiones de red para garantizar un acceso controlado.
 
 > Consideraciones Adicionales:
 > - **Seguridad**: Aunque se esté configurando sin SSL, en un entorno real se debería habilitar SSL para proteger las credenciales de los usuarios.
