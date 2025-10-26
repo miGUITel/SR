@@ -1,9 +1,19 @@
-**Guion para Práctica: Instalación y Configuración de FTP en Windows Server 2019**
+- [**1. Instalación del Servidor FTP usando PowerShell**](#1-instalación-del-servidor-ftp-usando-powershell)
+- [**2. Crear Usuarios y Grupos Locales (modo gráfico)**](#2-crear-usuarios-y-grupos-locales-modo-gráfico)
+- [**3. Crear los Grupos Locales**](#3-crear-los-grupos-locales)
+- [**4. Crear el Sitio FTP a través de IIS**](#4-crear-el-sitio-ftp-a-través-de-iis)
+- [**5. Configurar Accesos al Servidor FTP**](#5-configurar-accesos-al-servidor-ftp)
+- [**6. Configurar Permisos de la Carpeta en el Sistema Operativo**](#6-configurar-permisos-de-la-carpeta-en-el-sistema-operativo)
+- [**7. Conectar al Servidor FTP desde CMD**](#7-conectar-al-servidor-ftp-desde-cmd)
 
-## Objetivo:
+**Objetivo:**
 Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell para la instalación y la interfaz gráfica para la configuración. Los alumnos aprenderán a gestionar usuarios, permisos y conexiones de red para garantizar un acceso controlado.
 
-## Pasos a seguir:
+> Consideraciones Adicionales:
+> - **Seguridad**: Aunque se esté configurando sin SSL, en un entorno real se debería habilitar SSL para proteger las credenciales de los usuarios.
+> - **Documentación**: Anotar los usuarios, contraseñas y permisos configurados para futuras referencias.
+
+**Pasos a seguir**:
 
 > RECUERDA CONFIGURAR LA IP FIJA DEL SERVIDOR
 
@@ -55,7 +65,9 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
    - **4.1.** Abrir el "Administrador de IIS" y agregar un nuevo sitio FTP.
 
 ![alt text](image-11.png)
+
 ---
+
 ![alt text](image-12.png)
   
    - **4.2.** Dar nombre al sitio FTP (p.e. iniciales.local)
@@ -110,10 +122,4 @@ Instalar y configurar un servidor FTP en Windows Server 2019, usando PowerShell 
    - ![alt text](image-21.png)
    - Verificar que el directorio ha sido creado exitosamente.
 
-## Consideraciones Adicionales:
-- **Seguridad**: Aunque se esté configurando sin SSL, en un entorno real se debería habilitar SSL para proteger las credenciales de los usuarios.
-- **Documentación**: Anotar los usuarios, contraseñas y permisos configurados para futuras referencias.
-
-## Objetivo de Evaluación:
-- Verificar que los alumnos han comprendido la configuración completa del servidor FTP y la gestión de usuarios y permisos, así como la conexión al servidor usando herramientas de línea de comandos. Además, cada alumno deberá personalizar la configuración con sus iniciales y número de lista para el directorio compartido y la red, respectivamente.
 
