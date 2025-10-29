@@ -5,6 +5,7 @@
     - [2. Instalar ProFTPD](#2-instalar-proftpd)
     - [3. Comprobar el estado del servicio](#3-comprobar-el-estado-del-servicio)
     - [4. Probar la conexión local](#4-probar-la-conexión-local)
+  - [💻 **Comandos FTP básicos (puede variar según la aplicación cliente)**](#-comandos-ftp-básicos-puede-variar-según-la-aplicación-cliente)
     - [5. Probar desde otra máquina en la red](#5-probar-desde-otra-máquina-en-la-red)
     - [6. Ver la carpeta raíz del usuario](#6-ver-la-carpeta-raíz-del-usuario)
 - [✅ Comprobaciones finales Y ENTREGA: RECUERDA](#-comprobaciones-finales-y-entrega-recuerda)
@@ -73,13 +74,19 @@ Name: tu_usuario
 Password: tu_contraseña
 ```
 
-Comandos básicos dentro del cliente FTP:
+### 💻 **Comandos FTP básicos (puede variar según la aplicación cliente)**
 
-```
-ls        # listar archivos
-pwd       # mostrar directorio actual
-quit      # salir
-```
+| Comando            | Descripción                                                 |
+| ------------------ | ----------------------------------------------------------- |
+| `open <ip>`        | Conecta con el servidor FTP (por ejemplo, `open localhost`) |
+| `user <nombre>`    | Inicia sesión con el usuario indicado                       |
+| `ls` / `dir`       | Lista los archivos del directorio actual                    |
+| `cd <carpeta>`     | Cambia de carpeta en el servidor                            |
+| `get <archivo>`    | Descarga un archivo del servidor                            |
+| `put <archivo>`    | Sube un archivo al servidor                                 |
+| `delete <archivo>` | Elimina un archivo del servidor                             |
+| `quit`             | Cierra la sesión y sale del cliente FTP                     |
+
 
 ---
 
