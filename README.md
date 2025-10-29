@@ -53,6 +53,8 @@ Configurar la tarjeta de red en [WS19](./UT01/tut/01_red_en_WS19.md) [UBUNTU DES
 
 # UT04 FTP
 
+[Comandos básicos](./UT04_FTP/SR04_comandosFTP.md)
+
 [Elementos y conexiones](./UT04_FTP/SR04_elementosYconexiones.md)
 
 [Problema MODO ACTIVO](./UT04_FTP/SR04_pSeguridad_activo.md)
