@@ -21,14 +21,17 @@ Instalar y comprobar el funcionamiento de un servidor **FTP básico** con **ProF
 ## RECURSOS NECESARIOS
 - Máquina virtual enlazada linux Ubuntu Descktop, Mint o server para el Servidor
 - Máquina virtual enlazada linux Ubuntu Descktop, Mint o server para el cliente
+- Red modo NAT para la instalación
 - Red virtual interna
 
 ## Pasos
 
+(con la red en modo NAT)
+
 #### 1. Actualizar el sistema
 
 ```bash
-sudo apt update && sudo apt upgrade -y
+sudo apt update
 ```
 
 #### 2. Instalar ProFTPD
@@ -37,10 +40,9 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install proftpd -y
 ```
 
-Durante la instalación preguntará:
+Durante la instalación, ***si te pregunta***:
 
 * **Tipo de instalación:** selecciona *independiente (standalone)*
-  *(más sencillo para empezar, sin depender de inetd)*
 
 ---
 
@@ -50,7 +52,10 @@ Durante la instalación preguntará:
 sudo systemctl status proftpd
 ```
 
-Debe aparecer como `active (running)`.
+Debe aparecer como `active (running)` y un círculo verde:
+
+![alt text](image.png)
+
 Si no, puedes arrancarlo con:
 
 ```bash
@@ -90,6 +95,8 @@ Password: tu_contraseña
 
 ---
 
+(con la red en modo puente)
+
 #### 5. Probar desde otra máquina en la red
 
 * Averiguar la IP del servidor:
@@ -97,14 +104,9 @@ Password: tu_contraseña
   ```bash
   ip a
   ```
-* Desde otro cliente Linux:
+* Desde otro cliente Linux o WIN:
 
   ```bash
-  ftp <ip_del_servidor>
-  ```
-* O desde Windows (símbolo del sistema):
-
-  ```cmd
   ftp <ip_del_servidor>
   ```
 
@@ -129,11 +131,14 @@ y luego haciendo `ls` dentro del cliente FTP.
 * ***En las capturas, siempre se debe ver el marco de la(s) máquina(s)***
 * ***El nombre de la máquina virtual debe reflejar tu nombre, SO, servicio y cliente/servidor***
 
+CAPTURAS EN EL PROPIO SERVIDOR:
 * El servicio arranca sin errores: `sudo systemctl status proftpd`
   * Captura: 0400tunombrecompleto1.jpg
-* Puedes iniciar sesión con un usuario del sistema: `ftp localhost`
+* Puedes iniciar sesión con un usuario del sistema: `ftp localhost` y acepta las credenciales.
   * Captura: 0400tunombrecompleto2.jpg
 * Puedes listar archivos y salir correctamente.
   * Captura: 0400tunombrecompleto3.jpg
+
+CAPTURAS EN LAS QUE TIENE QUE APARECER EL CLIENTE Y EL SERVIDOR
 * Sube un archivo desde el servidor y bájalo desde el cliente.
   * Captura: 0400tunombrecompleto4.jpg
