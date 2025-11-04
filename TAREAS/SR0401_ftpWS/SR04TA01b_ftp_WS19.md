@@ -14,12 +14,16 @@
 - Los alumnos aprenderán a gestionar usuarios, permisos y conexiones de red para garantizar un acceso controlado.
 
 > Consideraciones Adicionales:
-> - **Seguridad**: Aunque se esté configurando sin SSL, en un entorno real se debería habilitar SSL para proteger las credenciales de los usuarios.
-> - **Documentación**: Anotar los usuarios, ***contraseñas*** y permisos configurados para no olvidarlos.
+> **Seguridad**: Aunque se configure sin SSL, en un entorno real se debería habilitar SSL por seguridad.
+> **Documentación**: Anotar los usuarios, ***contraseñas*** y permisos configurados para no olvidarlos.
+
+> 💡 **Importante:**
+> Durante la instalación, el servidor necesita **conexión a Internet** para descargar los componentes de IIS y FTP.
+> Asegúrate de que la máquina virtual esté configurada en **modo adaptador en puente** (para tener conexión a Internet).
+>
+> Una vez finalizada la instalación, configura una **IP fija** y cambia a **red interna** para realizar las pruebas de conexión FTP.
 
 **Pasos a seguir**:
-
-> RECUERDA CONFIGURAR LA IP FIJA DEL SERVIDOR
 
 ## **1. Instalación del Servidor FTP usando PowerShell**
    - Abrir PowerShell como administrador.

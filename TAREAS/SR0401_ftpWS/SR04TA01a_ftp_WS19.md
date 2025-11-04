@@ -3,7 +3,7 @@
   - [**2. Crear el Sitio FTP a través de IIS**](#2-crear-el-sitio-ftp-a-través-de-iis)
   - [**3. Configurar Acceso de Usuario**](#3-configurar-acceso-de-usuario)
   - [**4. Conectar al Servidor FTP desde el CMD del propio servidor**](#4-conectar-al-servidor-ftp-desde-el-cmd-del-propio-servidor)
-    - [💻 **Comandos FTP básicos en CMD**](#-comandos-ftp-básicos-en-cmd)
+  - [💻 **Comandos FTP básicos en CMD**](#-comandos-ftp-básicos-en-cmd)
 
 # **SR0401a Práctica: Instalación y prueba básica de un servidor FTP en Windows Server 2019**
 
@@ -93,7 +93,7 @@ Si se crea correctamente el directorio `prueba`, la conexión y permisos funcion
 
 * Prueba otros:
 
-### 💻 **Comandos FTP básicos en CMD**
+## 💻 **Comandos FTP básicos en CMD**
 
 | Comando            | Descripción                                                 |
 | ------------------ | ----------------------------------------------------------- |

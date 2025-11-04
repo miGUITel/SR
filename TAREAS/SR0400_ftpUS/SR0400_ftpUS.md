@@ -5,7 +5,7 @@
     - [2. Instalar ProFTPD](#2-instalar-proftpd)
     - [3. Comprobar el estado del servicio](#3-comprobar-el-estado-del-servicio)
     - [4. Probar la conexión local](#4-probar-la-conexión-local)
-  - [💻 **Comandos FTP básicos (puede variar según la aplicación cliente)**](#-comandos-ftp-básicos-puede-variar-según-la-aplicación-cliente)
+    - [💻 Comandos FTP básicos (puede variar según la aplicación cliente)](#-comandos-ftp-básicos-puede-variar-según-la-aplicación-cliente)
     - [5. Probar desde otra máquina en la red](#5-probar-desde-otra-máquina-en-la-red)
     - [6. Ver la carpeta raíz del usuario](#6-ver-la-carpeta-raíz-del-usuario)
 - [✅ Comprobaciones finales Y ENTREGA: RECUERDA](#-comprobaciones-finales-y-entrega-recuerda)
@@ -79,7 +79,7 @@ Name: tu_usuario
 Password: tu_contraseña
 ```
 
-### 💻 **Comandos FTP básicos (puede variar según la aplicación cliente)**
+#### 💻 Comandos FTP básicos (puede variar según la aplicación cliente)
 
 | Comando            | Descripción                                                 |
 | ------------------ | ----------------------------------------------------------- |
@@ -95,7 +95,7 @@ Password: tu_contraseña
 
 ---
 
-(con la red en modo puente)
+> (con la red en modo puente)
 
 #### 5. Probar desde otra máquina en la red
 
