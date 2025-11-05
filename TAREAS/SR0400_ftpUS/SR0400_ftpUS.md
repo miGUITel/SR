@@ -141,4 +141,5 @@ CAPTURAS EN EL PROPIO SERVIDOR:
 
 CAPTURAS EN LAS QUE TIENE QUE APARECER EL CLIENTE Y EL SERVIDOR
 * Sube un archivo desde el servidor y bájalo desde el cliente.
+* Muestra el archivo subido en el sistema de archivos del servidor.
   * Captura: 0400tunombrecompleto4.jpg

@@ -4,6 +4,8 @@
   - [**3. Configurar Acceso de Usuario**](#3-configurar-acceso-de-usuario)
   - [**4. Conectar al Servidor FTP desde el CMD del propio servidor**](#4-conectar-al-servidor-ftp-desde-el-cmd-del-propio-servidor)
   - [💻 **Comandos FTP básicos en CMD**](#-comandos-ftp-básicos-en-cmd)
+    - [Entrega una captura similar a ésta:](#entrega-una-captura-similar-a-ésta)
+
 
 # **SR0401a Práctica: Instalación y prueba básica de un servidor FTP en Windows Server 2019**
 
@@ -36,7 +38,7 @@ Install-WindowsFeature -name Web-Server -IncludeManagementTools
 
 ## **2. Crear el Sitio FTP a través de IIS**
 
-* Crear una carpeta local llamada, por ejemplo, **FTP_LOCAL**, que servirá de directorio raíz.
+* Crear una carpeta local llamada, por ejemplo, **MiFTP**, que servirá de directorio raíz. Créala en `Mis Documentos` o en el escritorio.
 
 * Abrir el **Administrador de IIS** y agregar un **nuevo sitio FTP**:
 
@@ -46,12 +48,13 @@ Install-WindowsFeature -name Web-Server -IncludeManagementTools
 
 ![alt text](image-12.png)
 
-* Asignar un nombre al sitio (por ejemplo, `ftp_local`) y seleccionar la carpeta **FTP_LOCAL** como ruta física.
+* Asignar un nombre al sitio (por ejemplo, `ftp_local`) y seleccionar la carpeta **MiFTP** como ruta física.
 * Configurar el sitio **sin SSL** (en esta práctica no lo usaremos).
-* Puedes marcar o no `Habilitar nombres de host virtuales`, por ahora no tiene trascendencia, en prácticas más avanzadas sí.
+* No marcar `Habilitar nombres de host virtuales`.
+* ![alt text](image.png)
 * Finalizar la creación del sitio.
 
-![alt text](image-13.png)
+
 
 ---
 
@@ -105,3 +108,8 @@ Si se crea correctamente el directorio `prueba`, la conexión y permisos funcion
 | `put <archivo>`    | Sube un archivo al servidor                                 |
 | `delete <archivo>` | Elimina un archivo del servidor                             |
 | `quit`             | Cierra la sesión y sale del cliente FTP                     |
+
+
+### Entrega una captura similar a ésta:
+
+![alt text](<Captura desde 2025-11-05 13-53-02.png>)
