@@ -137,4 +137,9 @@
 
 ## Qué debo entregar:
 
-- Captura del usuario A
+![alt text](<Captura desde 2025-11-05 13-53-02.png>)
+
+- Captura del usuario AdminFTP: Se conecta, lee y escribe en el directorio. Tunombre1.jpg
+- Captura de otro usuario con todos los permisos: se conecta, lee y escribe. Tunombre2.jpg
+- Captura de otro usuario con permisos de lectura: se conecta, trata de escribir y no puede. Tunombre3.jpg
+- 
