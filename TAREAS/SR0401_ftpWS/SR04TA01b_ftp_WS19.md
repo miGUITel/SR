@@ -137,9 +137,10 @@
 
 ## Qué debo entregar:
 
+Debes entregar 3 capturas similares a la siguiente:
+
 ![alt text](<Captura desde 2025-11-05 13-53-02.png>)
 
-- Captura del usuario AdminFTP: Se conecta, lee y escribe en el directorio. Tunombre1.jpg
-- Captura de otro usuario con todos los permisos: se conecta, lee y escribe. Tunombre2.jpg
-- Captura de otro usuario con permisos de lectura: se conecta, trata de escribir y no puede. Tunombre3.jpg
-- 
+- Captura del usuario AdminFTP: En ella se aprecia cómo el usuario se conecta, lee y escribe en el directorio. Pon a la captura el siguiente nombre: Tunombre1.jpg
+- Captura de otro usuario con todos los permisos: se conecta, lee y escribe. Pon a la captura el siguiente nombre:  Tunombre2.jpg
+- Captura de otro usuario con permisos de lectura: se conecta, trata de escribir y no puede. Pon a la captura el siguiente nombre:  Tunombre3.jpg
