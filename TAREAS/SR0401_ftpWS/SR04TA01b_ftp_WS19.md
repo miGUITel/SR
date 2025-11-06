@@ -6,6 +6,7 @@
   - [**5. Configurar Accesos al Servidor FTP**](#5-configurar-accesos-al-servidor-ftp)
   - [**6. Configurar Permisos de la Carpeta en el Sistema Operativo**](#6-configurar-permisos-de-la-carpeta-en-el-sistema-operativo)
   - [**7. Conectar al Servidor FTP desde el CMD del propio servidor**](#7-conectar-al-servidor-ftp-desde-el-cmd-del-propio-servidor)
+  - [Qué debo entregar:](#qué-debo-entregar)
 
 # **SR0401b Práctica: Configuración de FTP en WS19 con múltiples usuarios y conexiones**
 
@@ -78,8 +79,9 @@
 
 ![alt text](image-12.png)
   
-   - **4.2.** Dar nombre al sitio FTP (p.e. iniciales.local)
+   - **4.2.** Dar nombre al sitio FTP ***TunombreFTP***
    - **4.3.** Habilitar los nombres de host virtuales para permitir que diferentes dominios apunten al mismo servidor FTP.
+     - ***tunombre.local***
    - **4.4.** Configurar sin SSL (Secure Sockets Layer) para simplificar la configuración en este entorno de prueba.
 
 ![alt text](image-13.png)
@@ -118,6 +120,7 @@
 ## **7. Conectar al Servidor FTP desde el CMD del propio servidor**
    - Abrir el símbolo del sistema (CMD).
    - **7.1.** Crear un directorio de prueba para comprobar el acceso al servidor FTP:
+   - 
      ```cmd
      ftp 172.16.X.9
      REM (donde X es el número de lista del alumno, por ejemplo, 43 si el alumno es el número 43)
@@ -127,7 +130,11 @@
      REM introduce la contraseña del usuario con el que te quieres conectar    
      mkdir prueba_directorio
      ```
+
    - ![alt text](image-21.png)
    - Verificar que el directorio ha sido creado exitosamente.
 
 
+## Qué debo entregar:
+
+- Captura del usuario A
