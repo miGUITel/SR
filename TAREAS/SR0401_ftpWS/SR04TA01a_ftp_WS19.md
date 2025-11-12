@@ -82,6 +82,9 @@ ftp localhost
 ```
 
 * Introducir las credenciales del usuario con el que estás conectado al sistema.
+
+![alt text](image-1.png)
+
 * Una vez dentro, probar los comandos básicos:
 
 ```
@@ -89,8 +92,6 @@ ls
 mkdir prueba
 quit
 ```
-
-![alt text](image-21.png)
 
 Si se crea correctamente el directorio `prueba`, la conexión y permisos funcionan.
 
