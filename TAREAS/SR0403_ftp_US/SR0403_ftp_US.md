@@ -3,8 +3,7 @@
 - [**Paso 2: Instalación del Servicio FTP (ProFTPD)**](#paso-2-instalación-del-servicio-ftp-proftpd)
 - [**Paso 3: Configuración de Usuarios y Carpetas Compartidas**](#paso-3-configuración-de-usuarios-y-carpetas-compartidas)
 - [**Paso 4: Configuración del Servidor ProFTPD**](#paso-4-configuración-del-servidor-proftpd)
-- [**Paso 5: Pruebas del Servicio FTP**](#paso-5-pruebas-del-servicio-ftp)
-- [**Paso 6: Consideraciones Finales**](#paso-6-consideraciones-finales)
+- [**Paso 5: Pruebas del Servicio FTP y ENTREGA**](#paso-5-pruebas-del-servicio-ftp-y-entrega)
 
 ### **Guion para la Instalación del Servicio FTP con ProFTPD en Ubuntu Server 20.04**
 
@@ -261,7 +260,7 @@ UseIPv6                         off                         # Desactiva el uso d
 ![alt text](image-5.png)
 
 
-### **Paso 5: Pruebas del Servicio FTP**
+### **Paso 5: Pruebas del Servicio FTP y ENTREGA**
 
 1. **Arranque del Servicio**:
    - Inicia el servicio ProFTPD:
@@ -274,27 +273,20 @@ UseIPv6                         off                         # Desactiva el uso d
 
      sudo netstat -tulnp | grep ftp
      ```
-
+  - Realiza una captura del resultado de systemctl status. `Llama a la imagen tunombre1.png`
 2. **Conexión desde Consola Local**:
    - Conéctate al servidor FTP desde la misma máquina para verificar que funciona correctamente:
      ```sh
      ftp localhost
      ```
-   - Realiza una captura de pantalla mostrando la conexión exitosa del usuario **adminftp**. El nombre del servidor debe ser el correspondiente a tus iniciales (p. ej., "Servidor de FJLM").
+   - Realiza una captura de pantalla mostrando la conexión exitosa del usuario **informatico1**. El nombre del servidor debe ser el correspondiente a tus iniciales (p. ej., "Servidor de FJLM"). `Llama a la imagen tunombre2.png`
 
 ![alt text](image-6.png)
 
 3. **Prueba de Conectividad con FileZilla**:
    - Desde una máquina con **FileZilla Client**, conéctate al servidor FTP utilizando la IP del servidor configurada en la red interna.
-   - Realiza una transferencia de un archivo **.png** al servidor y asegúrate de que el archivo se visualiza correctamente en el lado del servidor.
-   - Realiza una captura de pantalla mostrando los mensajes de conexión y la transferencia exitosa.
-
----
-
-### **Paso 6: Consideraciones Finales**
-
-- **Capturas de Pantalla**: Recuerda sustituir las capturas de pantalla propuestas en la tarea con las tuyas propias, asegurándote de cumplir con las modificaciones especificadas (nombre del servidor y red).
-- **Entrega**: Asegúrate de que todas las configuraciones son correctas y de incluir ambas capturas de pantalla en tu informe final.
-
----
-
+   - Con el usuario ***informatico2***:
+     - Realiza una transferencia de un archivo **.png** al servidor y asegúrate de que el archivo se visualiza correctamente en el lado del servidor.
+     - Realiza una captura de pantalla mostrando los mensajes de conexión y la transferencia exitosa. `Llama a la imagen tunombre3.png`
+    - Con el usuario ***anonimo***, intenta subir un archivo al servidor FTP.
+      - Realiza una captura del resultado. `Llama a la imagen tunombre4.png`
