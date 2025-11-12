@@ -1,11 +1,18 @@
-**Guion para la Instalación del Servicio FTP con ProFTPD en Ubuntu Server 20.04**
+- [**Guion para la Instalación del Servicio FTP con ProFTPD en Ubuntu Server 20.04**](#guion-para-la-instalación-del-servicio-ftp-con-proftpd-en-ubuntu-server-2004)
+- [**Paso 1: Preparación del Entorno**](#paso-1-preparación-del-entorno)
+- [**Paso 2: Instalación del Servicio FTP (ProFTPD)**](#paso-2-instalación-del-servicio-ftp-proftpd)
+- [**Paso 3: Configuración de Usuarios y Carpetas Compartidas**](#paso-3-configuración-de-usuarios-y-carpetas-compartidas)
+- [**Paso 4: Configuración del Servidor ProFTPD**](#paso-4-configuración-del-servidor-proftpd)
+- [**Paso 5: Pruebas del Servicio FTP**](#paso-5-pruebas-del-servicio-ftp)
+- [**Paso 6: Consideraciones Finales**](#paso-6-consideraciones-finales)
+
+### **Guion para la Instalación del Servicio FTP con ProFTPD en Ubuntu Server 20.04**
 
 **Objetivo de la tarea**: Configurar un servidor FTP en Ubuntu Server utilizando ProFTPD, siguiendo las instrucciones indicadas, para gestionar el intercambio de archivos en una red local. Se deben personalizar algunos aspectos del servidor para que sea único para cada alumno.
 
 > **nota**: La modificación de los archivos de cofiguración en linux es delicada. Recuerda:
 > Se cuidadoso con la tabulación.
 > Si después de modificar el archivo, el servidor ftp no funciona, comprueba el contenido del final del archivo `/var/log/syslog`.
-> -
 
 ---
 
@@ -33,8 +40,9 @@
 
 
 2. **Actualiza los paquetes** de Ubuntu antes de proceder:
+
    ```sh
-   sudo apt update && sudo apt upgrade -y
+   sudo apt update
    ```
 
 ---
@@ -230,6 +238,4 @@ UseIPv6                         off                         # Desactiva el uso d
 - **Entrega**: Asegúrate de que todas las configuraciones son correctas y de incluir ambas capturas de pantalla en tu informe final.
 
 ---
-
-Este guion debe guiar a los estudiantes paso a paso para realizar la instalación y configuración correctamente, asegurándose de cumplir con los requisitos personalizados de la tarea.
 
