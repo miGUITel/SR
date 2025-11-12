@@ -32,9 +32,13 @@
      network:
        version: 2
        ethernets: 
-         ens33: ; aquí el nombre de tu interfaz
+         ens33: # aquí el nombre de tu interfaz
            dhcp4: true
      ```
+> si tienes que modificar el archivo, realiza primero una copia de seguridad:
+> 
+> `sudo cp /etc/proftpd/proftpd.conf /etc/proftpd/proftpd.conf.original`
+> __
 
 ![alt text](image.png)
 
@@ -80,7 +84,10 @@
                - 8.8.4.4
      ```
      Este archivo configura la máquina en la red interna con una IP estática acorde al escenario de la tarea.
-
+> si tienes que modificar el archivo, realiza primero una copia de seguridad:
+> 
+> `sudo cp /etc/proftpd/proftpd.conf /etc/proftpd/proftpd.conf.original`
+> __
 ---
 
 ### **Paso 3: Configuración de Usuarios y Carpetas Compartidas**
@@ -89,31 +96,31 @@
    - Crea un grupo y los usuarios necesarios para el servicio FTP:
  - ![alt text](image-1.png)
      ```sh
-    sudo groupadd Informaticos
-    sudo groupadd Contables
-    sudo useradd AdminFtp -s /bin/false -M -N
-    sudo useradd Informatico1 -s /bin/false -M -N -g Informaticos
-    sudo useradd Informatico2 -s /bin/false -M -N -g Informaticos
-    sudo useradd Contable1 -s /bin/false -M -N -g Contables
-    sudo useradd Contable2 -s /bin/false -M -N -g Contables
+    sudo groupadd informaticos
+    sudo groupadd contables
+    sudo useradd adminftp -s /bin/false -M -N
+    sudo useradd informatico1 -s /bin/false -M -N -g informaticos
+    sudo useradd informatico2 -s /bin/false -M -N -g informaticos
+    sudo useradd contable1 -s /bin/false -M -N -g contables
+    sudo useradd contable2 -s /bin/false -M -N -g contables
      ```
 
 2. **Adjudicar las contraseñas a los usuarios**
 
 ![alt text](image-2.png)
     
-    sudo passwd AdminFTP
-    sudo passwd Informatico1
-    sudo passwd Informatico2
-    sudo passwd Contable1
-    sudo passwd Contable2
+    sudo passwd adminftp
+    sudo passwd informatico1
+    sudo passwd informatico2
+    sudo passwd contable1
+    sudo passwd contable2
 
 3. **Crear la Carpeta Compartida**:
    - Crea la carpeta que se va a compartir mediante FTP:
      ```sh
      sudo mkdir /srv/ftp/FJLM_LOCAL
      ```
-   - **Nota**: Sustituye "FJLM" por las iniciales de tu nombre completo. Este es uno de los cambios obligatorios especificados en la tarea.
+   - **Nota: Sustituye "FJLM" por las iniciales de tu nombre completo. Este es uno de los cambios obligatorios especificados en la tarea.**
    - Ajusta los permisos de la carpeta para que el usuario FTP pueda acceder:
 
 - ![alt text](image-3.png)
@@ -129,43 +136,93 @@
 
 1. **Edición del Archivo de Configuración**:
    - Edita el archivo `/etc/proftpd/proftpd.conf` para ajustar la configuración del servidor.
-   - Añade la configuración resumida proporcionada en el documento de la tarea, asegurándote de que:
+   - Añade la configuración resumida siguiente:
+
+> No es necesario que incluyas los comentarios # ...
    
 
 ```apache
-ServerName                      "Servidor Escenario EJEMPLO LOCAL."
-ServerType                      standalone
-DefaultServer                   on
-Port                            21
-Umask                           000
-MaxInstances                    500
-User                            proftpd
-Group                           nogroup
-DefaultRoot                     /EJEMPLO_LOCAL
-RequireValidShell               off
+# /etc/proftpd/proftpd.conf
+# ProFTPD en Ubuntu Server 20.04
 
+# --- Carga de módulos por defecto (Ubuntu/Debian) ---
+Include /etc/proftpd/modules.conf
+
+# --- Identidad del servidor ---
+ServerName              "Servidor de FJLM"
+ServerType              standalone
+DefaultServer           on
+Port                    21
+UseIPv6                 off
+# Desactiva búsquedas DNS inversas que ralentizan el login
+IdentLookups            off
+UseReverseDNS           off
+
+# --- Cuenta del proceso ---
+User                    proftpd
+Group                   nogroup
+
+# --- Permisos por defecto para archivos/directorios creados ---
+# 022 -> ficheros 644, directorios 755 (más seguro que 000)
+Umask                   022
+
+# --- Requisitos de shell para usuarios (necesario si usan /bin/false) ---
+RequireValidShell       off
+
+# --- Raíz por defecto (chroot) para TODOS los usuarios que inicien sesión ---
+# Ajusta a tu carpeta compartida real
+DefaultRoot             /srv/ftp/FJLM_LOCAL
+
+# --- (Opcional) Rango de puertos pasivos para firewalls/NAT ---
+# Descomenta si cierras el firewall y abres este rango.
+# PassivePorts          50000 50050
+
+# --- Límites de concurrencia ---
+MaxInstances            50
+
+# --- Política de acceso: QUIÉN puede iniciar sesión ---
+# Permitimos al usuario de administración y a los grupos definidos;
+# el resto, denegado.
 <Limit LOGIN>
-  AllowUser AdminFTP
-  AllowGroup OR Informaticos, Contables
   DenyAll
+  AllowUser              adminftp
+  AllowGroup             Informaticos
+  AllowGroup             Contables
 </Limit>
 
-<Directory /EJEMPLO_LOCAL>
+# --- Reglas de acceso a la carpeta compartida ---
+# Estructura propuesta:
+# - Contables: lectura/listado
+# - Informaticos: lectura/escritura
+# - adminftp: lectura/escritura/overwrite
+<Directory "/srv/ftp/FJLM_LOCAL">
+  # Política base: denegar todo
   <Limit READ WRITE DIRS>
     DenyAll
   </Limit>
 
+  # Contables: solo lectura y listar
   <Limit READ DIRS>
-    AllowGroup Contables
+    AllowGroup           Contables
   </Limit>
 
+  # Informaticos y adminftp: lectura/escritura y crear/eliminar dirs
   <Limit READ WRITE DIRS>
-    AllowUser AdminFTP
-    AllowGroup Informaticos
+    AllowGroup           Informaticos
+    AllowUser            adminftp
   </Limit>
 
-  AllowOverwrite                on
+  # Permitir sobrescribir (para los que ya tienen WRITE concedido)
+  AllowOverwrite         on
 </Directory>
+
+# --- Logs (puedes dejarlos por defecto o ajustar) ---
+# TransferLog            /var/log/proftpd/xferlog
+# SystemLog              /var/log/proftpd/proftpd.log
+
+# --- Incluye configuraciones adicionales en conf.d si las hubiera ---
+Include /etc/proftpd/conf.d/*.conf
+
 ```
 
 **A Continuación se explica detalladamente el contenido del archivo:**
@@ -182,8 +239,8 @@ DefaultRoot                     ~                           # Limita a los usuar
 RequireValidShell               off                         # Permite el acceso a usuarios incluso si no tienen un shell válido asignado en `/etc/shells`. Esto es útil para cuentas que no se conectan normalmente al sistema de forma interactiva.
 
 <Limit LOGIN>
-  AllowUser AdminFTP                                       # Permite solo al usuario "AdminFTP" realizar una conexión de inicio de sesión al servidor FTP.
-  DenyALL                                                  # Niega el acceso de inicio de sesión a todos los demás usuarios que no sean "AdminFTP".
+  AllowUser adminftp                                       # Permite solo al usuario "adminftp" realizar una conexión de inicio de sesión al servidor FTP.
+  DenyALL                                                  # Niega el acceso de inicio de sesión a todos los demás usuarios que no sean "adminftp".
 </Limit>
 
 Port                            21                          # Puerto en el cual escucha el servidor FTP (el puerto predeterminado de FTP es el 21).
@@ -214,6 +271,8 @@ UseIPv6                         off                         # Desactiva el uso d
    - Verifica que el servicio está activo:
      ```sh
      sudo systemctl status proftpd
+
+     sudo netstat -tulnp | grep ftp
      ```
 
 2. **Conexión desde Consola Local**:
@@ -221,7 +280,7 @@ UseIPv6                         off                         # Desactiva el uso d
      ```sh
      ftp localhost
      ```
-   - Realiza una captura de pantalla mostrando la conexión exitosa del usuario **AdminFTP**. El nombre del servidor debe ser el correspondiente a tus iniciales (p. ej., "Servidor de FJLM").
+   - Realiza una captura de pantalla mostrando la conexión exitosa del usuario **adminftp**. El nombre del servidor debe ser el correspondiente a tus iniciales (p. ej., "Servidor de FJLM").
 
 ![alt text](image-6.png)
 
