@@ -110,8 +110,8 @@
 
 ## **6. Configurar Permisos de la Carpeta en el Sistema Operativo**
    - Navegar a la carpeta creada en el paso 4.1 (**INICIALES_LOCAL** (donde INICIALES representa las iniciales del nombre completo del alumno, por ejemplo, FJLM_LOCAL para Francisco Javier López Mota)).
-   - ![alt text](image-19.png)
-   - ![alt text](image-20.png)
+  ![alt text](image-19.png)
+  ![alt text](image-20.png)
    - Asignar permisos adecuados según los requisitos:
      - **Lectura y escritura** para el usuario **AdminFTP** y el grupo **Informáticos**.
      - **Lectura** para el grupo **Contables**.
@@ -142,5 +142,5 @@ Debes entregar 3 capturas similares a la siguiente:
 ![alt text](<Captura desde 2025-11-05 13-53-02.png>)
 
 - Captura del usuario AdminFTP: En ella se aprecia cómo el usuario se conecta, lee y escribe en el directorio. Pon a la captura el siguiente nombre: Tunombre1.jpg
-- Captura de otro usuario con todos los permisos: se conecta, lee y escribe. Pon a la captura el siguiente nombre:  Tunombre2.jpg
+- Captura de otro usuario distintno al anterior con todos los permisos: se conecta, lee y escribe. Pon a la captura el siguiente nombre:  Tunombre2.jpg
 - Captura de otro usuario con permisos de lectura: se conecta, trata de escribir y no puede. Pon a la captura el siguiente nombre:  Tunombre3.jpg
