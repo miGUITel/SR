@@ -25,15 +25,21 @@
 
      
      Archivo: `/etc/netplan/00-installer-config.yaml`
+     Comando: `sudo nano /etc/netplan/00-installer-config.yaml`
+
 
      Contenido:
      ```yaml
      network:
        version: 2
        ethernets: 
-         ens33: # aquí el nombre de tu interfaz
+         ens33: # aquí el nombre de tu interfaz (se ve con: ip -br a)
            dhcp4: true
      ```
+     
+     Después de modificar el archivo, es necesario reiniciar la red:
+     Comando: `sudo netplan aply`
+
 > si tienes que modificar el archivo, realiza primero una copia de seguridad:
 > 
 > `sudo cp /etc/proftpd/proftpd.conf /etc/proftpd/proftpd.conf.original`
@@ -67,6 +73,7 @@
        - **Archivo de configuración de red (para modo red interna con IP estática)**:
 
      Archivo: `/etc/netplan/00-installer-config.yaml`
+     Comando: `sudo nano /etc/netplan/00-installer-config.yaml`
 
      Contenido:
      ```yaml
@@ -83,6 +90,10 @@
                - 8.8.4.4
      ```
      Este archivo configura la máquina en la red interna con una IP estática acorde al escenario de la tarea.
+
+     Después de modificar el archivo, es necesario reiniciar la red:
+     Comando: `sudo netplan aply`
+
 > si tienes que modificar el archivo, realiza primero una copia de seguridad:
 > 
 > `sudo cp /etc/proftpd/proftpd.conf /etc/proftpd/proftpd.conf.original`
