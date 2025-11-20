@@ -28,6 +28,10 @@
      ```powershell
      Install-WindowsFeature -Name Web-Server -IncludeManagementTools -IncludeAllSubFeature
      ```
+   - Ejecuta el siguiente comando para reiniciar el servidor web (IIS):
+     ```powershell
+     iisreset
+     ```
 ![alt text](5.1.png)
 ### 2. Crear un Usuario de Windows
    - Abre **Administración de Equipos**.
