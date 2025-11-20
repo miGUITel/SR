@@ -144,6 +144,7 @@
      127.0.0.1   sitio1.local 
      127.0.0.1   sitio2.net
      ```
+   - ASEGÚRATE DE QUITAR LAS # DEL PRINCIPIO DE LÍNEA (descomentar)
 ![alt text](<5.8 modificar hosts.png>)
 
 ### 11. Pruebas de Conexión
@@ -317,7 +318,7 @@ donde **X** es el número de la captura según aparece en esta lista.
 
 ---
 
-itio HTTP**
+**sitio HTTP**
 
 **4.** Captura de la ventana **Agregar sitio web** del `sitio2`, donde se vea:
 
