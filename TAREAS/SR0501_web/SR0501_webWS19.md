@@ -95,12 +95,11 @@
 
 ### 5. Crear un Certificado Autofirmado ***para el Sitio con Seguridad***
 (Solo se utilizará para configurar el sitio HTTPS)
-   - Abre **Administrador de IIS**.
-   - Ve a **Certificados del Servidor** y selecciona **Crear Certificado Autofirmado** en el panel derecho.
-   - Introduce el nombre del certificado, por ejemplo, `sitio1.local` y haz clic en **Aceptar** para generar el certificado.
-![alt text](<5.5 crear certificado.png>)
-![alt text](<5.51 crear autofirmado.png>)
-![alt text](<5.52 nombrar certificado.png>)
+```powershell
+New-SelfSignedCertificate `
+  -DnsName "www.sitio1.local","sitio1.local" `
+  -CertStoreLocation "cert:\LocalMachine\My"
+```
 
 ### 6. Crear el Sitio Web HTTPS en IIS
    - En **Administrador de IIS**, haz clic derecho sobre **Sitios** y selecciona **Agregar sitio web**.
