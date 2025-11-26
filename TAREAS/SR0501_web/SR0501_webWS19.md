@@ -96,9 +96,7 @@
 ### 5. Crear un Certificado Autofirmado ***para el Sitio con Seguridad***
 (Solo se utilizará para configurar el sitio HTTPS)
 ```powershell
-New-SelfSignedCertificate `
-  -DnsName "www.sitio1.local","sitio1.local" `
-  -CertStoreLocation "cert:\LocalMachine\My"
+New-SelfSignedCertificate -DnsName "www.sitio1.local","sitio1.local" -CertStoreLocation "cert:\LocalMachine\My"
 ```
 
 ### 6. Crear el Sitio Web HTTPS en IIS
