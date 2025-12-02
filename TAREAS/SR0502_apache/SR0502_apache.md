@@ -45,8 +45,8 @@ Antes de instalar Apache, configura la red para permitir acceso a Internet y pru
 
 ```bash
 ls /etc/netplan/ #comprueba cómo se llama el archivo .yaml en tu caso
-sudo cp /etc/netplan/01-netcfg.yaml /etc/netplan/01-netcfg.yaml.DHCP.ORIGINAL
-sudo nano /etc/netplan/01-netcfg.yaml
+sudo cp /etc/netplan/50-cloud.init.yaml /etc/netplan/archivo.DHCP.ORIGINAL
+sudo nano /etc/netplan/50-cloud.init.yaml
 ```
 
 **Contenido para DHCP:**
@@ -59,7 +59,7 @@ network:
     enp1s0:
       dhcp4: true
 ```
-
+![alt text](image-11.png)
 Aplica:
 
 ```bash
