@@ -4,6 +4,7 @@
     - [1.1. **Configuración de red por DHCP (modo puente en VirtualBox)**](#11-configuración-de-red-por-dhcp-modo-puente-en-virtualbox)
   - [2. **Instalación del servidor web Apache**](#2-instalación-del-servidor-web-apache)
   - [3. **Comprobación del servicio**](#3-comprobación-del-servicio)
+  - [Aquí tienes más información sobre la configuración de apache](#aquí-tienes-más-información-sobre-la-configuración-de-apache)
   - [4. **Personalización del sitio por defecto**](#4-personalización-del-sitio-por-defecto)
 - [**PARTE 2 — Convivencia de dos sitios virtuales**](#parte-2--convivencia-de-dos-sitios-virtuales)
 - [**PARTE 2a — Sitio con acceso anónimo (HTTP)**](#parte-2a--sitio-con-acceso-anónimo-http)
@@ -98,7 +99,7 @@ Accede al sitio por defecto a través del navedador:
 ![alt text](image-9.png)
 ![alt text](apache-default-page.png)
 
-Revisa el archivo de configuración del sitio principal:
+Revisa el archivo de configuración GENERAL DE **APACHE**:
 
 ```
 sudo nano /etc/apache2/apache2.conf
@@ -106,6 +107,7 @@ sudo nano /etc/apache2/apache2.conf
 
 ![alt text](image.png)
 
+[Aquí tienes más información sobre la configuración de apache](../../SR05WEB/SR0506_config_apache2.md)
 ---
 
 ## 4. **Personalización del sitio por defecto**
