@@ -5,6 +5,7 @@
   - [2. **Instalación del servidor web Apache**](#2-instalación-del-servidor-web-apache)
   - [3. **Comprobación del servicio**](#3-comprobación-del-servicio)
   - [4. **Personalización del sitio por defecto**](#4-personalización-del-sitio-por-defecto)
+  - [](#)
 - [**PARTE 2 — Convivencia de dos sitios virtuales**](#parte-2--convivencia-de-dos-sitios-virtuales)
 - [**PARTE 2a — Sitio con acceso anónimo (HTTP)**](#parte-2a--sitio-con-acceso-anónimo-http)
   - [5. **Creación del directorio y contenido del sitio anónimo**](#5-creación-del-directorio-y-contenido-del-sitio-anónimo)
@@ -129,7 +130,8 @@ sudo nano /var/www/html/index.html
 ```
 
 Añade tu nombre, fecha o un mensaje personalizado para comprobar el funcionamiento.
-
+> Entrega una captura similar a esta:
+![alt text](image-12.png)
 ---
 
 # **PARTE 2 — Convivencia de dos sitios virtuales**
