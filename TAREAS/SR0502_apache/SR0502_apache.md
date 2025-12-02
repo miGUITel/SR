@@ -41,8 +41,10 @@ Antes de instalar Apache, configura la red para permitir acceso a Internet y pru
 
 * Configura la red de la MV en **modo puente** para recibir IP desde el router.
 * Edita el archivo de *netplan*:
+* (El nombre de archivo `01-netcfg.yaml` puede ser distinto, comprueba previamente cómo se llama en tu máquina)
 
 ```bash
+ls /etc/netplan/ #comprueba cómo se llama el archivo .yaml en tu caso
 sudo cp /etc/netplan/01-netcfg.yaml /etc/netplan/01-netcfg.yaml.DHCP.ORIGINAL
 sudo nano /etc/netplan/01-netcfg.yaml
 ```
