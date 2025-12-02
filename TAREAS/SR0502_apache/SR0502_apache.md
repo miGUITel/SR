@@ -90,10 +90,13 @@ Verifica que Apache está instalado:
 ls /etc/apache2
 sudo systemctl status apache2
 ```
+![alt text](image-8.png)
 
+Accede al sitio por defecto a través del navedador:
+![alt text](image-9.png)
 ![alt text](apache-default-page.png)
 
-Revisa el archivo principal:
+Revisa el archivo de configuración del sitio principal:
 
 ```
 sudo nano /etc/apache2/apache2.conf
