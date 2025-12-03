@@ -419,7 +419,10 @@ Conecta:
 
 ```bash
 lynx http://sitio1.local
-lynx https://sitio2.local
+
+# Para la web cifrada modificamos el comando para que acepte el certificado autofirmado:
+lynx -accept_insecure_https https://sitio2.local
+
 ```
 
 ---
