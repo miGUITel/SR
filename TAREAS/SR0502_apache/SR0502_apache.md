@@ -223,8 +223,11 @@ Comprueba que no hay errores:
 ```bash
 sudo systemctl status apache2
 ```
-
----
+> Entrega dos capturas:
+> 1. Archivo de configuración del sisito
+> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde el cliente y mostrando la ip)
+>
+> .
 
 # **PARTE 2b — Sitio con acceso autenticado y HTTPS**
 
