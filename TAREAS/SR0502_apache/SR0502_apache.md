@@ -117,6 +117,7 @@ El sitio por defecto se sirve desde:
 ```
 /var/www/html/index.html
 ```
+El archivo anterior contiene el código html con el contenido de la página web incial del sitio.
 
 Haz una copia:
 
@@ -192,6 +193,7 @@ Creamos el archivo:
 ```bash
 sudo nano /etc/apache2/sites-available/sitio1.conf
 ```
+El archivo anterior es una archivo de configuración de apache. En él se indican las características básicas de nuestro sitio web.
 
 Contenido:
 
@@ -212,10 +214,16 @@ Contenido:
 
 ## 7. **Habilitar este sitio y desactivar el sitio por defecto**
 
+Por último queremos desactivar el sitio original, con la publicidad de apache (000-default.conf) y activar el nuestro (sitio1.conf)
+Para que los cambios tengan efecto debemos recargar apache `reload`
+Si ha habido algún fallo y apache no está activo, debemos reactivarlo: `systemctl start apache2`.
+
 ```bash
 sudo a2ensite sitio1.conf
 sudo a2dissite 000-default.conf
 sudo systemctl reload apache2
+# alternativa
+sudo systemctl start apache2
 ```
 
 Comprueba que no hay errores:
