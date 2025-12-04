@@ -19,7 +19,7 @@
   - [12. **Habilitar el sitio autenticado**](#12-habilitar-el-sitio-autenticado)
   - [13. **Consulta de sitios y comprobación de errores**](#13-consulta-de-sitios-y-comprobación-de-errores)
   - [14. **Configuración del archivo hosts en el cliente**](#14-configuración-del-archivo-hosts-en-el-cliente)
-  - [15. **Conexión desde cliente web en consola (lynx)**](#15-conexión-desde-cliente-web-en-consola-lynx)
+  - [15. **Conexión desde cliente web con un navegador moderno**](#15-conexión-desde-cliente-web-con-un-navegador-moderno)
   - [16. **Revisión de logs de Apache**](#16-revisión-de-logs-de-apache)
   - [17. **Volver a red estática en red interna (resumen)**](#17-volver-a-red-estática-en-red-interna-resumen)
     - [1) **Restaurar la copia del archivo original (recomendado)**](#1-restaurar-la-copia-del-archivo-original-recomendado)
@@ -415,34 +415,27 @@ Añadir:
 
 ---
 
-## 15. **Conexión desde cliente web en consola (lynx)**
+## 15. **Conexión desde cliente web con un navegador moderno**
 
-Instala:
-
-```bash
-sudo apt install lynx -y
-```
-
-Conecta:
-
-```bash
-lynx http://sitio1.local
-
-# Para la web cifrada modificamos el comando para que acepte el certificado autofirmado:
-lynx -accept_insecure_https https://sitio2.local
-
-```
+Accede a tus sitios desde un navegador en un cliente que esté en la misma red.
 
 ---
 
 ## 16. **Revisión de logs de Apache**
 
+Consulta el contenido del aschivo `/var/log/apache2/other_vhost_access.log`
+
 [ampliacion](../../SR05WEB/SR0504_USwebLog.md)
 
-Aquí tienes **solo lo esencial**, tal como pides, sin pasos adicionales.
+
 
 ---
-
+> Entrega tres capturas:
+> 1. Archivo de configuración del sitio cifrado
+> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde el cliente y mostrando la ip)
+> 3. Contenido del log de apache con los registros más recientes, en el que se vea la conexión desde el cliente de la captura anterior.
+>
+> .
 ## 17. **Volver a red estática en red interna (resumen)**
 
 Cuando cambies la MV a **Red interna**, debes **restaurar la configuración de IP estática** en *netplan*.
