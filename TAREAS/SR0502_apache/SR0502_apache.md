@@ -432,7 +432,7 @@ Consulta el contenido del aschivo `/var/log/apache2/other_vhost_access.log`
 ---
 > Entrega tres capturas:
 > 1. Archivo de configuración del sitio cifrado
-> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde el cliente y mostrando la ip)
+> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde un navegador del cliente y mostrando la ip)
 > 3. Contenido del log de apache con los registros más recientes, en el que se vea la conexión desde el cliente de la captura anterior.
 >
 > .
