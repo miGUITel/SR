@@ -21,6 +21,7 @@
   - [14. **Configuración del archivo hosts en el cliente**](#14-configuración-del-archivo-hosts-en-el-cliente)
   - [15. **Conexión desde cliente web con un navegador moderno**](#15-conexión-desde-cliente-web-con-un-navegador-moderno)
   - [16. **Revisión de logs de Apache**](#16-revisión-de-logs-de-apache)
+  - [ENTREGAS:](#entregas)
   - [17. **Volver a red estática en red interna (resumen)**](#17-volver-a-red-estática-en-red-interna-resumen)
     - [1) **Restaurar la copia del archivo original (recomendado)**](#1-restaurar-la-copia-del-archivo-original-recomendado)
     - [2) **Si no hay copia, reescribir el archivo con IP estática**](#2-si-no-hay-copia-reescribir-el-archivo-con-ip-estática)
@@ -427,9 +428,8 @@ Consulta el contenido del aschivo `/var/log/apache2/other_vhost_access.log`
 
 [ampliacion](../../SR05WEB/SR0504_USwebLog.md)
 
+## ENTREGAS:
 
-
----
 > Entrega tres capturas:
 > 1. Archivo de configuración del sitio cifrado
 > 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde un navegador del cliente y mostrando la ip)
