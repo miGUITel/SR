@@ -1,145 +1,366 @@
-**PRÁCTICA DE CONFIGURACIÓN Y PRUEBA DE SSH ENTRE WINDOWS SERVER Y UBUNTU SERVER**
+# 🧪 PRÁCTICA GUIADA — CONFIGURACIÓN Y PRUEBA DE SSH
 
-**WINDOWS SERVER**
+## 🎯 OBJETIVO DE LA PRÁCTICA
 
-1. **Comprobar si SSH está disponible:**
+Aprender a **acceder remotamente de forma segura** a un sistema informático utilizando **SSH**, comprendiendo:
 
-   - Abrir PowerShell como administrador.
-   - Ejecutar el comando: `Get-WindowsCapability -Online | ? Name -like "OpenSSH*"`
-   - Verificar si está instalado el cliente y servidor SSH.
+* qué equipo actúa como **cliente** y cuál como **servidor**
+* qué papel juegan los **servicios**, el **firewall** y los **usuarios**
+* cómo **verificar** que una conexión se ha realizado correctamente
 
-2. **Instalar componentes faltantes (si es necesario):**
+---
 
-   - Cliente SSH: `Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0`
-   - Servidor SSH: `Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0`
+## 🧠 IDEA CLAVE
 
-      - *puede tardar un bastante dependiendo del estado de los servidores de microsof*t
-   - ALTERNATIVA: `DISM /Online /Add-Capability /CapabilityName:OpenSSH.Server~~~~0.0.1.0`
-   - REINICIAR
+> **SSH permite controlar un equipo remoto desde la línea de comandos**, pero para que funcione:
+>
+> * el equipo remoto debe tener **un servicio SSH activo**
+> * la red debe permitir la comunicación
+> * el usuario debe existir en el sistema remoto
 
-3. **Configurar arranque automático:**
+---
 
-   - Activar y configurar el servicio OpenSSH:
-     ```
-     Set-Service -Name sshd -StartupType Automatic
-     Start-Service sshd
-     ```
-   - Activar y configurar el cliente SSH-Agent:
-     ```
-     Set-Service -Name ssh-agent -StartupType Automatic
-     Start-Service ssh-agent
-     ```
-   - Verificar el estado:
-     ```
-     Get-Service sshd
-     Get-Service ssh-agent
-     ```
+## 📘 SESIÓN 1 — SSH EN UBUNTU SERVER
 
-4. **Explorar el visor de eventos:**
+### 1️⃣ Comprobar red **y** conexión a Internet
 
-   - Abrir el Visor de Eventos.
-   - Navegar a **Applications and Services Logs / Registro de operaciones y servicios** > **OpenSSH** > **Operational**.
-   - Observar los eventos relacionados con SSH.
-
-![alt text](<Captura de pantalla 2025-01-12 084938.png>)
-
-![alt text](z4.png)
-
-**UBUNTU SERVER**
-
-5. **Configurar Ubuntu Server en DHCP:**
-
-   - Confirmar que la interfaz de red esté configurada para obtener dirección IP automáticamente.
-     - - [guía](https://miguitel.github.io/SR/linux/SR00linux.html#configuraci%C3%B3n-de-red-con-netplan-ampliaci%C3%B3n)
-   - Editar el archivo de configuración de red (ejemplo para Netplan):
-     ```
-     sudo nano /etc/netplan/01-netcfg.yaml
-     ```
-   - Configurar `dhcp4: true` para la interfaz correspondiente y aplicar cambios:
-     ```
-     sudo netplan apply
-     ```
-
-6. **Actualizar repositorios:**
+1. Comprueba que el equipo tiene dirección IP:
 
    ```
-   sudo apt update && sudo apt upgrade -y
+   ip a
    ```
 
-7. **Instalar OpenSSH:**
+   * Anota la dirección IP asignada.
+
+2. Comprueba la **salida a Internet** haciendo un ping a un servidor externo:
 
    ```
-   sudo apt install openssh-server -y
+   ping -c 3 8.8.8.8
    ```
 
-8. **Habilitar el firewall:**
+> 🧠 **Interpretación de resultados:**
+>
+> * Si `ip a` no muestra IP → problema de red local.
+> * Si `ping 8.8.8.8` falla → no hay salida a Internet.
 
-   - Permitir conexiones SSH:
-     ```
-     sudo ufw allow ssh
-     sudo ufw enable
-     ```
+Si falla la conexión a internet:[Configura netplan en DHCP](../../linux/SR005netplan.md)
 
-9. **Comprobar el estado del servicio SSH:**
+> ❗ **Sin conexión a Internet no se puede instalar software con `apt`.**
+
+
+### 2️⃣ Actualizar el sistema
+
+```
+sudo apt update
+```
+
+(Si el sistema lo pide, acepta las actualizaciones).
+
+---
+
+### 3️⃣ Instalar el servidor SSH
+
+```
+sudo apt install openssh-server -y
+```
+
+> 📌 *Ubuntu será el **servidor SSH***.
+
+---
+
+### 4️⃣ Comprobar que el servicio está activo
+
+```
+sudo systemctl status ssh
+```
+
+* El servicio debe aparecer como **active (running)**.
+
+> ❗ Si el servicio no está activo, **no se puede conectar nadie**.
+
+---
+
+### 5️⃣ Permitir SSH en el firewall
+
+1. Permitir el servicio:
 
    ```
-   sudo systemctl status ssh
+   sudo ufw allow ssh
+   ```
+2. Activar el firewall:
+
+   ```
+   sudo ufw enable
+   ```
+3. Comprobar el estado:
+
+   ```
+   sudo ufw status
    ```
 
-10. **Verificar el archivo de log:**
+> 🧠 *El firewall controla qué conexiones entran o salen del sistema.*
 
-    - Filtrar eventos relacionados con SSH en el archivo `auth.log`:
-      ```
-      sudo grep sshd /var/log/auth.log
-      ```
+---
 
-11. **Comprobar conexiones activas:**
+### 6️⃣ Ver los registros de acceso
+
+```
+sudo grep sshd /var/log/auth.log
+```
+
+> 📌 Aquí se guardarán los intentos de conexión SSH.
+
+### **Comprobar conexiones activas:**
 
     ```
     who
     ```
 ![alt text](image.png)
+---
 
-**CONECTAR ENTRE ELLOS**
+## 📘 SESIÓN 2 — SSH EN WINDOWS SERVER
 
-Deben formar parte de la misma RED.
+### 7️⃣ Comprobar si SSH está instalado
 
-12. **Conectar desde Ubuntu Server a Windows Server:**
+1. Abre **PowerShell como administrador**.
+2. Ejecuta:
 
-    ```
-    ssh usuario@direccion_ip_windows
-    ```
+   ```
+   Get-WindowsCapability -Online | Where-Object Name -like "OpenSSH*"
+   ```
+3. Mira los resultados, Comprueba si **Client** y **Server** están en estado `Installed`.
 
-    - Introducir la contraseña del usuario de Windows Server.
-    - Ejecuta DIR y comprueba que ves el contenido del Servidor Windows.
+---
 
-13. **Comprobar eventos en el visor de Windows Server:**
+> ⚠️ Este proceso requiere **conexión a Internet**.
 
-    - Revisar el Visor de Eventos > OpenSSH para registrar la conexión entrante.
+### 8️⃣ Instalar OpenSSH (si no está instalado al comprobar en 7️⃣)
+
+```
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+```
+
+> ⚠️ Este proceso requiere **conexión a Internet**.
+
+Reinicia el servidor cuando termine.
+
+---
+
+### 9️⃣ Activar el servicio SSH
+
+```
+Set-Service -Name sshd -StartupType Automatic
+Start-Service sshd
+```
+
+Comprueba el estado:
+
+```
+Get-Service sshd
+```
+
+---
+
+### 🔟 Revisar los eventos del servicio
+
+1. Abre el **Visor de eventos**.
+2. Accede a:
+
+   ```
+   Registros de aplicaciones y servicios > OpenSSH > Operational
+   ```
+3. Observa los eventos registrados.
+
+> 📌 Aquí quedará constancia de las conexiones SSH.
+
+![alt text](<Captura de pantalla 2025-01-12 084938.png>)
+
+![alt text](z4.png)
+---
+
+## 🔗 CONEXIÓN ENTRE UBUNTU Y WINDOWS
+
+> ⚠️ Ambos equipos deben estar **en la misma red**.
+
+---
+
+### 1️⃣1️⃣ Conectar desde Ubuntu a Windows
+
+Desde Ubuntu:
+
+```
+ssh usuario_windows@IP_windows
+```
+
+* Introduce la contraseña del usuario de Windows.
+
+Ejecuta:
+
+```
+dir
+```
+
+> ✔️ Si ves archivos, la conexión es correcta.
+
+---
+
+### 1️⃣2️⃣ Comprobar el registro en Windows
+
+* Revisa el visor de eventos OpenSSH.
+* Debe aparecer un acceso entrante.
 
 ![alt text](z13.png)
 
-14. **Conectar desde Windows Server a Ubuntu Server:**
+---
 
-    - Desde PowerShell:
-      ```
-      ssh usuario@direccion_ip_ubuntu
-      ```
-    - Introducir la contraseña del usuario de Ubuntu Server.
+### 1️⃣3️⃣ Conectar desde Windows a Ubuntu
 
-15. **Verificar la conexión en Ubuntu Server:**
+Desde PowerShell:
 
-    ```
-    who
-    ```
+```
+ssh usuario_ubuntu@IP_ubuntu
+```
 
-    - Confirmar que la sesión SSH del usuario de Windows Server está activa.
-  
+Introduce la contraseña del usuario de Ubuntu.
+
+---
+
+### 1️⃣4️⃣ Ver usuarios conectados en Ubuntu
+
+```
+who
+```
+
+> ✔️ Debe aparecer la sesión SSH activa.
+
   ![alt text](z15.png)
 
-**NOTAS ADICIONALES:**
+## 📸 CAPTURAS OBLIGATORIAS A ENTREGAR
 
-- Para fortalecer la seguridad, configurar la autenticación basada en claves SSH.
-- En caso de problemas, verificar configuraciones de firewall, puertos y servicios.
-- Asegurarse de que los puertos 22 (Ubuntu) y 22/SSH (Windows Server) estén abiertos en las respectivas configuraciones de firewall.
+El alumno deberá entregar **DOS capturas de pantalla**, claramente identificadas como **REM1tuNombre** y **REM2tuNombre**.
+Cada captura debe mostrar **simultáneamente** la información indicada.
+
+---
+
+## 📷 **CAPTURA 1 — CONEXIÓN SSH A SERVIDOR LINUX (UBUNTU SERVER)**
+
+### 🔹 SERVIDOR (Ubuntu Server)
+
+La captura debe mostrar:
+
+* Servicio activo:
+
+```
+sudo systemctl status ssh
+```
+
+* La **dirección IP del servidor Linux**, obtenida con:
+
+  ```
+  ip a
+  ```
+* El comando:
+
+  ```
+  who
+  ```
+
+  donde se vea claramente **la sesión SSH activa del cliente**.
+
+---
+
+### 🔹 CLIENTE (equipo que se conecta al servidor Linux)
+
+En la **misma captura** debe verse:
+
+* La **dirección IP del cliente**, obtenida con:
+
+  ```
+  ip a
+  ```
+
+  o
+
+  ```
+  ipconfig
+  ```
+* El comando de conexión SSH:
+
+  ```
+  ssh usuario@IP_servidor_linux
+  ```
+* La conexión establecida correctamente (terminal operativo).
+
+> 📌 Esta captura demuestra que:
+>
+> * el servicio SSH está activo en Linux
+> * el cliente se conecta correctamente al servidor
+
+---
+
+## 📷 **CAPTURA 2 — CONEXIÓN SSH A SERVIDOR WINDOWS SERVER**
+
+### 🔹 SERVIDOR (Windows Server)
+
+La captura debe mostrar:
+
+* La **dirección IP del servidor Windows**, obtenida con:
+
+  ```
+  ipconfig
+  ```
+* El **Visor de eventos**, en la ruta:
+
+  ```
+  Registros de aplicaciones y servicios > OpenSSH > Operational
+  ```
+
+  donde se observe **el evento de conexión SSH del cliente**.
+
+---
+
+### 🔹 CLIENTE (equipo que se conecta al servidor Windows)
+
+En la **misma captura** debe verse:
+
+* La **dirección IP del cliente**, obtenida con:
+
+  ```
+  ip a
+  ```
+
+  o
+
+  ```
+  ipconfig
+  ```
+* El comando:
+
+  ```
+  ssh usuario@IP_servidor_windows
+  ```
+* La conexión SSH establecida correctamente.
+
+> 📌 Esta captura demuestra que:
+>
+> * el servicio SSH está instalado y activo en Windows Server
+> * el servidor registra correctamente las conexiones entrantes
+
+---
+
+## ⚠️ CONDICIONES IMPORTANTES
+
+* Las capturas deben ser **claras y legibles**.
+* Debe verse **completo el terminal o ventana**, no recortes parciales.
+* Las IP del cliente y del servidor deben ser **coherentes con la red**.
+* Si falta alguno de los elementos indicados, **la captura no se considera válida**.
+
+## 📌 CONCLUSIÓN
+
+Con esta práctica has aprendido que:
+
+* SSH es un **servicio**, no solo un comando.
+* Una conexión remota depende de **red, servicio y usuario**.
+* Un administrador **no solo conecta**, también **verifica**.
 
