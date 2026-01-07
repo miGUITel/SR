@@ -19,8 +19,9 @@
   - [12. **Habilitar el sitio autenticado**](#12-habilitar-el-sitio-autenticado)
   - [13. **Consulta de sitios y comprobación de errores**](#13-consulta-de-sitios-y-comprobación-de-errores)
   - [14. **Configuración del archivo hosts en el cliente**](#14-configuración-del-archivo-hosts-en-el-cliente)
-  - [15. **Conexión desde cliente web en consola (lynx)**](#15-conexión-desde-cliente-web-en-consola-lynx)
+  - [15. **Conexión desde cliente web con un navegador moderno**](#15-conexión-desde-cliente-web-con-un-navegador-moderno)
   - [16. **Revisión de logs de Apache**](#16-revisión-de-logs-de-apache)
+  - [ENTREGAS:](#entregas)
   - [17. **Volver a red estática en red interna (resumen)**](#17-volver-a-red-estática-en-red-interna-resumen)
     - [1) **Restaurar la copia del archivo original (recomendado)**](#1-restaurar-la-copia-del-archivo-original-recomendado)
     - [2) **Si no hay copia, reescribir el archivo con IP estática**](#2-si-no-hay-copia-reescribir-el-archivo-con-ip-estática)
@@ -117,6 +118,7 @@ El sitio por defecto se sirve desde:
 ```
 /var/www/html/index.html
 ```
+El archivo anterior contiene el código html con el contenido de la página web incial del sitio.
 
 Haz una copia:
 
@@ -192,6 +194,7 @@ Creamos el archivo:
 ```bash
 sudo nano /etc/apache2/sites-available/sitio1.conf
 ```
+El archivo anterior es una archivo de configuración de apache. En él se indican las características básicas de nuestro sitio web.
 
 Contenido:
 
@@ -212,10 +215,16 @@ Contenido:
 
 ## 7. **Habilitar este sitio y desactivar el sitio por defecto**
 
+Por último queremos desactivar el sitio original, con la publicidad de apache (000-default.conf) y activar el nuestro (sitio1.conf)
+Para que los cambios tengan efecto debemos recargar apache `reload`
+Si ha habido algún fallo y apache no está activo, debemos reactivarlo: `systemctl start apache2`.
+
 ```bash
 sudo a2ensite sitio1.conf
 sudo a2dissite 000-default.conf
 sudo systemctl reload apache2
+# alternativa
+sudo systemctl start apache2
 ```
 
 Comprueba que no hay errores:
@@ -223,8 +232,11 @@ Comprueba que no hay errores:
 ```bash
 sudo systemctl status apache2
 ```
-
----
+> Entrega dos capturas:
+> 1. Archivo de configuración del sisito
+> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde el cliente y mostrando la ip)
+>
+> .
 
 # **PARTE 2b — Sitio con acceso autenticado y HTTPS**
 
@@ -404,31 +416,26 @@ Añadir:
 
 ---
 
-## 15. **Conexión desde cliente web en consola (lynx)**
+## 15. **Conexión desde cliente web con un navegador moderno**
 
-Instala:
-
-```bash
-sudo apt install lynx -y
-```
-
-Conecta:
-
-```bash
-lynx http://sitio1.local
-lynx https://sitio2.local
-```
+Accede a tus sitios desde un navegador en un cliente que esté en la misma red.
 
 ---
 
 ## 16. **Revisión de logs de Apache**
 
+Consulta el contenido del aschivo `/var/log/apache2/other_vhost_access.log`
+
 [ampliacion](../../SR05WEB/SR0504_USwebLog.md)
 
-Aquí tienes **solo lo esencial**, tal como pides, sin pasos adicionales.
+## ENTREGAS:
 
----
-
+> Entrega tres capturas:
+> 1. Archivo de configuración del sitio cifrado
+> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde un navegador del cliente y mostrando la ip)
+> 3. Contenido del log de apache con los registros más recientes, en el que se vea la conexión desde el cliente de la captura anterior.
+>
+> .
 ## 17. **Volver a red estática en red interna (resumen)**
 
 Cuando cambies la MV a **Red interna**, debes **restaurar la configuración de IP estática** en *netplan*.
