@@ -1,11 +1,6 @@
-Perfecto. Es una indicación **muy adecuada para SMR** y además **encaja con el razonamiento técnico real**: primero detecto el fallo, luego reviso la configuración.
-
-Te propongo **integrarlo de forma natural**, sin alargar en exceso y sin convertirlo en una guía de Netplan completa (que no es el objetivo de la práctica).
-
-Aquí tienes el **bloque definitivo corregido**, listo para sustituir el punto 1 de Ubuntu.
-
----
-
+- [🔧 1️⃣ Comprobar red, Internet y configuración de Netplan (Ubuntu Server)](#-1️⃣-comprobar-red-internet-y-configuración-de-netplan-ubuntu-server)
+  - [🚨 Si NO hay conexión a Internet](#-si-no-hay-conexión-a-internet)
+  - [🧠 Idea clave](#-idea-clave)
 ## 🔧 1️⃣ Comprobar red, Internet y configuración de Netplan (Ubuntu Server)
 
 1. Comprueba que el equipo tiene dirección IP:
@@ -72,7 +67,7 @@ Aquí tienes el **bloque definitivo corregido**, listo para sustituir el punto 1
 
 ---
 
-### 🧠 Idea clave para el alumno
+### 🧠 Idea clave
 
 > Si un equipo no tiene acceso a Internet, **no basta con instalar programas**:
 > primero hay que revisar la **configuración de red**.

@@ -1,3 +1,27 @@
+- [🧪 PRÁCTICA GUIADA — CONFIGURACIÓN Y PRUEBA DE SSH](#-práctica-guiada--configuración-y-prueba-de-ssh)
+  - [🎯 OBJETIVO DE LA PRÁCTICA](#-objetivo-de-la-práctica)
+  - [📘 1 SSH EN UBUNTU SERVER](#-1-ssh-en-ubuntu-server)
+    - [1️⃣ Comprobar red y conexión a Internet](#1️⃣-comprobar-red-y-conexión-a-internet)
+    - [2️⃣ Actualizar el sistema](#2️⃣-actualizar-el-sistema)
+    - [3️⃣ Instalar el servidor SSH](#3️⃣-instalar-el-servidor-ssh)
+    - [4️⃣ Comprobar que el servicio está activo](#4️⃣-comprobar-que-el-servicio-está-activo)
+    - [5️⃣ Permitir SSH en el firewall](#5️⃣-permitir-ssh-en-el-firewall)
+    - [6️⃣ Ver los registros de acceso](#6️⃣-ver-los-registros-de-acceso)
+    - [**Comprobar conexiones activas:**](#comprobar-conexiones-activas)
+  - [📘 2 — SSH EN WINDOWS SERVER](#-2--ssh-en-windows-server)
+    - [7️⃣ Comprobar si SSH está instalado](#7️⃣-comprobar-si-ssh-está-instalado)
+    - [8️⃣ Instalar OpenSSH (si no está instalado al comprobar en 7️⃣)](#8️⃣-instalar-openssh-si-no-está-instalado-al-comprobar-en-7️⃣)
+    - [9️⃣ Activar el servicio SSH](#9️⃣-activar-el-servicio-ssh)
+    - [🔟 Revisar los eventos del servicio](#-revisar-los-eventos-del-servicio)
+  - [🔗 CONEXIÓN ENTRE UBUNTU Y WINDOWS](#-conexión-entre-ubuntu-y-windows)
+    - [1️⃣1️⃣ Conectar desde Ubuntu a Windows](#1️⃣1️⃣-conectar-desde-ubuntu-a-windows)
+    - [1️⃣2️⃣ Comprobar el registro en Windows](#1️⃣2️⃣-comprobar-el-registro-en-windows)
+    - [1️⃣3️⃣ Conectar desde Windows a Ubuntu](#1️⃣3️⃣-conectar-desde-windows-a-ubuntu)
+    - [1️⃣4️⃣ Ver usuarios conectados en Ubuntu](#1️⃣4️⃣-ver-usuarios-conectados-en-ubuntu)
+  - [📸 CAPTURAS A ENTREGAR](#-capturas-a-entregar)
+  - [📷 **CAPTURA 1 — CONEXIÓN SSH A SERVIDOR LINUX (UBUNTU SERVER)**](#-captura-1--conexión-ssh-a-servidor-linux-ubuntu-server)
+  - [📷 **CAPTURA 2 — CONEXIÓN SSH A SERVIDOR WINDOWS SERVER**](#-captura-2--conexión-ssh-a-servidor-windows-server)
+  - [📌 CONCLUSIÓN](#-conclusión)
 # 🧪 PRÁCTICA GUIADA — CONFIGURACIÓN Y PRUEBA DE SSH
 
 ## 🎯 OBJETIVO DE LA PRÁCTICA
@@ -10,7 +34,7 @@ Aprender a **acceder remotamente de forma segura** a un sistema informático uti
 
 ---
 
-## 🧠 IDEA CLAVE
+🧠 IDEA CLAVE
 
 > **SSH permite controlar un equipo remoto desde la línea de comandos**, pero para que funcione:
 >
@@ -20,9 +44,9 @@ Aprender a **acceder remotamente de forma segura** a un sistema informático uti
 
 ---
 
-## 📘 SESIÓN 1 — SSH EN UBUNTU SERVER
+## 📘 1 SSH EN UBUNTU SERVER
 
-### 1️⃣ Comprobar red **y** conexión a Internet
+### 1️⃣ Comprobar red y conexión a Internet
 
 1. Comprueba que el equipo tiene dirección IP:
 
@@ -112,13 +136,16 @@ sudo grep sshd /var/log/auth.log
 
 ### **Comprobar conexiones activas:**
 
-    ```
-    who
-    ```
+```
+who
+```
+
+
 ![alt text](image.png)
+
 ---
 
-## 📘 SESIÓN 2 — SSH EN WINDOWS SERVER
+## 📘 2 — SSH EN WINDOWS SERVER
 
 ### 7️⃣ Comprobar si SSH está instalado
 
@@ -170,13 +197,16 @@ Get-Service sshd
    ```
    Registros de aplicaciones y servicios > OpenSSH > Operational
    ```
+
+![alt text](<Captura de pantalla 2025-01-12 084938.png>)
+
+
 3. Observa los eventos registrados.
 
 > 📌 Aquí quedará constancia de las conexiones SSH.
 
-![alt text](<Captura de pantalla 2025-01-12 084938.png>)
-
 ![alt text](z4.png)
+
 ---
 
 ## 🔗 CONEXIÓN ENTRE UBUNTU Y WINDOWS
@@ -236,7 +266,7 @@ who
 
   ![alt text](z15.png)
 
-## 📸 CAPTURAS OBLIGATORIAS A ENTREGAR
+## 📸 CAPTURAS A ENTREGAR
 
 El alumno deberá entregar **DOS capturas de pantalla**, claramente identificadas como **REM1tuNombre** y **REM2tuNombre**.
 Cada captura debe mostrar **simultáneamente** la información indicada.
@@ -245,15 +275,15 @@ Cada captura debe mostrar **simultáneamente** la información indicada.
 
 ## 📷 **CAPTURA 1 — CONEXIÓN SSH A SERVIDOR LINUX (UBUNTU SERVER)**
 
-### 🔹 SERVIDOR (Ubuntu Server)
+🔹 SERVIDOR (Ubuntu Server)
 
 La captura debe mostrar:
 
 * Servicio activo:
 
-```
-sudo systemctl status ssh
-```
+  ```
+  sudo systemctl status ssh
+  ```
 
 * La **dirección IP del servidor Linux**, obtenida con:
 
@@ -270,7 +300,7 @@ sudo systemctl status ssh
 
 ---
 
-### 🔹 CLIENTE (equipo que se conecta al servidor Linux)
+🔹 CLIENTE (equipo que se conecta al servidor Linux)
 
 En la **misma captura** debe verse:
 
@@ -301,7 +331,7 @@ En la **misma captura** debe verse:
 
 ## 📷 **CAPTURA 2 — CONEXIÓN SSH A SERVIDOR WINDOWS SERVER**
 
-### 🔹 SERVIDOR (Windows Server)
+🔹 SERVIDOR (Windows Server)
 
 La captura debe mostrar:
 
@@ -320,7 +350,7 @@ La captura debe mostrar:
 
 ---
 
-### 🔹 CLIENTE (equipo que se conecta al servidor Windows)
+🔹 CLIENTE (equipo que se conecta al servidor Windows)
 
 En la **misma captura** debe verse:
 
@@ -349,7 +379,7 @@ En la **misma captura** debe verse:
 
 ---
 
-## ⚠️ CONDICIONES IMPORTANTES
+⚠️ CONDICIONES IMPORTANTES
 
 * Las capturas deben ser **claras y legibles**.
 * Debe verse **completo el terminal o ventana**, no recortes parciales.
