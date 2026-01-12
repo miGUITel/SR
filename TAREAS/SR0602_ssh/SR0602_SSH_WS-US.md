@@ -20,6 +20,8 @@
   - [📸 CAPTURAS A ENTREGAR](#-capturas-a-entregar)
   - [📷 **CAPTURA 1 — CONEXIÓN SSH A SERVIDOR LINUX (UBUNTU SERVER)**](#-captura-1--conexión-ssh-a-servidor-linux-ubuntu-server)
   - [📷 **CAPTURA 2 — CONEXIÓN SSH A SERVIDOR WINDOWS SERVER**](#-captura-2--conexión-ssh-a-servidor-windows-server)
+  - [� **CAPTURA 3 — CONEXIÓN SSH A SERVIDOR ssh DE UN COMPAÑERO utilizando la IP**](#-captura-3--conexión-ssh-a-servidor-ssh-de-un-compañero-utilizando-la-ip)
+  - [📷 **CAPTURA 4 — CONEXIÓN SSH A SERVIDOR ssh DE UN COMPAÑERO utilizando un nombre de dominio**](#-captura-4--conexión-ssh-a-servidor-ssh-de-un-compañero-utilizando-un-nombre-de-dominio)
   - [📌 CONCLUSIÓN](#-conclusión)
 # 🧪 PRÁCTICA GUIADA — CONFIGURACIÓN Y PRUEBA DE SSH
 
@@ -377,6 +379,9 @@ En la **misma captura** debe verse:
 > * el servidor registra correctamente las conexiones entrantes
 
 ---
+
+## 📷 **CAPTURA 3 — CONEXIÓN SSH A SERVIDOR ssh DE UN COMPAÑERO utilizando la IP**
+## 📷 **CAPTURA 4 — CONEXIÓN SSH A SERVIDOR ssh DE UN COMPAÑERO utilizando un nombre de dominio**
 
 ⚠️ CONDICIONES IMPORTANTES
 
