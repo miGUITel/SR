@@ -7,7 +7,6 @@
     - [4️⃣ Comprobar que el servicio está activo](#4️⃣-comprobar-que-el-servicio-está-activo)
     - [5️⃣ Permitir SSH en el firewall](#5️⃣-permitir-ssh-en-el-firewall)
     - [6️⃣ Ver los registros de acceso](#6️⃣-ver-los-registros-de-acceso)
-    - [**Comprobar conexiones activas:**](#comprobar-conexiones-activas)
   - [📘 2 — SSH EN WINDOWS SERVER](#-2--ssh-en-windows-server)
     - [7️⃣ Comprobar si SSH está instalado](#7️⃣-comprobar-si-ssh-está-instalado)
     - [8️⃣ Instalar OpenSSH (si no está instalado al comprobar en 7️⃣)](#8️⃣-instalar-openssh-si-no-está-instalado-al-comprobar-en-7️⃣)
@@ -134,7 +133,7 @@ sudo grep sshd /var/log/auth.log
 
 > 📌 Aquí se guardarán los intentos de conexión SSH.
 
-### **Comprobar conexiones activas:**
+**Comprobar conexiones activas:**
 
 ```
 who
