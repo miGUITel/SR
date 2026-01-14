@@ -53,21 +53,73 @@ El objetivo de esta tarea es aprender a configurar el servicio de acceso remoto 
 2. **Verificación**:
    - Comprueba que puedes interactuar con el servidor de manera fluida.
 
+
 #### 2.2. Cliente Ubuntu Desktop
-1. **Instalación del cliente RDP en Ubuntu**:
-   - Instala la herramienta `vinagre`, que permite conectarte mediante RDP:
+
+1. **Instalación del cliente RDP en Ubuntu**
+
+   * Instala la herramienta `remmina`, uno de los clientes de escritorio remoto más utilizados en entornos Linux:
+
      ```bash
      sudo apt-get update -y
-     sudo apt-get install vinagre -y
+     sudo apt-get install remmina remmina-plugin-rdp -y
      ```
 
-2. **Conexión al servidor**:
-   - Abre `vinagre` y selecciona el protocolo RDP.
-   - Introduce la dirección IP o el nombre del servidor.
-   - Añade las credenciales de usuario del servidor y conecta.
+2. **Conexión al servidor**
 
-3. **Verificación**:
-   - Asegúrate de que puedes acceder al escritorio remoto del servidor.
+   * Abre **Remmina**.
+   * Crea una nueva conexión o usa la conexión rápida.
+   * Selecciona el protocolo **RDP**.
+   * Introduce la dirección IP o el nombre del servidor.
+   * Indica el usuario y la contraseña del servidor y conecta.
 
-4. **Aternativa**:
-   - La herramienta `Remmina` es una alternativa a vinagre.
+3. **Verificación**
+
+   * Comprueba que puedes acceder correctamente al escritorio remoto del servidor Windows Server 2019 y trabajar sobre él.
+
+4. **Alternativa**
+
+   * Como alternativa, puedes utilizar la herramienta `vinagre`, que también permite realizar conexiones mediante RDP.
+
+
+---
+
+> Recuerda, en las capturas se debe ver la ventana completa y el nombre de la máquina virtual
+
+### ✅ Captura 1: Conexión desde cliente Windows
+
+Una única captura donde se muestre:
+
+* En el **cliente Windows 10**:
+
+  * Conexión activa por Escritorio Remoto al servidor Windows Server 2019.
+
+* En el **servidor Windows Server 2019**:
+
+  * Ejecución del comando `query session`, donde se vea claramente la sesión remota activa y el usuario conectado.
+
+---
+
+### ✅ Captura 2: Conexión desde cliente Ubuntu
+
+Una única captura donde se muestre:
+
+* En el **cliente Ubuntu Desktop**:
+
+  * Conexión RDP activa al servidor Windows Server 2019.
+
+* En el **servidor Windows Server 2019**:
+
+  * Ejecución del comando `query session`, donde se vea claramente la sesión remota activa desde el cliente Ubuntu.
+---
+
+.
+
+.
+
+.
+
+.
+
+> Aspecto de la salida del comando `query session`:
+> ![alt text](image.png)
