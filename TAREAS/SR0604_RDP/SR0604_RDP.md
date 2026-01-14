@@ -40,6 +40,8 @@ El objetivo de esta tarea es aprender a configurar el servicio de acceso remoto 
    - Desde el servidor, comprueba que el servicio de Escritorio Remoto está habilitado y activo.
    - Realiza una prueba inicial de conexión local para verificar que el servicio funciona correctamente.
 
+![alt text](image-1.png)
+
 ---
 
 ### Parte 2: Pruebas de conexión desde los clientes
@@ -47,7 +49,7 @@ El objetivo de esta tarea es aprender a configurar el servicio de acceso remoto 
 #### 2.1. Cliente Windows 10
 1. **Iniciar la conexión desde Windows**:
    - Abre la herramienta "Conexión a Escritorio Remoto" (mstsc).
-   - Introduce la dirección IP o el nombre del servidor configurado.
+   - Introduce la dirección IP del servidor configurado.
    - Introduce las credenciales de usuario del servidor.
 
 2. **Verificación**:
