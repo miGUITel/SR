@@ -1,4 +1,12 @@
-**Tarea: Configuración de RDP en Windows Server 2019 y Pruebas desde Clientes Windows y Ubuntu**
+## - [**Tarea: Configuración de RDP en Windows Server 2019 y Pruebas desde Clientes Windows y Ubuntu**](#tarea-configuración-de-rdp-en-windows-server-2019-y-pruebas-desde-clientes-windows-y-ubuntu)
+- [- **Tarea: Configuración de RDP en Windows Server 2019 y Pruebas desde Clientes Windows y Ubuntu**](#--tarea-configuración-de-rdp-en-windows-server-2019-y-pruebas-desde-clientes-windows-y-ubuntu)
+  - [Introducción](#introducción)
+  - [Parte 1: Configuración de RDP en Windows Server 2019](#parte-1-configuración-de-rdp-en-windows-server-2019)
+  - [Parte 2: Pruebas de conexión desde los clientes](#parte-2-pruebas-de-conexión-desde-los-clientes)
+    - [2.1. Cliente Windows 10](#21-cliente-windows-10)
+    - [2.2. Cliente Ubuntu Desktop](#22-cliente-ubuntu-desktop)
+  - [✅ Captura 1: Conexión desde cliente Windows](#-captura-1-conexión-desde-cliente-windows)
+  - [✅ Captura 2: Conexión desde cliente Ubuntu](#-captura-2-conexión-desde-cliente-ubuntu)
 
 ### Introducción
 
