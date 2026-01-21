@@ -61,7 +61,7 @@ La teoría **no se agota nunca en una sesión**: se introduce lo justo para pode
 * Zonas y por qué existen.
 * Introducción a delegaciones (conceptual).
 
-**Práctica** [+](./S0303_FQDN.md)
+**Práctica** [+](./S0303_FQDN_OP.md)
 
 * Análisis de nombres reales.
 * Descomposición de FQDN.
@@ -90,7 +90,7 @@ La teoría **no se agota nunca en una sesión**: se introduce lo justo para pode
 
 ---
 
-### **Sesión 5 — Zonas y resolución directa** [+](./S0305zonas.md)
+### **Sesión 5 — Zonas y resolución directa** [+](./S0305_zonas.md)
 
 **Teoría**
 
