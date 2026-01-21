@@ -45,11 +45,11 @@ Configurar la tarjeta de red en [WS19](./UT01/tut/01_red_en_WS19.md) [UBUNTU DES
 
 [Apuntes](./UT03/SR03.md)
 
-[Configuración de archivos de registros DNS en linux](./TAREAS/SR03TA03_bind9files.md)
+[Configuración de archivos de registros DNS en linux](./TAREAS/SR03DNS/SR03TA03_bind9files.md)
 
-[Guion TA04: DNS en WS19 - Crear servidores](./TAREAS/SR03TA04_dns_win_1.md)
+[Guion TA04: DNS en WS19 - Crear servidores](./TAREAS/SR03DNS/SR03TA04_dns_win_1.md)
 
-[Guion TA04: DNS en WS19 - Configurar DNS](./TAREAS/SR03TA04_dns_win_2.md)
+[Guion TA04: DNS en WS19 - Configurar DNS](./TAREAS/SR03DNS/SR03TA04_dns_win_2.md)
 
 # UT04 FTP
 
