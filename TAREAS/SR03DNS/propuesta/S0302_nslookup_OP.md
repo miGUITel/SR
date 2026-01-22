@@ -202,3 +202,8 @@ o
 
 > *Cuando escribes un nombre, el sistema consulta un DNS,
 > guarda la respuesta en caché y la reutiliza mientras sea válida.*
+>
+
+Feedback:
+Aunque ping no funcione (ping www.google.com) sí que realiza la petición al DNS y sí queda registrado en la caché del DNS
+Comprobar porqué en algunas máquinas la caché se llena justo después de flush (parece que tiene que ver con el archivo HOSTS)
