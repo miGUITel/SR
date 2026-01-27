@@ -50,10 +50,8 @@ En el **Administrador DNS** del servidor:
 
 Comprueba que la zona inversa aparece creada correctamente.
 
-📎 *Captura reutilizable de tu guion ampliado:*
-
 ```md
-![alt text](<3 inversa.png>)
+![alt text](../3%20inversa.png)
 ```
 
 ---
@@ -139,10 +137,8 @@ A continuación, crea el registro **A** correspondiente:
 
 * `mail` → IP del servidor de correo (real o ficticia).
 
-📎 *Captura reutilizable de tu guion ampliado:*
-
 ```md
-![alt text](image.png)
+![alt text](../image.png)
 ```
 
 ---
