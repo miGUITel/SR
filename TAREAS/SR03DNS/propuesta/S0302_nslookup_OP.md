@@ -66,7 +66,8 @@ ipconfig /displaydns
 Ejecuta:
 
 ```powershell
-ping www.google.com
+ping www.google.com 
+ping www.iesinfantaelena.com
 ```
 
 **Qué observar**
