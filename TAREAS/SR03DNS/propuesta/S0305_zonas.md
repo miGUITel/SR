@@ -32,22 +32,22 @@ En el **Administrador DNS** del servidor:
 
 1. Accede a **Zonas de búsqueda directa**.
 2. Crea una nueva zona con las siguientes características:
-
+![alt text](image-6.png)
    * Tipo de zona: **Zona principal**
    * Nombre de la zona:
 
      ```
-     ejemplo.local
+     tunombre.local
      ```
-   * No permitir actualizaciones dinámicas.
+   ![alt text](image-5.png)
 
+
+
+> *Crear un archivo nuevo con este nombre...*
+>    *No permitir actualizaciones dinámicas.*
 Finaliza el asistente y comprueba que la zona aparece creada.
 
-📎 *Captura reutilizable de tu guion ampliado:*
-
-```md
-![alt text](2.png)
-```
+![alt text](image-7.png)
 
 *(Creación de zona directa)*
 
@@ -73,6 +73,10 @@ Responde brevemente:
 
 Añade los siguientes registros **A** dentro de la zona:
 
+![alt text](51.png)
+
+
+
 | Nombre | Dirección IP                      |
 | ------ | --------------------------------- |
 | `ns1`  | IP del servidor DNS               |
@@ -84,13 +88,7 @@ Añade los siguientes registros **A** dentro de la zona:
 * El registro `ns1` debe apuntar a la IP real del servidor DNS.
 * Los demás registros deben ser coherentes con la red interna.
 
-📎 *Captura reutilizable de tu guion ampliado:*
-
-```md
-![alt text](51.png)
-```
-
-*(Alta de registros A)*
+![alt text](image-8.png)
 
 ---
 
