@@ -6,6 +6,7 @@
   - [4. Creación de registros MX (introducción al correo)](#4-creación-de-registros-mx-introducción-al-correo)
   - [5. Comprobación del registro MX](#5-comprobación-del-registro-mx)
   - [Instrucciones de entrega](#instrucciones-de-entrega)
+  - [Capturas que debes conservar de esta práctica](#capturas-que-debes-conservar-de-esta-práctica)
 
 # 🧪 **Práctica 6 — Resolución inversa y registros de servicio (MX)**
 
@@ -42,17 +43,14 @@ En el **Administrador DNS** del servidor:
 3. Tipo de zona: **Zona principal**
 4. Tipo de IP: **IPv4**
 5. Identificador de red:
-
    * Introduce los octetos correspondientes a la red utilizada
-     (por ejemplo, `172.16` si trabajas con una red /16).
-6. No permitir actualizaciones dinámicas.
+     (por ejemplo, `172.16.20` si trabajas con una red /24).
+6. No admitir actualizaciones dinámicas.
 7. Finaliza el asistente.
 
 Comprueba que la zona inversa aparece creada correctamente.
 
-```md
-![alt text](../3%20inversa.png)
-```
+![alt text](image-11.png)
 
 ---
 
@@ -92,6 +90,8 @@ nslookup 172.16.0.4
 ```
 
 (Sustituye la IP por la correspondiente a cada equipo).
+
+![alt text](image-12.png)
 
 Qué observar
 
@@ -137,9 +137,7 @@ A continuación, crea el registro **A** correspondiente:
 
 * `mail` → IP del servidor de correo (real o ficticia).
 
-```md
-![alt text](../image.png)
-```
+![alt text](image-13.png)
 
 ---
 
@@ -150,7 +148,12 @@ A continuación, crea el registro **A** correspondiente:
 Desde el servidor o un cliente, ejecuta:
 
 ```powershell
-nslookup -type=MX ejemplo.local
+nslookup
+
+> set vc
+> set type=MX
+> miguel.local
+
 ```
 
 **Qué observar**
@@ -158,10 +161,7 @@ nslookup -type=MX ejemplo.local
 * Aparece el servidor de correo configurado.
 * Se muestra la prioridad del registro MX.
 
-Responde:
-
-* ¿Qué ocurriría si el registro MX apuntara a un nombre sin registro A?
-* ¿Por qué el servicio de correo depende del DNS?
+![alt text](image-14.png)
 
 ---
 
@@ -175,6 +175,12 @@ Responde:
   * Guardar las capturas indicadas.
   * Responder por escrito a las preguntas planteadas.
   * Mantener coherencia con las prácticas anteriores.
+
+## Capturas que debes conservar de esta práctica
+
+* 📸 Captura 1 → Zona inversa creada y con sus registros PTR
+* 📸 Captura 2 → Demostración con nslookup del funcionamiento adecuado de los registros inversos
+* 📸 Captura 3 → Resgistro MX creado y comprobación de su configuración con nslookup
 
 ---
 
