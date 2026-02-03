@@ -6,7 +6,7 @@
 
 ---
 
-## Objetivo de la práctica
+**Objetivo de la práctica**
 
 Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenviando consultas a **otro servidor DNS de la red**, diferenciando claramente entre:
 
@@ -16,7 +16,7 @@ Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenvi
 
 ---
 
-## Idea clave de la práctica
+**Idea clave de la práctica**
 
 > *Un DNS no tiene por qué saberlo todo:
 > puede preguntar a otro DNS de la red.*
@@ -26,16 +26,58 @@ Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenvi
 ## Escenario de trabajo
 
 * **DNS1** (Windows Server 2019)
-
-  * Zona directa: `ejemplo.local`
-* **DNS2** (Windows Server 2019, clonado)
-
+  * Zona directa: `alumno.local`
+  
+* **DNS2** Windows Server 2019, **clonado** y configurado con:
+  * nueva Ip, dentro del rango
+  * nueva zona directa, SOA, NS, registros A
+  * nueva zona inversa, con todos los PTR
   * Zona directa: `externo.local`
+
+<details>
+<summary>🔧 Cambio de nombre del servidor (Windows Server 2019). Realiza estos pasos en cada servidor DNS antes de continuar con la práctica.</summary>
+
+#### Opción 1 — Método gráfico
+
+1. Abre **Administrador del servidor**.
+2. Accede a **Servidor local**.
+3. Haz clic sobre el **Nombre del equipo**.
+4. En la ventana **Propiedades del sistema**, pulsa **Cambiar…**.
+5. Introduce el nuevo nombre:
+
+   * `DNS1` para el primer servidor.
+   * `DNS2` para el segundo servidor.
+6. Acepta los cambios.
+7. **Reinicia el servidor** para que el cambio tenga efecto.
+
+---
+
+#### Opción 2 — PowerShell
+
+Abre **PowerShell como administrador** y ejecuta:
+
+```powershell
+Rename-Computer -NewName DNS1 -Restart
+```
+
+En el segundo servidor:
+
+```powershell
+Rename-Computer -NewName DNS2 -Restart
+```
+
+> El parámetro `-Restart` reinicia automáticamente el sistema para aplicar el cambio de nombre.
+</details>
+
+---
+
+  
 * Ambos servidores:
 
   * En la **misma red interna**.
   * Con IP fija.
-* El cliente:
+
+* El **cliente**: (puedes utilizar el DNS1 original como cliente)
 
   * Configurado para usar **solo DNS1** como servidor DNS.
 
@@ -46,8 +88,6 @@ Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenvi
 
 ## Tareas a realizar
 
----
-
 ## 1. Situación inicial: cada DNS conoce solo su zona
 
 Antes de configurar reenviadores, comprueba desde el **cliente**:
@@ -55,7 +95,7 @@ Antes de configurar reenviadores, comprueba desde el **cliente**:
 ### Consultas que deben funcionar
 
 ```cmd
-nslookup pc1.ejemplo.local
+nslookup pc1.alumno.local
 ```
 
 (DNS1 responde de forma autoritativa).
@@ -86,6 +126,8 @@ En el **Administrador DNS** de **DNS1**:
 
 📌 DNS1 reenviará a DNS2 las consultas que no pueda resolver.
 
+![alt text](image-15.png)
+
 ---
 
 ## 3. Comprobación de resolución reenviada
@@ -112,7 +154,7 @@ Para observar claramente quién responde, utiliza consultas dirigidas.
 ### Consulta directa a DNS1
 
 ```cmd
-nslookup pc1.ejemplo.local <IP_DNS1>
+nslookup pc1.alumno.local <IP_DNS1>
 ```
 
 ✔️ Respuesta correcta.
@@ -134,7 +176,7 @@ nslookup pc1.externo.local <IP_DNS2>
 ✔️ Respuesta autoritativa.
 
 ```cmd
-nslookup pc1.ejemplo.local <IP_DNS2>
+nslookup pc1.alumno.local <IP_DNS2>
 ```
 
 ❌ No responde (no conoce esa zona).
@@ -163,6 +205,13 @@ Responde brevemente:
 * Guarda las capturas indicadas y responde a las preguntas.
 * No se entrega de forma independiente.
 
+## Capturas que debes conservar de esta práctica
+
+* 📸 Captura 1 → Configuración DNS2: zonas y contenido de la zona directa
+* 📸 Captura 2 → Configuración en DNS1 de reenviador: DNS2
+* 📸 Captura 3 → Demostración con nslookup: solicitud a DNS1 de un nombre que esté en DNS2
+* 📸 Captura 4 → Demostración con nslookup: solicitud a DNS2 de un nombre que esté en DNS1 (no debe funcionar)
+  
 ---
 
 ## Qué se evalúa en esta práctica

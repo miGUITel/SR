@@ -1,4 +1,4 @@
-- [🧪 **Práctica 6 — Resolución inversa y registros de servicio (MX)**](#-práctica-6--resolución-inversa-y-registros-de-servicio-mx)
+- [🧪 **Práctica 5 — Resolución inversa y registros de servicio (MX)**](#-práctica-5--resolución-inversa-y-registros-de-servicio-mx)
   - [1. Creación de la zona de búsqueda inversa](#1-creación-de-la-zona-de-búsqueda-inversa)
   - [2. Asociación directa ↔ inversa (creación de registros PTR)](#2-asociación-directa--inversa-creación-de-registros-ptr)
   - [3. Pruebas de resolución inversa](#3-pruebas-de-resolución-inversa)
@@ -8,7 +8,7 @@
   - [Instrucciones de entrega](#instrucciones-de-entrega)
   - [Capturas que debes conservar de esta práctica](#capturas-que-debes-conservar-de-esta-práctica)
 
-# 🧪 **Práctica 6 — Resolución inversa y registros de servicio (MX)**
+# 🧪 **Práctica 5 — Resolución inversa y registros de servicio (MX)**
 
 **Módulo:** Servicios en Red
 **Unidad de Trabajo:** UT03 – DNS
