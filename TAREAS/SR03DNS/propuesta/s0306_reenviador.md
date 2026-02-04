@@ -35,6 +35,7 @@ Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenvi
   * Zona directa: `externo.local`
 
 <details>
+
 <summary>🔧 Cambio de nombre del servidor (Windows Server 2019). Realiza estos pasos en cada servidor DNS antes de continuar con la práctica.</summary>
 
 #### Opción 1 — Método gráfico
@@ -67,6 +68,7 @@ Rename-Computer -NewName DNS2 -Restart
 ```
 
 > El parámetro `-Restart` reinicia automáticamente el sistema para aplicar el cambio de nombre.
+
 </details>
 
 ---
