@@ -1,4 +1,6 @@
 - [🧪 **Práctica 5 — Resolución inversa y registros de servicio (MX)**](#-práctica-5--resolución-inversa-y-registros-de-servicio-mx)
+  - [0. Configurar los nombres adecuados del DNS](#0-configurar-los-nombres-adecuados-del-dns)
+  - [](#)
   - [1. Creación de la zona de búsqueda inversa](#1-creación-de-la-zona-de-búsqueda-inversa)
   - [2. Asociación directa ↔ inversa (creación de registros PTR)](#2-asociación-directa--inversa-creación-de-registros-ptr)
   - [3. Pruebas de resolución inversa](#3-pruebas-de-resolución-inversa)
@@ -32,6 +34,17 @@ Crear una **zona de búsqueda inversa**, asociar correctamente registros **A ↔
 
 * Tareas a realizar
 
+## 0. Configurar los nombres adecuados del DNS
+
+Para que el DNS se reconozca a sí mismo.
+
+En el registro SOA y el NS, cambiar el nombre de host por el que tenga en el registro A, probablemnte ns1.ejemplo.local
+En SOA,cambiamos el campo "Servidor principal". Se puede examinar para no fallar:
+
+![alt text](image-16.png)
+
+En servidores de nombres, escribimos el nombre y click en resolver. (El DNS lo resuelve porque tengo un registro A asociado)
+![alt text](image-17.png)
 ---
 
 ## 1. Creación de la zona de búsqueda inversa
