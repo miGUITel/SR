@@ -4,13 +4,18 @@
 **Unidad de Trabajo:** UT03 – DNS
 **Sesión:** 7
 
+CONTROL DE CAMBIOS
+
+1. He cambiado los nombres que tienen que tener los DNS, ahora son DNS1_PRIMARIO y DN3_SECUNDARIO
+2. Se deben cambiar los nombres de los equipos WINDOWS
+
 ### ÍNDICE
 
 ## Índice
 
 - [1. Situación inicial](#1-situación-inicial)
 - [2. Configuración de la transferencia de zona](#2-configuración-de-la-transferencia-de-zona-en-dns1)
-- [3. Creación del servidor secundario](#3-creación-de-la-zona-secundaria-en-dns3)
+- [3. Creación del servidor secundario](#3-creación-de-la-zona-secundaria-en-dns3_SECUNDARIO)
 - [4. Comprobación de la transferencia y resolución](#4-comprobación-de-la-transferencia-de-zona)
 - [7. Capturas a entregar](#7-sincronización-de-cambios-y-tiempo-de-actualización-del-secundario)
 
@@ -30,17 +35,19 @@ Configurar un **servidor DNS secundario** y comprobar la **transferencia de zona
 
 ## Escenario de trabajo
 
-* **DNS1**
+* **DNS1_PRIMARIO**
 
   * Windows Server 2019
   * Zona directa principal: `ejemplo.local`
   * Servidor DNS **primario**
+  * Cambia el nombre de WINDOWS A **DNS_PRIMARIO**
 
-* **DNS3**
+* **DNS3_SECUNDARIO**
 
   * Clonación enlazada: **cambia MACs, ip, nombre de Windows, elimina la zona del DNS**
   * Windows Server 2019
   * Servidor DNS **secundario**
+  * Cambia el nombre de WINDOWS A **DNS_SECUNDARIO**
 
 * Ambos servidores:
 
@@ -48,8 +55,8 @@ Configurar un **servidor DNS secundario** y comprobar la **transferencia de zona
   * Con IP fija.
   * Sin conexión a Internet.
 
-* El cliente: ***(puedes utilizar DNS1 como cliente)***
-  * Puede consultar indistintamente a DNS1 o DNS3 (según se indique).
+* El cliente: ***(puedes utilizar DNS1_PRIMARIO como cliente)***
+  * Puede consultar indistintamente a DNS1_PRIMARIO o DNS3_SECUNDARIO (según se indique).
 
 
 ## Tareas a realizar
@@ -58,19 +65,19 @@ Configurar un **servidor DNS secundario** y comprobar la **transferencia de zona
 
 Comprueba que:
 
-* DNS1 resuelve correctamente los nombres de la zona `ejemplo.local`.
-* DNS3 **no tiene** todavía ninguna zona configurada.
+* DNS1_PRIMARIO resuelve correctamente los nombres de la zona `ejemplo.local`.
+* DNS3_SECUNDARIO **no tiene** todavía ninguna zona configurada.
 
 Esto confirma que:
 
-* DNS1 es el único servidor autoritativo en este momento.
-* DNS3 aún no dispone de información DNS.
+* DNS1_PRIMARIO es el único servidor autoritativo en este momento.
+* DNS3_SECUNDARIO aún no dispone de información DNS.
 
 ---
 
-## 2. Configuración de la transferencia de zona en DNS1
+## 2. Configuración de la transferencia de zona en DNS1_PRIMARIO
 
-En el **Administrador DNS** de **DNS1**:
+En el **Administrador DNS** de **DNS1_PRIMARIO**:
 
 1. Abre la zona directa `ejemplo.local`.
 2. Clic derecho → **Propiedades**.
@@ -78,32 +85,32 @@ En el **Administrador DNS** de **DNS1**:
 
    * Marca **Permitir transferencias de zona**.
    * Selecciona **Solo a los servidores de nombres**
-     *(o especifica explícitamente la IP de DNS3)*.
+     *(o especifica explícitamente la IP de DNS3_SECUNDARIO)*.
 4. Acepta los cambios.
 
-📌 Con esto autorizas a DNS3 a recibir la zona.
+📌 Con esto autorizas a DNS3_SECUNDARIO a recibir la zona.
 
 ---
 
-## 3. Creación de la zona secundaria en DNS3
+## 3. Creación de la zona secundaria en DNS3_SECUNDARIO
 
-En el **Administrador DNS** de **DNS3**:
+En el **Administrador DNS** de **DNS3_SECUNDARIO**:
 
 1. Clic derecho en **Zonas de búsqueda directa** → **Nueva zona…**
 2. Tipo de zona: **Zona secundaria**.
 3. Nombre de la zona: `ejemplo.local`.
 4. Servidor maestro:
 
-   * Introduce la **IP de DNS1**.
+   * Introduce la **IP de DNS1_PRIMARIO**.
 5. Finaliza el asistente.
 
-📌 DNS3 solicitará automáticamente la transferencia de zona a DNS1.
+📌 DNS3_SECUNDARIO solicitará automáticamente la transferencia de zona a DNS1_PRIMARIO.
 
 ---
 
 ## 4. Comprobación de la transferencia de zona
 
-En **DNS3**, comprueba que:
+En **DNS3_SECUNDARIO**, comprueba que:
 
 * La zona `ejemplo.local` aparece creada.
 * Los registros **A**, **CNAME** (y otros existentes) aparecen automáticamente.
@@ -112,7 +119,7 @@ En **DNS3**, comprueba que:
 Esto confirma que:
 
 * La transferencia de zona se ha realizado correctamente.
-* DNS3 tiene una **copia de la información DNS**.
+* DNS3_SECUNDARIO tiene una **copia de la información DNS**.
 
 ---
 
@@ -123,13 +130,13 @@ Desde un cliente o desde los propios servidores, realiza consultas:
 ### Consulta al DNS primario
 
 ```cmd
-nslookup pc1.ejemplo.local <IP_DNS1> # Le preguntas por pc1 al DNS primario
+nslookup pc1.ejemplo.local <IP_DNS1_PRIMARIO> # Le preguntas por pc1 al DNS primario
 ```
 
 ### Consulta al DNS secundario
 
 ```cmd
-nslookup pc1.ejemplo.local <IP_DNS3> # Le preguntas por pc1 al DNS secundario
+nslookup pc1.ejemplo.local <IP_DNS3_SECUNDARIO> # Le preguntas por pc1 al DNS secundario
 ```
 
 Comprueba que:
@@ -192,7 +199,7 @@ En esta parte se comprobará que el **servidor secundario no se actualiza de for
 
 ### 7.1 Ajuste del tiempo de actualización (SOA – Refresh)
 
-En **DNS1 (servidor primario)**:
+En **DNS1_PRIMARIO (servidor primario)**:
 
 1. Abre el **Administrador DNS**.
 2. Accede a la zona `ejemplo.local`.
@@ -207,18 +214,18 @@ En **DNS1 (servidor primario)**:
 
 ### 7.2 Modificación de un registro en el primario
 
-En **DNS1**, realiza **un único cambio visible** en la zona, por ejemplo:
+En **DNS1_PRIMARIO**, realiza **un único cambio visible** en la zona, por ejemplo:
 
 * Cambiar la dirección IP de un registro A existente, **o**
 * Añadir un nuevo registro A sencillo.
 
-No realices ningún cambio en DNS3.
+No realices ningún cambio en DNS3_SECUNDARIO.
 
 ---
 
 ### 7.3 Comprobación en el servidor secundario
 
-En **DNS3**:
+En **DNS3_SECUNDARIO**:
 
 1. Comprueba inmediatamente la zona `ejemplo.local`.
 
@@ -228,7 +235,7 @@ En **DNS3**:
 
 Verifica que:
 
-* El cambio **aparece automáticamente** en DNS3.
+* El cambio **aparece automáticamente** en DNS3_SECUNDARIO.
 * No ha sido necesario crear ni modificar nada manualmente.
 
 ---
@@ -261,8 +268,8 @@ Aquí tienes un **listado claro y ajustado de capturas** para solicitar en la **
 📸 **Captura 1 — Zona replicada en ambos servidores**
 Una única captura en la que se vea, **lado a lado** (o en dos ventanas en la misma imagen):
 
-* **DNS1 (primario)** mostrando la zona `ejemplo.local`.
-* **DNS2 (secundario)** mostrando la **misma zona** con **los mismos registros**.
+* **DNS1_PRIMARIO (primario)** mostrando la zona `ejemplo.local`.
+* **DNS3_SECUNDARIO (secundario)** mostrando la **misma zona** con **los mismos registros**.
 
 > Debe apreciarse que el contenido es idéntico y que no se han creado registros manualmente en el secundario.
 
@@ -271,8 +278,8 @@ Una única captura en la que se vea, **lado a lado** (o en dos ventanas en la mi
 📸 **Captura 2 — Comprobaciones de resolución con `nslookup`**
 Captura de consola mostrando las consultas indicadas en la práctica, donde se vea claramente:
 
-* Una consulta resuelta por **DNS1**.
-* La misma consulta resuelta por **DNS2**.
+* Una consulta resuelta por **DNS1_PRIMARIO**.
+* La misma consulta resuelta por **DNS3_SECUNDARIO**.
 
 > Debe apreciarse que **ambos servidores responden correctamente** a la misma zona.
 
@@ -281,8 +288,8 @@ Captura de consola mostrando las consultas indicadas en la práctica, donde se v
 📸 **Captura 3 — Cambio no sincronizado (antes del Refresh)**
 Captura en la que se vea:
 
-* En **DNS1**: el registro modificado o añadido **ya visible**.
-* En **DNS2**: ese mismo cambio **todavía no aparece**, porque **no ha transcurrido el tiempo de Refresh**.
+* En **DNS1_PRIMARIO**: el registro modificado o añadido **ya visible**.
+* En **DNS3_SECUNDARIO**: ese mismo cambio **todavía no aparece**, porque **no ha transcurrido el tiempo de Refresh**.
 
 > Esta captura demuestra que la sincronización **no es inmediata**.
 
