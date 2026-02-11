@@ -1,3 +1,9 @@
+> La experiencia me ha llevado a plantear:
+> * Reducir o unir las tareas teóricas del principio, (que vienen bien para trabajar la teoría, son optativas, se les puede reducir el valor, 1 solo intento?)
+> * El desarrollo de la práctica principal está bien, la entrega de una memoria final en pdf también es una buena idea
+> * Podría añadirse (o tener escrito) más subapartados (que podrían ser optativos) como reenviadores condicionales o subdominios delegados.
+> * También está pendiente verlo en linux (podría ponerse de manera opcional)
+
 Te propongo una **secuenciación realista y pensada para SMR**, con **9 sesiones de 2–3 horas**, donde la teoría **siempre justifica una acción práctica**. No entro en guiones ni comandos concretos; es un **mapa de avance** coherente con tu presentación y con el RA 2.
 
 ---
