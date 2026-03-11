@@ -84,8 +84,8 @@ En el **Administrador DNS** de **DNS1_PRIMARIO**:
 3. Pestaña **Transferencias de zona**:
 
    * Marca **Permitir transferencias de zona**.
-   * Selecciona **Solo a los servidores de nombres**
-     *(o especifica explícitamente la IP de DNS3_SECUNDARIO)*.
+   * Selecciona **a todos los servidores**
+     *(o especifica explícitamente la IP de DNS3)*.
 4. Acepta los cambios.
 
 📌 Con esto autorizas a DNS3_SECUNDARIO a recibir la zona.
