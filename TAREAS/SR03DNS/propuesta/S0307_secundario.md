@@ -77,7 +77,7 @@ En el **Administrador DNS** de **DNS1**:
 3. Pestaña **Transferencias de zona**:
 
    * Marca **Permitir transferencias de zona**.
-   * Selecciona **Solo a los servidores de nombres**
+   * Selecciona **a todos los servidores**
      *(o especifica explícitamente la IP de DNS3)*.
 4. Acepta los cambios.
 
