@@ -47,7 +47,6 @@ Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenvi
 3. Haz clic sobre el **Nombre del equipo**.
 4. En la ventana **Propiedades del sistema**, pulsa **Cambiar…**.
 5. Introduce el nuevo nombre:
-
    * `DNS1` para el primer servidor.
    * `DNS2` para el segundo servidor.
 6. Acepta los cambios.
@@ -81,7 +80,7 @@ Rename-Computer -NewName DNS2 -Restart
   * En la **misma red interna**.
   * Con IP fija.
 
-* El **cliente**: (puedes utilizar el DNS1 original como cliente)
+* El **cliente**:
 
   * Configurado para usar **solo DNS1** como servidor DNS.
 
@@ -240,10 +239,5 @@ Responde brevemente:
 
 ## Idea final que debe quedar clara
 
-> *El cliente solo conoce a su DNS.
-> Los servidores DNS colaboran entre sí.*
-
----
-
-Este guion deja la práctica **muy limpia**, totalmente **controlada**, y prepara de forma natural la **Práctica 8 (servidor secundario y transferencia de zona)**.
-Cuando quieras, pasamos a esa última.
+> El cliente solo conoce a su DNS.
+> Los servidores DNS colaboran entre sí.
