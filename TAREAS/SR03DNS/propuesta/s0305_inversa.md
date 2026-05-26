@@ -43,7 +43,7 @@ En SOA,cambiamos el campo "Servidor principal". Se puede examinar para no fallar
 
 ![alt text](image-16.png)
 
-En servidores de nombres, escribimos el nombre y click en resolver. (El DNS lo resuelve porque tengo un registro A asociado)
+En servidores de nombres, escribimos el nombre y click en resolver. (El DNS lo resuelve porque tengo un registro A asociado y configurada la red para que se use a sí mismo como DNS)
 ![alt text](image-17.png)
 ---
 

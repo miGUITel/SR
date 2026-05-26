@@ -27,12 +27,14 @@ Comprender cómo un servidor DNS puede **resolver nombres que no conoce** reenvi
 
 * **DNS1** (Windows Server 2019)
   * Zona directa: `alumno.local`
+  * (Es el equipo que se creó en la práctica anterior)
   
-* **DNS2** Windows Server 2019, **clonado** y configurado con:
+* **DNS2** Windows Server 2019, **clonado** y configurado con: (Puedes seguir el guión de la práctica anterior, reconfigurando el servidor DNS2)
   * nueva Ip, dentro del rango
   * nueva zona directa, SOA, NS, registros A
   * nueva zona inversa, con todos los PTR
   * Zona directa: `externo.local`
+  
 
 <details>
 
