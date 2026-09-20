@@ -44,7 +44,7 @@ El comando `ip` es parte de la suite **iproute2** y es la forma recomendada en s
   ```
   Esto mostrará todas las interfaces, tanto físicas como virtuales, junto con sus direcciones IP, estado (UP o DOWN), y detalles adicionales como direcciones MAC.
 
-- Para listar únicamente las interfaces de red con su estado y direcciones:
+- Para listar las interfaces, su estado de enlace y su dirección MAC, pero no sus direcciones IP:
   ```bash
   ip link show
   ```
@@ -91,7 +91,7 @@ El comando `lshw` muestra información detallada del hardware de un sistema, inc
   ```
 
 ### 3. **Ejemplos de nombres de interfaces**:
-Aquí tienes algunos ejemplos reales de nombres de interfaces en diferentes configuraciones:
+Algunos ejemplos de nombres de interfaces en diferentes configuraciones son:
 
 - **enp3s0**: Primera interfaz Ethernet en el bus PCI 3.
 - **wlp2s0**: Primera interfaz inalámbrica en el bus PCI 2.

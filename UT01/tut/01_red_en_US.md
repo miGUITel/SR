@@ -1,77 +1,80 @@
-# 🌐 Configurar la tarjeta de red en **Ubuntu Server** (consola, netplan)
+# Configurar la red en Ubuntu Server con Netplan
 
-### 1. Ver el nombre de la tarjeta de red
+## 1. Identificar las interfaces
 
-Entra en la consola y escribe:
+Ejecuta:
 
 ```bash
-ip a
+ip link show
+ip addr show
 ```
 
-Verás algo como `ens33`, `enp0s3` o `eth0` → ese es el **nombre de la interfaz**.
+`ip link show` permite reconocer las interfaces, su estado y su dirección MAC. `ip addr show` muestra también las direcciones IP. Los nombres pueden ser, por ejemplo, `enp0s3`, `enp0s8`, `ens33` o `eth0`.
 
----
+## 2. Editar la configuración
 
-### 2. Editar la configuración de red
+Los archivos de Netplan están en `/etc/netplan/`. Comprueba primero el nombre del archivo:
 
-Los archivos de **netplan** están en `/etc/netplan/`.
-Normalmente se llama algo como `00-installer-config.yaml`.
+```bash
+ls /etc/netplan/
+```
 
-Abrimos el archivo:
+Después, ábrelo con un editor. Por ejemplo:
 
 ```bash
 sudo nano /etc/netplan/00-installer-config.yaml
 ```
 
----
+## 3. Ejemplo para UT01B: NAT y Host-Only
 
-### 3. Ejemplo de configuración
+En este ejemplo:
 
-#### 🔹 Para IP automática (DHCP)
+- `enp0s3` es el adaptador NAT y obtiene automáticamente su configuración.
+- `enp0s8` es el adaptador Host-Only y utiliza una dirección estática para comunicarse con las máquinas del escenario.
 
 ```yaml
 network:
   version: 2
   ethernets:
-    ens33:
+    enp0s3:
       dhcp4: true
-```
-
-#### 🔹 Para IP fija (manual)
-
-```yaml
-network:
-  version: 2
-  ethernets:
-    ens33:
+    enp0s8:
       dhcp4: false
       addresses:
-        - 192.168.1.50/24
-      gateway4: 192.168.1.1
-      nameservers:
-        addresses: [8.8.8.8, 1.1.1.1]
+        - 192.168.56.10/24
 ```
 
-⚠️⚠️⚠️⚠️⚠️⚠️ Ojo con la indentación (espacios), en YAML es muy importante. ⚠️⚠️⚠️⚠️⚠️⚠️
+Adapta los nombres de interfaz y la dirección al escenario. En la interfaz Host-Only no se configura una puerta de enlace ni un DNS ficticios. El adaptador NAT proporciona la ruta predeterminada y el DNS cuando se necesita acceso al exterior.
 
----
+La indentación de YAML debe hacerse con espacios, no con tabuladores.
 
-### 4. Guardar y aplicar cambios
+## 4. Validar y aplicar
 
-* Guardamos en nano con: `Ctrl + O` → Enter → `Ctrl + X`.
-* Aplicamos la configuración:
+Guarda en Nano con `Ctrl+O`, confirma con `Intro` y sal con `Ctrl+X`.
 
-  ```bash
-  sudo netplan apply
-  ```
-
----
-
-### 5. Comprobar
+Valida temporalmente la configuración:
 
 ```bash
-ip a          # Ver IP asignada
-ping 8.8.8.8  # Probar conexión
+sudo netplan try
 ```
 
+Si es correcta, aplícala:
 
+```bash
+sudo netplan apply
+```
+
+## 5. Comprobar
+
+Sustituye `<IP-del-otro-equipo>` por la dirección de otra máquina del escenario:
+
+```bash
+ip link show
+ip addr show
+ip route show
+ping <IP-del-otro-equipo>
+```
+
+Primero se comprueban la interfaz, la dirección, el prefijo, las rutas y la comunicación entre las máquinas. Solo si el escenario incluye salida exterior se comprueban después la puerta de enlace, una dirección pública y la resolución de nombres.
+
+Consulta también [Comprobar una red interna o Host-Only](../diagnostico_red_virtual.md).

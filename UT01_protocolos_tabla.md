@@ -11,7 +11,7 @@
 
 ## Descripción básica de estos protocolos
 
-A continuación te doy una descripción más detallada de cada uno de los 6 protocolos:
+A continuación se ofrece una descripción más detallada de cada protocolo:
 
 ### 1. **ARP (Address Resolution Protocol)** [ampliación](./UT01/UT01_ARP.md)
 - **Capa OSI**: Capa 2 (Enlace de datos)
@@ -41,7 +41,7 @@ A continuación te doy una descripción más detallada de cada uno de los 6 prot
 - **Capa OSI**: Capa 4 (Transporte)
 - **Palabras clave**: "Sin conexión", "Velocidad"
 - **Descripción detallada**:  
-   A diferencia de TCP, UDP es un protocolo sin conexión que no garantiza la entrega, el orden ni la integridad de los datos. Se utiliza cuando la velocidad es más importante que la fiabilidad, como en la transmisión de video y audio en tiempo real, donde es preferible perder algunos paquetes antes que retrasar la transmisión. UDP envía los datos sin establecer previamente una conexión con el receptor, lo que lo hace más rápido pero también menos fiable. No tiene mecanismos de corrección de errores, lo que significa que si un paquete se pierde, el protocolo no lo retransmitirá.
+   A diferencia de TCP, UDP es un protocolo sin conexión que no garantiza la entrega, el orden ni la retransmisión de los datagramas perdidos. Incluye una suma de comprobación para detectar errores, pero no corrige esos errores ni recupera por sí mismo la información perdida. Se utiliza, por ejemplo, en transmisiones de audio y vídeo en tiempo real, donde a menudo se prefiere evitar el retraso de una retransmisión.
 
 ### 6. **SCTP (Stream Control Transmission Protocol)**
 - **Capa OSI**: Capa 4 (Transporte)

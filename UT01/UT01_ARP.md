@@ -55,7 +55,7 @@ ARP es un protocolo sencillo, pero carece de mecanismos de seguridad, lo que lo 
 
 ### ARP en IPv6
 
-En IPv6, ARP es **reemplazado** por el **Neighbor Discovery Protocol (NDP)**, que cumple una función similar de resolución de direcciones pero es más avanzado y tiene mecanismos de seguridad adicionales.
+IPv6 no utiliza ARP. Emplea **Neighbor Discovery Protocol (NDP)** para descubrir vecinos y routers y para relacionar direcciones IPv6 con interfaces de la red local. NDP no debe considerarse seguro por sí mismo.
 
 ### Resumen:
 
@@ -64,5 +64,3 @@ En IPv6, ARP es **reemplazado** por el **Neighbor Discovery Protocol (NDP)**, qu
 - Los dispositivos almacenan esta información en una tabla de ARP para mejorar el rendimiento.
 - Carece de seguridad, lo que lo hace vulnerable a ataques como ARP Spoofing.
 - En redes IPv6, ARP ha sido reemplazado por el protocolo NDP.
-
-Si tienes más dudas sobre ARP o sus implicaciones en la red, estaré encantado de seguir explicando.

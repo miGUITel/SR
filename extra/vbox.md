@@ -11,7 +11,7 @@ Guía rápida para moverse con soltura en VirtualBox durante las prácticas de c
 
 | **Acción** | **Atajo (Host = Ctrl derecha)** | **Descripción breve** |
 |-------------|---------------------------------|------------------------|
-| Capturar/soltar ratón y teclado | Host + I | Libera el control del ratón si queda “atrapado” dentro de la VM. |
+| Soltar ratón y teclado | Tecla Host | Devuelve el control del ratón y del teclado al sistema anfitrión. |
 | Pausar / Reanudar VM | Host + P | Detiene temporalmente la ejecución de la máquina. |
 | Reiniciar VM | Host + R | Reinicia sin apagar completamente el sistema invitado. |
 | Apagar (botón ACPI) | Host + H | Simula pulsar el botón físico de apagado. |
@@ -20,7 +20,7 @@ Guía rápida para moverse con soltura en VirtualBox durante las prácticas de c
 | Modo sin bordes (Seamless) | Host + L | Muestra las ventanas del invitado junto a las del host (requiere Guest Additions). |
 | Captura de pantalla | Host + E | Guarda una imagen de la pantalla de la VM. |
 | Mostrar menú de dispositivos | Host + D | Acceso rápido a discos, USB, etc. |
-| Insertar imagen ISO | Host + I | Monta una ISO en la unidad de CD/DVD. |
+| Insertar imagen ISO | Menú Dispositivos → Unidades ópticas | Monta una ISO en la unidad de CD/DVD. |
 | Cambiar entre VMs abiertas | Host + Tab | Cambia rápidamente entre máquinas activas. |
 
 ---
@@ -29,8 +29,8 @@ Guía rápida para moverse con soltura en VirtualBox durante las prácticas de c
 
 | **Consejo** | **Explicación breve** |
 |--------------|-----------------------|
-| **1. Usa clonación enlazada** | Permiten volver a un punto anterior si algo sale mal. |
-| **2. NAT para internet, puente para LAN** | NAT da acceso a internet; puente permite comunicación con otros equipos. |
+| **1. Usa clones enlazados para trabajar** | Ahorran espacio, pero dependen de la máquina madre. Las instantáneas son las que permiten conservar puntos de referencia. |
+| **2. Elige la red según el escenario** | NAT permite salida al exterior. Host-Only o red interna sirven para laboratorios aislados. Utiliza puente solo cuando la práctica requiera acceso directo a la red física. |
 | **3. Discos VDI dinámicos** | Ocupan solo el espacio que realmente se usa. |
 | **4. Compacta los discos** | Menú: *Archivo → Herramientas → Compactar disco* para liberar espacio. |
 | **5. Instala Guest Additions** | Mejora el rendimiento, resolución y el portapapeles compartido. |
@@ -49,7 +49,7 @@ Guía rápida para moverse con soltura en VirtualBox durante las prácticas de c
 | **Memoria RAM** | 1 GB mínimo (Linux) / 2 GB (Windows Server) | Equilibrio entre rendimiento y recursos disponibles. |
 | **Procesadores** | 1–2 | Evita sobrecargar el host. |
 | **Disco duro** | VDI dinámico de 50 GB | Ahorra espacio en disco. |
-| **Red** | Adaptador puente o NAT según la práctica | Flexibilidad según el tipo de servicio. |
+| **Red** | NAT, Host-Only, red interna o puente según la práctica | Cada modo permite comunicaciones diferentes; no debe elegirse solo por tener acceso a Internet. |
 | **Carpeta compartida** | Activada (solo lectura si es necesario) | Facilita el intercambio de ficheros profesor↔alumno. |
 
 

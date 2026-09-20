@@ -1,73 +1,53 @@
-# 🌐 Configurar la tarjeta de red en Windows Server 2019 (Interfaz gráfica)
+# Configurar la red en Windows Server 2019
 
-### 1. Abrir el Administrador de Servidores
+## 1. Abrir las conexiones de red
 
-* Inicia sesión en tu Windows Server 2019.
-* Al arrancar, normalmente se abre el **Administrador del Servidor** (Server Manager).
-* Si no aparece, ábrelo desde el menú Inicio.
+1. Abre **Administrador del servidor**.
+2. Selecciona **Servidor local**.
+3. Haz clic en el enlace de **Ethernet**.
+4. Abre las propiedades de la tarjeta que quieras configurar.
 
----
+Antes de cambiarla, identifica qué adaptador de VirtualBox corresponde a cada conexión. Puedes comparar las direcciones MAC mostradas por Windows y por VirtualBox.
 
-### 2. Ir a la Configuración de Red
+## 2. Configurar IPv4
 
-1. En el **Administrador del Servidor**, arriba a la derecha haz clic en **Local Server** (Servidor local).
-2. Busca el apartado **Ethernet** (o el nombre de la tarjeta de red).
-3. Haz clic en el enlace azul con el nombre de la conexión.
+Selecciona **Protocolo de Internet versión 4 (TCP/IPv4)** y abre sus propiedades.
 
----
+- Para un adaptador NAT, selecciona **Obtener una dirección IP automáticamente** y **Obtener la dirección del servidor DNS automáticamente**.
+- Para una red interna o Host-Only, selecciona **Usar la siguiente dirección IP** e introduce la dirección y la máscara indicadas en el escenario.
 
-### 3. Abrir Propiedades de la Red
+Por ejemplo, en un adaptador Host-Only:
 
-1. Se abrirá la ventana **Network Connections** (Conexiones de red).
-2. Haz **clic derecho** sobre la tarjeta de red que quieras configurar → **Properties** (Propiedades).
+- Dirección IP: `192.168.56.30`
+- Máscara de subred: `255.255.255.0`
+- Puerta de enlace predeterminada: dejar en blanco
+- Servidor DNS preferido: dejar en blanco
 
----
+En una red aislada no debe inventarse una puerta de enlace ni configurarse un DNS público. Esos datos solo se añaden si el escenario incluye realmente un router y un servidor DNS accesibles por esa interfaz.
 
-### 4. Seleccionar Protocolo IPv4
+Acepta los cambios y cierra las ventanas de configuración.
 
-1. En la lista, busca **Internet Protocol Version 4 (TCP/IPv4)**.
-2. Selecciónalo y haz clic en **Properties** (Propiedades).
+## 3. Comprobar la configuración
 
----
+Abre PowerShell y ejecuta:
 
-### 5. Configurar IP Fija o Automática
+```powershell
+Get-NetAdapter
+ipconfig /all
+route print
+ping <IP-del-otro-equipo>
+```
 
-* **Si quieres usar DHCP (automático):**
-  Marca la opción:
+Sustituye `<IP-del-otro-equipo>` por la dirección de otra máquina del escenario.
 
-  * *Obtain an IP address automatically*
-  * *Obtain DNS server address automatically*
+Comprueba, por este orden:
 
-* **Si quieres poner IP fija (manual):**
-  Marca *Use the following IP address* y rellena:
+1. Que la interfaz está activa.
+2. Que la dirección y la máscara son correctas.
+3. Que no existe una ruta predeterminada incorrecta por la interfaz aislada.
+4. Que hay comunicación con las otras máquinas.
+5. Si se solicita, que funciona el servicio correspondiente, por ejemplo SSH.
 
-  * **IP address:** (ej. 192.168.1.100)
-  * **Subnet mask:** (ej. 255.255.255.0)
-  * **Default gateway:** (ej. 192.168.1.1)
-  * **Preferred DNS server:** (ej. 8.8.8.8 o el del servidor local)
+Solo si el escenario incluye acceso al exterior se comprueban después la puerta de enlace, una dirección pública y la resolución de nombres.
 
-👉 Haz clic en **OK** → **Close**.
-
----
-
-### 6. Comprobar Conexión
-
-1. Abre una consola (cmd o PowerShell).
-
-2. Escribe:
-
-   ```powershell
-   ipconfig
-   ```
-
-   Aquí verás la IP configurada.
-
-3. Para comprobar conectividad, prueba con:
-
-   ```powershell
-   ping 8.8.8.8
-   ```
----
-
-✅ Con esto la tarjeta de red ya queda configurada.
-
+Consulta también [Comprobar una red interna o Host-Only](../diagnostico_red_virtual.md).

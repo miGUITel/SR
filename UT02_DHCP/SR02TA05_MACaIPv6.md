@@ -1,7 +1,7 @@
-Aquí tienes una guía para convertir una dirección MAC en una dirección IPv6 utilizando el formato EUI-64:
+# Convertir una dirección MAC en un identificador EUI-64
 
 ### Introducción a EUI-64
-El formato EUI-64 (Extended Unique Identifier) es un método para generar la parte de **identificador de interfaz** (los últimos 64 bits) de una dirección IPv6 a partir de una dirección MAC de 48 bits. Este identificador de interfaz se utiliza en las direcciones **IPv6 de enlace local** y en las **direcciones unicast global**.
+El formato EUI-64 (*Extended Unique Identifier*) permite generar un **identificador de interfaz** de 64 bits a partir de una dirección MAC de 48 bits. Se estudia para comprender cómo puede formarse una dirección IPv6, pero los sistemas actuales suelen utilizar también identificadores estables o temporales que no revelan directamente la dirección MAC. Por tanto, no debe suponerse que toda dirección IPv6 se deriva de una MAC.
 
 ### Pasos para la conversión de MAC a IPv6 con EUI-64
 
@@ -41,7 +41,7 @@ El formato EUI-64 (Extended Unique Identifier) es un método para generar la par
 5. **Formar la dirección IPv6**.
    Ahora que tenemos el identificador de interfaz de 64 bits, se puede usar para formar una dirección IPv6 de enlace local o una dirección unicast global.
 
-   Si estamos generando una dirección de enlace local, la dirección IPv6 tendrá el prefijo **FE80::/64**. Entonces, tomamos el prefijo y agregamos el identificador EUI-64 que generamos:
+   Si estamos generando una dirección de enlace local, la dirección pertenecerá al bloque **`fe80::/10`**. En las interfaces IPv6 se utiliza normalmente una longitud de prefijo `/64`; el identificador EUI-64 ocupa los 64 bits finales.
 
    ```
    FE80::021A:2BFF:FE3C:4D5E
@@ -68,7 +68,7 @@ ip addr show
 Esto te mostrará todas las direcciones IPv6 asignadas a las interfaces, incluyendo las de enlace local (link-local).
 
 ### Conclusión
-El método EUI-64 es útil para generar identificadores únicos en redes IPv6 a partir de las direcciones MAC. Es una técnica que automatiza la asignación de direcciones, haciendo que las configuraciones de red sean más eficientes en entornos grandes.
+EUI-64 permite entender un procedimiento de formación del identificador de interfaz. Sin embargo, no es el único método utilizado actualmente y no debe esperarse que todas las direcciones IPv6 contengan la MAC del dispositivo.
 
 ### Ampliación
 
@@ -79,13 +79,13 @@ En redes IPv6, existen diferentes tipos de direcciones para diversos propósitos
 Las direcciones **IPv6 de enlace local** son direcciones que solo son válidas dentro de un segmento o enlace de red local. Estas direcciones permiten que los dispositivos de una misma red física se comuniquen entre sí sin necesidad de un router o de una configuración manual de direcciones IP.
 
 #### Características:
-- **Prefijo:** Las direcciones de enlace local siempre comienzan con el prefijo `FE80::/10`, es decir, los primeros 10 bits son `1111111010`, y el resto se completa automáticamente. Esto significa que cualquier dirección IPv6 que empiece por `FE80` es una dirección de enlace local.
+- **Bloque reservado:** `fe80::/10` identifica las direcciones de enlace local. En la configuración de una interfaz suele aparecer `/64`, que es la longitud del prefijo utilizado en ese enlace; no sustituye al `/10` que define el tipo de dirección.
 - **Alcance limitado:** Estas direcciones no son enrutables fuera del enlace local. Es decir, no pueden ser utilizadas para enviar tráfico a través de la red más allá de la red local en la que se encuentran.
 - **Asignación automática:** Los sistemas operativos modernos generan automáticamente una dirección de enlace local en cada interfaz de red habilitada para IPv6, lo que permite que los dispositivos en la misma red se comuniquen sin necesidad de un servidor DHCP o de una configuración manual.
 
 #### Ejemplo de una dirección de enlace local:
 ```
-FE80::1A2B:3C4D:5E6F:7G8H
+fe80::1a2b:3c4d:5e6f:7a8b
 ```
 Esta dirección solo es válida dentro de la red local donde el dispositivo está conectado.
 
@@ -108,7 +108,7 @@ Las direcciones **IPv6 unicast globales** son equivalentes a las direcciones IP 
 ```
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 ```
-Esta es una dirección global y puede ser utilizada para identificar a un dispositivo en la red de Internet.
+Esta dirección pertenece a `2001:db8::/32`, un bloque reservado para documentación. Tiene formato de dirección unicast global, pero no debe utilizarse como dirección real en Internet.
 
 #### Uso típico:
 - **Comunicación a través de Internet:** Las direcciones unicast globales se usan para identificar dispositivos que necesitan comunicarse a través de Internet, como servidores, routers y dispositivos de usuarios.
@@ -129,5 +129,3 @@ Esta es una dirección global y puede ser utilizada para identificar a un dispos
 ### Resumen:
 - **Direcciones IPv6 de Enlace Local**: Sirven para comunicación entre dispositivos dentro de una misma red local y no pueden ser usadas para comunicación a través de Internet. Se generan automáticamente y tienen el prefijo `FE80::/10`.
 - **Direcciones IPv6 Unicast Globales**: Son direcciones globalmente enrutables, equivalentes a las direcciones públicas de IPv4, y permiten la comunicación entre dispositivos a través de redes, incluyendo Internet. Tienen el prefijo `2000::/3`.
-
-Espero que esta explicación te ayude a entender mejor las diferencias entre las direcciones de enlace local y unicast global en IPv6.

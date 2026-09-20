@@ -1,9 +1,11 @@
 # SR
-Material del móduolo Servicios en Red del Grado Medio SMR
+Material del módulo Servicios en Red del Grado Medio SMR.
 
-# UT01 INTRODUCCIÓN
+# UT01A INTRODUCCIÓN Y DIRECCIONAMIENTO
 
-### Teoría
+La presentación de la unidad es la fuente principal. Los siguientes recursos amplían algunos de sus contenidos.
+
+### Ampliaciones
 
 [Protocolos básicos en la capa OSI](./UT01_protocolos_tabla.md)
 
@@ -11,17 +13,17 @@ Material del móduolo Servicios en Red del Grado Medio SMR
 
 [Direcciones anycast](./UT01_anycast.md)
 
-[Convertir MAC en IPv6](./UT02_DHCP/SR02TA05_MACaIPv6.md/)
+[Notación CIDR en IPv6](./UT01_cidr_ipv6.md)
 
-### Práctica
-
-[Practicar escenarios de red y ping](./UT01/escenariosRedPing.md)
-
-Configurar la tarjeta de red en [WS19](./UT01/tut/01_red_en_WS19.md) [UBUNTU DESCKTOP](./UT01/tut/01_red_en_Udkp.md) [UBUNTU SERVER](./UT01/tut/01_red_en_US.md)
-
-[Interfaces de red en linux](./UT01/UT01_interfaces_red.md)
+[Convertir una dirección MAC en un identificador EUI-64](./UT02_DHCP/SR02TA05_MACaIPv6.md)
 
 [APIPA](./UT01/apipa.md)
+
+# UT01B CONEXIÓN DE RED EN VIRTUALBOX
+
+El itinerario reúne los documentos conductores y los recursos de consulta para las tres sesiones.
+
+[Itinerario de UT01B](./UT01B/README.md)
 
 # UT02 DHCP
 
