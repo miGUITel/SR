@@ -23,6 +23,8 @@ La configuración habitual de Ubuntu Server será:
 
 El adaptador NAT aporta la ruta predeterminada. La interfaz Host-Only sirve para comunicarse con las otras máquinas y no debe añadir otra ruta predeterminada.
 
+![Tres máquinas conectadas a Host-Only y Ubuntu Server conectado además a NAT](./img/red_nat_hostonly.png)
+
 ## Preparar VirtualBox
 
 Con las máquinas apagadas:
@@ -46,12 +48,3 @@ Si la red Host-Only tiene un servidor DHCP de VirtualBox y el escenario utiliza 
 Consulta [Configurar interfaces](./04_configurar_interfaces.md) para acceder a la guía de cada sistema.
 
 Después sigue [Comprobar conectividad y SSH](./05_comprobar_conectividad_y_ssh.md).
-
-<!--
-IMAGEN SUGERIDA, NO INCLUIDA
-Descripción: esquema de un anfitrión con tres máquinas virtuales unidas a una red Host-Only; Ubuntu Server aparece además conectado a NAT mediante un segundo adaptador.
-Finalidad: mostrar que cada adaptador conecta la máquina a una red distinta y que solo NAT proporciona salida exterior.
-Ubicación propuesta: después de la tabla "Escenario con dos adaptadores".
-Texto alternativo: "Tres máquinas conectadas a Host-Only y Ubuntu Server conectado además a NAT".
-Fuente recomendable: diagrama propio posterior; no se necesita una imagen externa.
--->

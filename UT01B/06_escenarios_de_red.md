@@ -15,6 +15,8 @@ El objetivo es configurar un escenario con mayor autonomía, comprobarlo y expli
 9. Si algo falla, cambia una causa cada vez y repite la prueba.
 10. Conserva las evidencias que permitan explicar el resultado.
 
+![Plantilla de red con tres máquinas y espacios para anotar interfaces, MAC y direcciones](./img/plantilla_escenario_tres_maquinas.png)
+
 ## Escenarios progresivos
 
 Utiliza [Practicar escenarios de red y ping](../UT01/escenariosRedPing.md).
@@ -31,12 +33,3 @@ Los primeros escenarios aportan más información. En los últimos tendrás que 
 Si una máquina no arranca o un clon ha perdido su disco, resuelve primero el entorno virtual. Ese problema no se corrige cambiando direcciones IP.
 
 Utiliza [Diagnóstico y evidencias](./07_diagnostico_y_evidencias.md) cuando una prueba no produzca el resultado esperado.
-
-<!--
-IMAGEN SUGERIDA, NO INCLUIDA
-Descripción: plantilla de diagrama de red con tres máquinas sin direcciones escritas y dos tipos de conexión diferenciados, para que el alumnado anote los datos del escenario.
-Finalidad: separar la interpretación del escenario de la configuración en los sistemas operativos.
-Ubicación propuesta: antes del apartado "Escenarios progresivos".
-Texto alternativo: "Plantilla de red con tres máquinas y espacios para anotar adaptadores y direcciones".
-Fuente recomendable: esquema propio posterior para que coincida exactamente con las máquinas del aula.
--->

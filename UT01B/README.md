@@ -1,6 +1,6 @@
 # UT01B. Conexión de red en VirtualBox
 
-![alt text](image.png)
+![Red de servidores y equipos conectados](./img/cabecera_ut01b.png)
 
 En esta unidad prepararás máquinas virtuales reutilizables, configurarás sus interfaces de red y comprobarás la comunicación entre ellas.
 

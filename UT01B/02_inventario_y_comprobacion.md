@@ -30,7 +30,6 @@ La MAC mostrada por el sistema debe coincidir con la del adaptador correspondien
 
 - [ ] Las tres máquinas madre arrancan y permiten iniciar sesión.
 - [ ] Las máquinas madre están apagadas antes de crear los clones.
-- [ ] Existe una instantánea de referencia con un nombre reconocible.
 - [ ] Cada sistema dispone de un clon enlazado de trabajo.
 - [ ] Los clones arrancan correctamente.
 - [ ] Las máquinas que funcionarán simultáneamente tienen MAC distintas.
