@@ -14,7 +14,7 @@ En la pestaña **IPv4** elige el modo adecuado:
 
 - **Automático (DHCP)**: para un adaptador NAT, permite obtener automáticamente dirección, ruta predeterminada y DNS.
 - **Manual**: para una red interna o Host-Only, introduce la dirección y el prefijo indicados en el escenario.
-
+![alt text](image-1.png)
 Por ejemplo, en un adaptador Host-Only:
 
 - Dirección: `192.168.56.20`
@@ -24,7 +24,7 @@ Por ejemplo, en un adaptador Host-Only:
 
 En una red aislada no debe inventarse una puerta de enlace ni configurarse un DNS público. Esos datos solo se añaden si el escenario incluye realmente un router y un servidor DNS accesibles por esa interfaz.
 
-Guarda los cambios y desactiva y vuelve a activar la conexión para aplicarlos.
+> Guarda los cambios y desactiva y vuelve a activar la conexión para aplicarlos.
 
 ## 3. Comprobar la configuración
 

@@ -21,7 +21,7 @@ Con la máquina apagada:
 
 1. Selecciona la máquina madre.
 2. Inicia la operación de clonación.
-3. Elige **clon enlazado** cuando aparezca esa opción.
+3. Elige **clon enlazado** cuando aparezca esa opción.![alt text](image-1.png)
 4. Solicita que VirtualBox genere nuevas direcciones MAC para los adaptadores del clon.
 5. Asigna al clon un nombre que lo identifique como máquina de trabajo.
 6. Inicia el clon y comprueba que funciona.

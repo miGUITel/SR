@@ -35,6 +35,7 @@ Con las máquinas apagadas:
 4. Selecciona la misma red Host-Only o el mismo nombre de red interna en todas las máquinas que deban comunicarse.
 5. Comprueba que la opción de cable conectado está activada.
 6. Anota la MAC de cada adaptador.
+![alt text](image-2.png)
 
 Si la red Host-Only tiene un servidor DHCP de VirtualBox y el escenario utiliza direcciones estáticas, emplea las direcciones previstas por el docente para evitar duplicados.
 

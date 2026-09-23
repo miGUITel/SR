@@ -24,7 +24,7 @@ Después, ábrelo con un editor. Por ejemplo:
 ```bash
 sudo nano /etc/netplan/00-installer-config.yaml
 ```
-
+![alt text](image-2.png)
 ## 3. Ejemplo para UT01B: NAT y Host-Only
 
 En este ejemplo:
