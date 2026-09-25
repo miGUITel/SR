@@ -26,6 +26,7 @@ Documento conductor:
 
 Apoyos:
 
+- [Modos de red en VBOX](./08_modos_red.md)
 - [Configurar interfaces](./04_configurar_interfaces.md)
 - [Comprobar conectividad y SSH](./05_comprobar_conectividad_y_ssh.md)
 
