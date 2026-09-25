@@ -6,3 +6,6 @@
 
 ## MODO NAT
 ![alt text](image-5.png)
+
+## MODO NAT + HOST ONLY
+![alt text](image-6.png)
