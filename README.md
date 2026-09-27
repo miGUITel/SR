@@ -30,15 +30,15 @@ El itinerario reúne los documentos conductores y los recursos de consulta para 
 ## Actividades de enseñanza-aprendizaje
 
 - **I. DHCP: funcionamiento y conceptos esenciales** — PPT / OneDrive.
-- **II. [Tarea teórica: comprender DHCP](./TAREAS/SR0201_dhcp/UT02_TAREA_TEORIA.md)** — Aula Virtual (entrega) y repositorio (enunciado).
-- **III. [Revisión y puesta en común de la tarea teórica](./TAREAS/SR0201_dhcp/UT02_TAREA_TEORIA.md)** — En clase · Enunciado del repositorio y PPT.
-- **IV. [Práctica: DHCP en Windows Server 2019](./UT02_DHCP/SR0209_DCHP_WS19v2.md)** — Repositorio (guía) y Aula Virtual (entrega).
-- **V. [Práctica: DHCP en Ubuntu Desktop](./UT02_DHCP/SR0210_linux.md)** — Repositorio (guía) y Aula Virtual (entrega).
+- **II. Tarea teórica: comprender DHCP** — Aula Virtual (entrega) y repositorio (enunciado).
+- **III. Revisión y puesta en común de la tarea teórica** — En clase · Enunciado del repositorio y PPT.
+- **IV. Práctica: DHCP en Windows Server 2019** — Repositorio (guía) y Aula Virtual (entrega).
+- **V. Práctica: DHCP en Ubuntu Desktop** — Repositorio (guía) y Aula Virtual (entrega).
 - **VI. Ensayo de reconfiguración y resolución de incidencias** — En clase · Apartados de reconfiguración de ambas guías.
 - **VII. Repaso y resolución de dudas** — En clase · PPT, tarea teórica y guías del repositorio.
 - **VIII. Examen de la unidad** — Aula Virtual · Sin enlace público.
 
-Para el ensayo, consulta [Reconfiguración y APIPA en Windows](./UT02_DHCP/SR0209_DCHP_WS19v2.md#paso-7) y [Renovación y reconfiguración en Ubuntu](./UT02_DHCP/SR0210_linux.md#paso-7).
+Para el ensayo, consulta Reconfiguración y APIPA en Windows y Renovación y reconfiguración en Ubuntu.
 
 <!-- Destinos previstos que completará el docente cuando disponga de los enlaces:
 I. PPT / OneDrive: href=""
