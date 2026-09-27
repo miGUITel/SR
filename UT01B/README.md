@@ -53,4 +53,4 @@ Resultado esperado: un escenario configurado, comprobado y explicado mediante ev
 5. Localizar y corregir los fallos.
 6. Conservar las evidencias que expliquen el resultado.
 
-Los enunciados evaluables y las instrucciones de entrega se publican en el Aula Virtual, no en este repositorio.
+Accede a los enunciados y a sus requisitos de entrega desde Aula Virtual cuando el docente publique los enlaces. Allí se recogen también las entregas y las calificaciones.

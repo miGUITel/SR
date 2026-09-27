@@ -19,7 +19,7 @@ El objetivo es configurar un escenario con mayor autonomía, comprobarlo y expli
 
 ## Escenarios progresivos
 
-Utiliza [Practicar escenarios de red y ping](../UT01/escenariosRedPing.md).
+Accede al enunciado de la tarea 0107 desde Aula Virtual cuando el docente publique el enlace. Allí encontrarás las indicaciones para realizar los escenarios y preparar la entrega.
 
 Los primeros escenarios aportan más información. En los últimos tendrás que calcular o decidir algunos datos. No es obligatorio entregar cálculos o datos adicionales que no se hayan solicitado.
 
