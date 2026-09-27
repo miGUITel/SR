@@ -26,6 +26,8 @@ Get-NetAdapter
 
 La MAC mostrada por el sistema debe coincidir con la del adaptador correspondiente en VirtualBox.
 
+![alt text](image-7.png)
+
 ## Comprobación final
 
 - [ ] Las tres máquinas madre arrancan y permiten iniciar sesión.

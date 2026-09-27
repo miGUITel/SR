@@ -47,7 +47,9 @@ Desde otro equipo Linux o desde PowerShell:
 ssh <usuario>@<IP-del-servidor>
 ```
 
-La primera conexión puede solicitar que confirmes la identidad del servidor. Después pedirá las credenciales del usuario remoto.
+![alt text](image-8.png)
+
+> La primera conexión puede solicitar que confirmes la identidad del servidor. Después pedirá las credenciales del usuario remoto.
 
 Si `ping` funciona pero SSH no, revisa el servicio, el puerto TCP 22 y el cortafuegos. Son comprobaciones distintas.
 

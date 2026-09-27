@@ -23,7 +23,9 @@ Por ejemplo, en un adaptador Host-Only:
 - Puerta de enlace predeterminada: dejar en blanco
 - Servidor DNS preferido: dejar en blanco
 
-En una red aislada no debe inventarse una puerta de enlace ni configurarse un DNS público. Esos datos solo se añaden si el escenario incluye realmente un router y un servidor DNS accesibles por esa interfaz.
+> En una red aislada no debe inventarse una puerta de enlace ni configurarse un DNS público. Esos datos solo se añaden si el escenario incluye realmente un router y un servidor DNS accesibles por esa interfaz.
+> 
+
 ![alt text](image.png)
 Acepta los cambios y cierra las ventanas de configuración.
 
