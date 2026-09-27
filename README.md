@@ -27,21 +27,40 @@ El itinerario reúne los documentos conductores y los recursos de consulta para 
 
 # UT02 DHCP
 
+## Actividades de enseñanza-aprendizaje
+
+- **I. DHCP: funcionamiento y conceptos esenciales** — PPT / OneDrive.
+- **II. [Tarea teórica: comprender DHCP](./TAREAS/SR0201_dhcp/UT02_TAREA_TEORIA.md)** — Aula Virtual (entrega) y repositorio (enunciado).
+- **III. [Revisión y puesta en común de la tarea teórica](./TAREAS/SR0201_dhcp/UT02_TAREA_TEORIA.md)** — En clase · Enunciado del repositorio y PPT.
+- **IV. [Práctica: DHCP en Windows Server 2019](./UT02_DHCP/SR0209_DCHP_WS19v2.md)** — Repositorio (guía) y Aula Virtual (entrega).
+- **V. [Práctica: DHCP en Ubuntu Desktop](./UT02_DHCP/SR0210_linux.md)** — Repositorio (guía) y Aula Virtual (entrega).
+- **VI. Ensayo de reconfiguración y resolución de incidencias** — En clase · Apartados de reconfiguración de ambas guías.
+- **VII. Repaso y resolución de dudas** — En clase · PPT, tarea teórica y guías del repositorio.
+- **VIII. Examen de la unidad** — Aula Virtual · Sin enlace público.
+
+Para el ensayo, consulta [Reconfiguración y APIPA en Windows](./UT02_DHCP/SR0209_DCHP_WS19v2.md#paso-7) y [Renovación y reconfiguración en Ubuntu](./UT02_DHCP/SR0210_linux.md#paso-7).
+
+<!-- Destinos previstos que completará el docente cuando disponga de los enlaces:
+I. PPT / OneDrive: href=""
+II. Entrega de la tarea teórica en Aula Virtual: href=""
+IV. Entrega de la práctica Windows en Aula Virtual: href=""
+V. Entrega de la práctica Ubuntu en Aula Virtual: href=""
+El examen se anuncia sin enlace público. No añadir enlaces a exámenes ni soluciones.
+-->
+
+### Recursos de consulta
+
 [Protocolo DHCP, mensajes](./UT_DHCP_teoría.md)
 
-[TA03 Tipos de asignación de IP](./UT02_DHCP/SR02TA03t.md)
+[Tipos de asignación de IP](./UT02_DHCP/SR02TA03t.md)
 
-[Configurar VBox como red interna](./UT_DHCP_configuracion_VBox.md)
+[Configurar VirtualBox como red interna](./UT_DHCP_configuracion_VBox.md)
 
-[TA09 Instalación en WS19](./UT02_DHCP/SR0209_DCHP_WS19.md)
-
-[TA09 Comprobar en WS19](./UT02_DHCP/SR02_comprobar_ws19.md)
-
-[TA10 Instalar y configurar en linux](./UT02_DHCP/SR0210_linux.md)
+[Comprobar DHCP en Windows Server](./UT02_DHCP/SR02_comprobar_ws19.md)
 
 [Solucionar errores DHCP](./UT02_DHCP/SR02TA10_errorres.md)
 
-[General: Instalar isc-dhcp en Linux](./UT01/UT01_instalar_isc-dhcp.md)
+[Instalar isc-dhcp en Linux: consulta adicional](./UT01/UT01_instalar_isc-dhcp.md)
 
 # UT03 DNS
 

@@ -1,258 +1,159 @@
-Este ejercicio puede realizarse utilizando una máquina virtual o un entorno de laboratorio con acceso a un servidor DHCP y varios dispositivos cliente (pueden ser PCs, portátiles o máquinas virtuales).
+# DHCP en Ubuntu Desktop
 
-### Objetivos del ejercicio:
-1. Comprender el proceso de asignación dinámica de direcciones IP a través de DHCP.
-2. Configurar un servidor DHCP básico.
-3. Observar cómo un cliente obtiene su configuración de red utilizando DHCP.
-4. Entender el concepto de tiempo de arrendamiento y renovación.
+**Índice de la práctica**
 
-#### Material necesario:
-- 1 Servidor Linux (puede ser una máquina virtual) para actuar como servidor DHCP.
-- 1 o 2 dispositivos cliente (pueden ser PCs o máquinas virtuales con sistemas operativos como Windows o Linux).
-- Una red local (puede ser una red virtual o física).
+- [1. Instalar el servicio](#paso-1)
+- [2. IP fija e interfaz del servidor](#paso-2)
+- [3. Seleccionar la interfaz DHCP](#paso-3)
+- [4. Configurar una subred](#paso-4)
+- [5. Validar y arrancar](#paso-5)
+- [6. Conectar y comprobar el cliente](#paso-6)
+- [7. Renovación y reconfiguración](#paso-7)
+- [Evidencias de la práctica](#evidencias)
 
----
+Configurarás el servicio DHCP en Ubuntu Desktop y comprobarás la asignación a un cliente. Utiliza los clones de UT01B y un único servidor activo en la red interna. Detén el servicio DHCP de Windows antes de empezar.
 
-### Paso 1: Configuración del servidor DHCP
+Esta guía conserva **isc-dhcp-server** para el laboratorio preparado. Es software antiguo sin soporte del fabricante; comprueba su disponibilidad en la imagen del aula. No mezcles esta configuración con Kea. [Referencia de Ubuntu](https://ubuntu.com/server/docs/how-to/networking/install-isc-dhcp-server/).
 
-En este ejercicio, tus alumnos configurarán un servidor DHCP en una máquina Linux (por ejemplo, una máquina con Ubuntu Server).
+<a id="paso-1"></a>
 
-1. **Instalar el servidor DHCP:**
+## 1. Instalar el servicio
 
-   En la máquina que actuará como servidor, tus alumnos deben instalar el servidor DHCP. En Ubuntu Server, por ejemplo, pueden ejecutar:
+Conecta temporalmente el adaptador a **NAT** y ejecuta:
 
-   ```bash
-   sudo apt update
-   sudo apt install isc-dhcp-server
-   poweroff
-   ```
+```bash
+sudo apt update
+sudo apt install isc-dhcp-server
+```
 
-   ![alt text](image-14.png)
+El primer arranque puede fallar porque aún no existe una configuración válida. Lo comprobaremos después de configurarlo. Si el paquete no está disponible, detente y consulta al profesor; no cambies de implementación por tu cuenta.
 
-   Apagamos el equipo para poder modificar la configuración física en vBox.
+Apaga la máquina. Cambia ese adaptador a **Red interna**, nombre **aula**. Conecta el cliente a la misma red y desactiva los adaptadores adicionales durante la prueba. No necesitas dos subredes.
 
-   1.1 **Configurar las interfaces de red físicamente (vBox)**
+<a id="paso-2"></a>
 
-   En virtual box, configuramos dos adaptadores de red, **en modo red interna**, uno en la red llamada *subred1* y otro en la llamada *subred2*.
+## 2. IP fija e interfaz del servidor
 
-   ![alt text](image-15.png)
+En Ubuntu Desktop, abre la configuración de la conexión cableada. Identifica su MAC y compárala con VirtualBox. En IPv4 selecciona **Manual**:
 
-   1.2 **Configurar la red logicamente (linux)**
+- Dirección: **192.168.20.1**.
+- Máscara: **255.255.255.0** o prefijo **24**.
+- Gateway y DNS: vacíos; desactiva DNS automático si aparece.
 
-   Con ips fijas:
+Aplica y vuelve a activar la conexión. Comprueba:
 
-   En linux, editamos el archivo de configuración `/etc/netplan/00-installer-config.yaml`:
+```bash
+ip -br link
+ip -4 address
+ip route
+nmcli device status
+```
 
-   ![alt text](image-16.png)
+Anota el nombre real de la interfaz del laboratorio. En los ejemplos siguientes se usa **enp0s3**: sustitúyelo si el tuyo es distinto. En Ubuntu Server conserva la configuración de red de UT01B con Netplan; no supongas que existe un archivo llamado `00-installer-config.yaml` ni configures la misma interfaz por dos vías.
 
-   Comprobamos la configuración con `sudo netplan apply` y `ifconfig -a` o `ip a`:
+<a id="paso-3"></a>
 
-   ![alt text](image-17.png)
+## 3. Seleccionar la interfaz DHCP
 
+Edita `/etc/default/isc-dhcp-server`:
 
+```bash
+sudo nano /etc/default/isc-dhcp-server
+```
 
-2. **Configurar el archivo de configuración del DHCP:**
+Establece la interfaz de la red interna:
 
-   El archivo de configuración del servidor DHCP se encuentra en `/etc/dhcp/dhcpd.conf`. Los alumnos deben editarlo para definir un rango de direcciones IP que el servidor DHCP asignará a los clientes.
+```text
+INTERFACESv4="enp0s3"
+INTERFACESv6=""
+```
 
-   Ejemplo de configuración mínima sin ámbitos: (se recomienda guardar una copia con `cp`)
+<a id="paso-4"></a>
 
-   ```bash
-   subnet 192.168.1.0 netmask 255.255.255.0 {
-       range 192.168.1.10 192.168.1.50;
-       option routers 192.168.1.1;
-       option domain-name-servers 8.8.8.8, 8.8.4.4;
-       default-lease-time 600;
-       max-lease-time 7200;
-   }
-   ```
+## 4. Configurar una subred
 
-   **Explicación:**
-   - **subnet** define la red que se está utilizando (en este caso, 192.168.1.0/24).
-   - **range** define el rango de direcciones IP que el servidor DHCP asignará a los clientes (desde 192.168.1.10 hasta 192.168.1.50).
-   - **option routers** especifica la dirección IP de la puerta de enlace predeterminada (gateway).
-   - **option domain-name-servers** establece los servidores **DNS** que se proporcionarán a los clientes.
-   - **default-lease-time** y **max-lease-time** definen el tiempo de arrendamiento de la IP (en segundos).
-  
-  **Para nuestro ejemplo:**
+Guarda una copia antes de editar:
 
-  
-   ![alt text](image-18.png)
-   ![alt text](image-19.png)
+```bash
+sudo cp -n /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ut02.bak
+sudo nano /etc/dhcp/dhcpd.conf
+```
 
-3. **Iniciar el servicio DHCP:**
+Deja esta configuración activa, sin otros bloques de subred ni opciones contradictorias:
 
-   Una vez que hayan configurado el archivo, deben iniciar el servidor DHCP.
+```text
+authoritative;
+default-lease-time 600;
+max-lease-time 7200;
 
-   ```bash
-   sudo systemctl start isc-dhcp-server
-   sudo systemctl enable isc-dhcp-server  # Para que se inicie automáticamente en cada arranque
-   ```
+subnet 192.168.20.0 netmask 255.255.255.0 {
+    range 192.168.20.100 192.168.20.149;
+    option subnet-mask 255.255.255.0;
+    option domain-name "ut02.test";
+}
+```
 
-   También pueden verificar el estado del servidor con:
+`subnet` declara la red y `range` las 50 direcciones disponibles. La IP fija del servidor queda fuera del rango. `domain-name` entrega un sufijo al cliente; no instala DNS. Los tiempos de concesión están expresados en segundos. `authoritative` corresponde aquí al único servidor del laboratorio, no a la autorización en Active Directory.
 
-   ```bash
-   sudo systemctl status isc-dhcp-server
-   ```
-   ![alt text](image-20.png)
+No añadas `option routers` ni DNS ficticios a esta red aislada. Si otro escenario dispone de router o DNS reales, se usarán las direcciones indicadas por el profesor.
 
-   **En caso de error:**
+<a id="paso-5"></a>
 
-   `sudo dhcpd -t -d`
-   
-   revisa el archivo de configuración
-   
-   o
-   
-   `cat /var/log/syslog | grep dhcpd`
+## 5. Validar y arrancar
 
-   revisa las anotaciones en el log del sistema.
+```bash
+sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf
+sudo systemctl restart isc-dhcp-server
+sudo systemctl enable isc-dhcp-server
+sudo systemctl status isc-dhcp-server --no-pager
+```
 
-   Nos dará una explicación del error y la línea del archivo de configuración en la que se encuentra éste.
+Continúa solo si la validación no informa de errores y el servicio aparece **active (running)**. Si falla:
 
-   Errores comunes:
-      - mala tabulación -> utiliza 2 espacios `__`
-      - no poner `;` al final de las líneas que lo necesitan
+```bash
+sudo journalctl -u isc-dhcp-server -n 50 --no-pager
+```
 
-   [Editar archivos de configuración en linux: consejos](../UT00_editar_conf.md)
+Comprueba el nombre de interfaz, su IP fija, la correspondencia de subred, llaves y puntos y coma. La indentación ayuda a leer `dhcpd.conf`, pero no sigue las reglas de YAML. [Consejos para editar archivos](../UT00_editar_conf.md).
 
-   [Solucionar errores DHCP](../UT02_DHCP/SR02TA10_errorres.md)
----
+<a id="paso-6"></a>
 
-### Paso 2: Configuración de los clientes
+## 6. Conectar y comprobar el cliente
 
-En este paso, los alumnos configurarán los dispositivos cliente (pueden ser PCs o máquinas virtuales) para que utilicen DHCP.
+Usa preferentemente el mismo cliente Windows de la práctica anterior. En IPv4 activa IP y DNS automáticos; elimina cualquier configuración manual anterior. Conéctalo a **aula** y ejecuta:
 
-1. **Configurar un cliente Linux:**
+```powershell
+ipconfig /release
+ipconfig /renew
+ipconfig /all
+hostname
+```
 
-   En un sistema Linux, deben asegurarse de que la interfaz de red esté configurada para obtener una IP automáticamente con DHCP. Si están usando Ubuntu o Debian, pueden editar el archivo `/etc/network/interfaces` o usar `netplan`.
+Debe recibir una IP entre **192.168.20.100 y 192.168.20.149**, máscara /24, servidor DHCP **192.168.20.1** y sufijo **ut02.test**. No debe recibir gateway. Relaciona su MAC e IP con la concesión del servidor:
 
-   Ejemplo para `netplan` (Ubuntu 18.04 en adelante):
+```bash
+sudo cat /var/lib/dhcp/dhcpd.leases
+sudo journalctl -u isc-dhcp-server -n 50 --no-pager
+```
 
-   ```yaml
-   network:
-     version: 2
-     ethernets:
-       enp0s3:
-         dhcp4: true
-   ```
+El fichero puede conservar concesiones anteriores; busca el bloque activo y los mensajes recientes de tu cliente. No basta con que aparezca cualquier dirección.
 
-   Luego aplicar la configuración:
+Si usas Ubuntu Desktop como cliente, elige **Automático (DHCP)** en IPv4, activa DNS automático y reconecta el perfil. Consulta `nmcli device show`, `ip -4 address`, `ip -br link` y `hostname`. No necesitas instalar ni ejecutar otro cliente `dhclient` en paralelo con NetworkManager.
 
-   ```bash
-   sudo netplan apply
-   ```
+<a id="paso-7"></a>
 
-2. **Configurar un cliente Windows:**
+## 7. Renovación y reconfiguración
 
-   En Windows, deben ir al **Panel de Control > Centro de redes y recursos compartidos > Cambiar configuración del adaptador**. Luego deben hacer clic derecho sobre la interfaz de red, seleccionar **Propiedades**, y habilitar la opción **Obtener una dirección IP automáticamente**.
+Mantén visible el registro con `sudo journalctl -u isc-dhcp-server -f` y fuerza una renovación en el cliente. Identifica REQUEST y ACK si aparecen. Un cliente que conserva una concesión no tiene por qué repetir DORA completo.
 
----
+Después de guardar las evidencias iniciales, ensaya una modificación a **192.168.20.0/25**: servidor **.1/25**, rango **.2–.126**, máscara **255.255.255.128** tanto en `subnet` como en `option subnet-mask`. Valida, reinicia, renueva el cliente y verifica dirección, máscara y servidor DHCP. La IP fija .1 no se reparte.
 
-### Paso 3: Verificación del proceso DHCP
+<a id="evidencias"></a>
 
-Una vez configurado el servidor y los clientes, los alumnos pueden verificar el proceso de obtención de una IP por parte de los clientes y ver los mensajes que intercambian con el servidor.
+## Evidencias de la práctica
 
-0. **Configuración física (vBox)**
-   - Configurar el adaptador de red en modo red interna, en la misma red en la que está trabajando el servidor dhcp.
+1. Configuración inicial DHCP y servicio activo.
+2. Concesión o registro del servidor junto al cliente, mostrando la correspondencia IP/MAC, servidor DHCP y sufijo recibido.
+3. Configuración /25 y cliente con la nueva máscara tras renovar.
 
-1. **En el cliente:**
-   - En Linux, pueden usar `ip a` para ver si la interfaz de red ha obtenido una dirección IP. También pueden usar `dhclient -v` para observar el proceso de solicitud de IP.
-  
-      ![alt text](image-21.png)
-
-   - En Windows, pueden usar `ipconfig` para ver la dirección IP asignada. También pueden usar `ipconfig /renew` para forzar la renovación de la IP.
-
-2. **En el servidor:**
-   - Pueden revisar los logs del servidor DHCP en `/var/log/syslog` o `/var/log/dhcpd.log` para observar las solicitudes y asignaciones de IP en tiempo real.
-   
-   Comando para ver los logs en tiempo real:
-
-   ```bash
-   sudo tail -f /var/log/syslog | grep dhcp
-   ```
-      ![alt text](image-24.png) En la imagen observamos cómo, al conectarse por primera vez, el cliente comienza el intercambio de mensajes con DHCPDISCOVER.
-   Sin embargo, al reiniciar el cliente, como la concesión sigue activa, el cliente envía un DHCPREQUEST y el servidor responde con un DHCPACK.
-
-   - Pueden comprobar la lista de ips prestadas con:
-   ```bash
-   dhcp-lease-list
-   ```
-      ![alt text](image-22.png)
-
----
-
-### Paso 4: Experimentación con la renovación del arrendamiento
-
-Para que los alumnos comprendan cómo funciona la renovación de la IP, pueden reducir el tiempo de arrendamiento en el servidor y observar cómo los clientes intentan renovar sus IPs antes de que expire el lease.
-
-1. **Modificar el tiempo de arrendamiento en el servidor:**
-
-   Cambia el **default-lease-time** en `/etc/dhcp/dhcpd.conf` a un valor más bajo, por ejemplo, 60 segundos.
-
-   ```bash
-   default-lease-time 60;
-   ```
-
-   Reinicia el servidor para aplicar los cambios:
-
-   ```bash
-   sudo systemctl restart isc-dhcp-server
-   ```
-
-2. **Observar el comportamiento en los clientes:**
-   Los alumnos pueden observar cómo, antes de que pasen los 60 segundos, el cliente envía una solicitud de renovación de IP al servidor.
-
----
-
-### Conclusión y reflexión:
-
-Al final del ejercicio, los alumnos deben ser capaces de:
-- Entender cómo funciona el protocolo DHCP y qué mensajes intercambian cliente y servidor.
-- Configurar un servidor DHCP básico y observar el proceso de asignación y renovación de IP.
-- Reflexionar sobre la importancia del tiempo de arrendamiento y cómo afecta a la gestión de direcciones IP en una red.
-
-## Resumen de archivos de configuración y comandos:
-
-1. **/etc/netplan/00-installer-config.yaml**  
-   - Configuración de red, IP estática
-
-2. **/etc/dhcp/dhcpd.conf**  
-   - Rango IP, Configuración DHCP
-
-3. **/etc/network/interfaces** (en algunos casos de clientes Linux)  
-   - Configuración DHCP, Cliente de red
-
-4. **/var/log/syslog**  
-   - Registros, Diagnóstico DHCP
-
-### Comandos de Linux:
-1. `sudo apt install isc-dhcp-server`  
-   - Instalación DHCP
-
-2. `sudo netplan apply`  
-   - Aplicar configuración de Red
-
-3. `ifconfig -a` o `ip a`  
-   - Información red, Estado interfaces
-
-4.   `sudo dhcpd -t -cd /etc/dhcp/dhcpd.conf`
-   
-     - **Buscar errores en el archivo de configuración**
-
-5. `sudo systemctl [start, restart, enable, status] isc-dhcp-server`  
-   - [Iniciar, reiniciar, inicio automático, estado] servicio dhcp
-  
-6. `cat /var/log/syslog | grep dhcpd`  
-   - Diagnóstico, Filtrar registros
-
-7. `dhclient -v`  
-   - Solicitud IP, Cliente DHCP
-
-8.  `sudo tail -f /var/log/syslog | grep dhcp`  
-   
-    - Monitoreo en tiempo real, DHCP
-
-9.  `dhcp-lease-list`  
-    - Lista IP, Concesiones activas
-
+Incluye los nombres de las máquinas virtuales en las capturas y una frase por evidencia. Una dirección mostrada solo con `ip a` o `ipconfig` no demuestra por sí sola que la haya asignado este servidor.

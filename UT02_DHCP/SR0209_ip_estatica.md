@@ -7,7 +7,7 @@ Usar el Administrador de conexiones de red
 1. **Abrir las Conexiones de Red**:
    - Ve al **Menú Inicio, Panel de control, Tareas de red, Configuración del adaptador: Conexiones de red**, donde verás las interfaces de red disponibles.
 
-![alt text](image-2.png)
+![alt text](img/image-2.png)
 
 2. **Seleccionar la primera interfaz de red**:
    - Identifica la interfaz que deseas configurar con la dirección **172.16.0.220**. Normalmente, las interfaces están nombradas como "Ethernet 1", "Ethernet 2", etc. Puedes hacer clic derecho sobre la interfaz y seleccionar **Propiedades** para ver detalles y confirmar que es la correcta.
@@ -24,7 +24,7 @@ Usar el Administrador de conexiones de red
      - **DNS alternativo**: 172.16.0.5
    - Haz clic en **Aceptar** para guardar los cambios.
    - 
-![alt text](image-3.png)
+![alt text](img/image-3.png)
 
 4. **Seleccionar la segunda interfaz de red**:
    - Repite el mismo proceso, pero esta vez selecciona la segunda interfaz de red, que configuraremos con la dirección IP de la segunda subred (172.16.1.220).
@@ -48,4 +48,4 @@ Usar el Administrador de conexiones de red
      ```
    - Esto mostrará el estado de cada interfaz y las IPs asignadas.
    - 
-![alt text](image-4.png)
+![alt text](img/image-4.png)
