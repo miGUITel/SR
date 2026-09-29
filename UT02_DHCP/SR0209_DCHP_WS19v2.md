@@ -176,6 +176,8 @@ Selecciona **Sí, deseo configurar estas opciones ahora**.
 3. Activa el ámbito al terminar el asistente.
 4. En **Opciones de ámbito → Configurar opciones**, marca **015 Nombre de dominio DNS** y escribe `ut02.test`. Es un sufijo que el cliente recibirá por DHCP; no crea un servidor DNS ni un dominio de Active Directory.
 
+![alt text](image.png)
+
 ---
 
 <a id="paso-4"></a>
@@ -183,6 +185,7 @@ Selecciona **Sí, deseo configurar estas opciones ahora**.
 ## ✅ 4. Verificación del funcionamiento
 
 1. Comprueba en la consola DHCP que el ámbito aparece **activo** (icono verde).
+   ![alt text](image-1.png)
 2. Inicia un **cliente** (por ejemplo, una máquina virtual con Windows 10 o Linux) conectada también a la **misma red interna de VirtualBox**.
 3. Configura la tarjeta del cliente para **obtener dirección IP automáticamente**.
 4. En el cliente, abre la consola y ejecuta:
@@ -200,7 +203,7 @@ Selecciona **Sí, deseo configurar estas opciones ahora**.
 
    (Linux)
 
-   Verifica que recibe una IP dentro del rango **172.16.0.100–172.16.0.200**, fuera de la exclusión **.150–.159**, sin puerta de enlace y con sufijo DNS **ut02.test**.
+   Verifica que recibe una IP dentro del rango **172.16.0.100–172.16.0.200**, fuera de la exclusión **.150–.159**, sin puerta de enlace.
 
 ---
 
@@ -208,9 +211,15 @@ Selecciona **Sí, deseo configurar estas opciones ahora**.
 
 ## 5. Comprobar la concesión y las opciones
 
-En **Concesiones de direcciones**, busca el cliente. Relaciona IP, nombre y MAC/identificador con `ipconfig /all` del cliente Windows. Deben aparecer DHCP habilitado, servidor DHCP **172.16.0.1** y sufijo de conexión **ut02.test**. Un cliente Windows Server puede actuar como cliente: no necesita otro rol.
+En **Concesiones de direcciones**, busca el cliente.
+
+![alt text](image-2.png)
+
+Relaciona IP, nombre y MAC/identificador con `ipconfig /all` del cliente Windows. Deben aparecer DHCP habilitado, servidor DHCP **172.16.0.1** y sufijo de conexión **ut02.test**. Un cliente Windows Server puede actuar como cliente: no necesita otro rol.
 
 En Ubuntu Desktop puedes usar `hostname`, `ip -br link`, `ip -4 address` y `nmcli device show`. Busca también las opciones DHCP y el identificador del servidor. Mostrar solo `ip a` no prueba quién asignó la dirección.
+
+![alt text](image-3.png)
 
 <a id="paso-6"></a>
 
@@ -233,7 +242,13 @@ En Ubuntu Desktop puedes usar `hostname`, `ip -br link`, `ip -4 address` y `nmcl
 
 ## Evidencias de la práctica
 
-Conserva cuatro evidencias legibles: rango y exclusión iniciales; concesión y opción recibida; reserva en uso junto al cliente; y APIPA. Añade una frase que explique qué demuestra cada una. En las capturas deben verse los nombres de las máquinas virtuales. Guarda la configuración final /25 como ensayo de reconfiguración.
+Conserva cuatro evidencias legibles:
+* RF 1: rango y exclusión iniciales; 
+* RF 2: concesión y opción recibida;
+* RF 3: reserva en uso junto al cliente;
+* RF 5: APIPA.
+
+Añade una frase que explique qué demuestra cada una. En las capturas deben verse los nombres de las máquinas virtuales. Guarda la configuración final /25 como ensayo de reconfiguración.
 
 <a id="diagnostico"></a>
 
