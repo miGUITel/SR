@@ -73,8 +73,8 @@ Configura dos adaptadores por MV:
 |---|---|
 | Adaptador 1 | **NAT**, IPv4 y DNS automáticos |
 | Adaptador 2 | **Solo-anfitrión (Host-Only)**, misma red virtual en ambas MV |
-| Red Host-Only y máscara | `192.168.20.0/28` — `255.255.255.240` |
-| Interfaz Host-Only del anfitrión | `192.168.20.1` con esa máscara |
+| Red Host-Only y máscara | `192.168.56.0/24` — `255.255.255.0` |
+| Interfaz Host-Only del anfitrión | `192.168.56.1` con esa máscara |
 | DHCP de Host-Only | Desactivado |
 | IP Host-Only de US y Mint | Elige dos direcciones manuales válidas y distintas |
 | Puerta de enlace y DNS de Host-Only | Vacíos; se obtienen por NAT |
