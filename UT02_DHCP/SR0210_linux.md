@@ -129,10 +129,10 @@ Comprueba el nombre de interfaz, su IP fija, la correspondencia de subred, llave
 Usa preferentemente el mismo cliente Windows de la práctica anterior. En IPv4 activa IP y DNS automáticos; elimina cualquier configuración manual anterior. Conéctalo a **aula** y ejecuta:
 
 ```powershell
-ipconfig /release
-ipconfig /renew
-ipconfig /all
-hostname
+ipconfig /release  # Libera la concesión DHCP actual.
+ipconfig /renew    # Solicita una concesión DHCP.
+ipconfig /all      # Muestra la configuración completa de red.
+hostname           # Muestra el nombre del equipo.
 ```
 
 Debe recibir una IP entre **192.168.20.100 y 192.168.20.149**, máscara /24, servidor DHCP **192.168.20.1** y sufijo **ut02.test**. No debe recibir gateway. Relaciona su MAC e IP con la concesión del servidor:
