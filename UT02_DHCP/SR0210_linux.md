@@ -47,10 +47,10 @@ En Ubuntu Desktop, abre la configuración de la conexión cableada. Identifica s
 Aplica y vuelve a activar la conexión. Comprueba:
 
 ```bash
-ip -br link
-ip -4 address
-ip route
-nmcli device status
+ip -br link          # Muestra las interfaces, su estado y su MAC.
+ip -4 address        # Muestra las direcciones IPv4 y sus prefijos.
+ip route             # Muestra las rutas y la puerta de enlace, si existe.
+nmcli device status  # Muestra el estado de los dispositivos en NetworkManager.
 ```
 
 Anota el nombre real de la interfaz del laboratorio. En los ejemplos siguientes se usa **enp0s3**: sustitúyelo si el tuyo es distinto. En esta práctica configura la interfaz desde la conexión cableada de Ubuntu Desktop; evita modificar también su configuración mediante archivos de Netplan.
@@ -91,13 +91,24 @@ default-lease-time 600;
 max-lease-time 7200;
 
 subnet 192.168.20.0 netmask 255.255.255.0 {
-    range 192.168.20.100 192.168.20.149;
-    option subnet-mask 255.255.255.0;
-    option domain-name "ut02.test";
+  range 192.168.20.100 192.168.20.149;
+  option subnet-mask 255.255.255.0;
+  option domain-name "ut02.test";
 }
 ```
 
-`subnet` declara la red y `range` delimita las 50 direcciones que se pueden repartir dinámicamente. La IP fija del servidor queda fuera del rango. `domain-name` entrega un sufijo al cliente; no instala DNS ni crea registros de nombres. Los tiempos de concesión están expresados en segundos: 600 son 10 minutos y 7200 son 2 horas.
+`default-lease-time 600;` si el cliente no solicita una duración concreta, el servidor concede la IP durante 600 segundos (10 minutos).
+
+`max-lease-time 7200;` establece el máximo que puede conceder si el cliente solicita una duración: 7200 segundos (2 horas).
+
+`subnet` declara la red: ip de red y máscara de red
+
+`option subnet-mask 255.255.255.0;` es la máscara que se distribuirá en la concesión (normalmente la misma de `subnet`)
+
+`range` delimita las 50 direcciones que se pueden repartir dinámicamente. La IP fija del servidor queda fuera del rango.
+
+`domain-name` entrega un sufijo al cliente; no instala DNS ni crea registros de nombres.
+Los tiempos de concesión están expresados en segundos: 600 son 10 minutos y 7200 son 2 horas.
 
 `authoritative;` declara que este servidor tiene autoridad sobre la red y permite responder con DHCPNAK ante solicitudes de configuraciones que no sean válidas para ella. No impide que funcionen otros servidores DHCP ni equivale a la autorización en Active Directory; por eso debes detener los demás servidores del laboratorio.
 
@@ -108,19 +119,25 @@ No añadas `option routers` ni DNS ficticios a esta red aislada. Si otro escenar
 ## 5. Validar y arrancar
 
 ```bash
-sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf
-sudo systemctl restart isc-dhcp-server
-sudo systemctl enable isc-dhcp-server
-sudo systemctl status isc-dhcp-server --no-pager
+sudo dhcpd -t -cf /etc/dhcp/dhcpd.conf               # Comprueba la sintaxis del archivo sin arrancar el servicio.
+sudo systemctl restart isc-dhcp-server              # Reinicia el servicio para aplicar la configuración.
+sudo systemctl enable isc-dhcp-server               # Activa el inicio automático del servicio al arrancar el sistema.
+sudo systemctl status isc-dhcp-server --no-pager    # Muestra el estado del servicio sin paginar la salida.
 ```
 
 Continúa solo si la validación no informa de errores y el servicio aparece **active (running)**. Si falla:
 
 ```bash
-sudo journalctl -u isc-dhcp-server -n 50 --no-pager
+sudo journalctl -u isc-dhcp-server -n 50 --no-pager  # Muestra los últimos 50 registros del servicio sin paginar.
 ```
 
-Comprueba el nombre de interfaz, su IP fija, la correspondencia de subred, llaves y puntos y coma. La indentación ayuda a leer `dhcpd.conf`, pero no sigue las reglas de YAML. [Consejos para editar archivos](../UT00_editar_conf.md).
+Comprueba 
+* el nombre de interfaz, 
+* su IP fija, 
+* la correspondencia de subred, 
+* llaves
+* puntos y coma.
+La indentación ayuda a leer `dhcpd.conf`, pero no sigue las reglas de YAML. [Consejos para editar archivos](../UT00_editar_conf.md).
 
 <a id="paso-6"></a>
 
@@ -150,7 +167,11 @@ Si usas Ubuntu Desktop como cliente, elige **Automático (DHCP)** en IPv4, activ
 
 ## 7. Renovación y reconfiguración
 
-En el servidor, mantén visible el registro con `sudo journalctl -u isc-dhcp-server -f`. En el cliente Windows, ejecuta únicamente `ipconfig /renew`, sin ejecutar antes `/release`, para solicitar la renovación de la concesión actual. Identifica DHCPREQUEST y DHCPACK si aparecen. Un cliente que conserva una concesión no tiene por qué repetir DORA completo. Cuando termines de observar el registro, pulsa **Ctrl+C**; esto detiene el seguimiento, no el servicio DHCP.
+En el **servidor**, mantén visible el registro con `sudo journalctl -u isc-dhcp-server -f`.
+
+En el **cliente** Windows, ejecuta únicamente `ipconfig /renew`, sin ejecutar antes `/release`, para solicitar la renovación de la concesión actual.
+
+En el **servidor**, Identifica DHCPREQUEST y DHCPACK si aparecen. Un cliente que conserva una concesión no tiene por qué repetir DORA completo. Cuando termines de observar el registro, pulsa **Ctrl+C**; esto detiene el seguimiento, no el servicio DHCP.
 
 Después de guardar las evidencias iniciales, modifica la configuración para utilizar **192.168.20.0/25** y un nuevo rango DHCP que no se solape con el anterior:
 
@@ -170,7 +191,7 @@ La subred pasa de **254 a 126 hosts utilizables**, pero ambos rangos DHCP contie
 
 ## Evidencias de la práctica
 
-1. Configuración inicial DHCP y servicio activo.
+1. Configuración inicial DHCP (archivo de configuración) y servicio activo (systemctl status en verde).
 2. Concesión o registro del servidor junto al cliente, mostrando la correspondencia IP/MAC, servidor DHCP y sufijo recibido.
 3. Configuración DHCP /25, interfaz del servidor con 192.168.20.1/25 y cliente con una IP del nuevo rango 192.168.20.20–192.168.20.69, distinta de la inicial. Muestra también la nueva máscara y el servidor DHCP recibido.
 4. Responde a las preguntas de comprensión.
