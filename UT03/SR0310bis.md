@@ -1,110 +1,54 @@
-[DNS inicio](./SR03.md)
+[Volver al recorrido de DNS](./SR03.md#aea-xvi)
 
-### **5. Cliente DNS (Resolver)**
+# Herramientas de consulta DNS: ampliación opcional
 
-El **cliente DNS** o **resolver** es un componente esencial del proceso de resolución de nombres. Su función principal es enviar consultas DNS en nombre de las aplicaciones o servicios que requieren la traducción de un nombre de dominio a una dirección IP o viceversa. Los resolvers están integrados en los sistemas operativos y funcionan de manera transparente para los usuarios.
+Este documento amplía las consultas con `dig` y `host`. La herramienta común de la unidad es `nslookup`, explicada en los [apuntes del cliente DNS](./SR0310.md#1031-nslookup).
 
-#### **5.1. Introducción**
+Estas herramientas realizan consultas DNS. No comprueban el archivo `hosts` ni garantizan que se utilice la caché del sistema. Se pueden usar herramientas de cliente sin instalar el servidor BIND9.
 
-Cuando un usuario intenta acceder a un recurso a través de un nombre de dominio (por ejemplo, introduciendo una URL en el navegador), el resolver DNS del dispositivo se encarga de gestionar la consulta. Este proceso ocurre de forma automática y casi instantánea, pero detrás de escena, el resolver está comunicándose con los servidores DNS para obtener la dirección IP correspondiente.
+## dig
 
-El resolver realiza su tarea de forma **transparente** para el usuario final. Esto significa que el usuario no necesita interactuar directamente con el resolver ni saber cómo funciona el proceso de resolución de nombres.
-
-#### **5.2. Tipos de Consultas Realizadas por el Resolver**
-
-El resolver puede realizar diferentes tipos de consultas DNS, dependiendo de la configuración del servidor DNS con el que interactúa y la información disponible en caché.
-
-1. **Consulta Recursiva**: 
-   - En este tipo de consulta, el resolver solicita al servidor DNS que obtenga la respuesta completa. El resolver espera que el servidor DNS continúe buscando la información, incluso si necesita consultar a otros servidores DNS.
-   - La consulta recursiva es la más común en entornos de usuario, ya que el resolver descarga la mayor parte del trabajo en el servidor DNS.
-
-2. **Consulta Iterativa**:
-   - En una consulta iterativa, el resolver obtiene una respuesta parcial del servidor DNS y, si el servidor no tiene la respuesta completa, el resolver debe hacer más consultas a otros servidores DNS.
-   - Las consultas iterativas se utilizan principalmente en servidores DNS que actúan como intermediarios para obtener información de otros servidores.
-
-3. **Consulta en Caché**:
-   - Para optimizar el rendimiento y evitar sobrecargar los servidores DNS con consultas repetidas, los resolvers suelen almacenar en caché las respuestas a consultas recientes. Si el resolver tiene la respuesta almacenada, la recuperará de la caché en lugar de consultar un servidor DNS.
-   - El tiempo que una respuesta permanece en caché está determinado por el valor **TTL (Time To Live)**, que es especificado por el servidor DNS autoritativo.
-
----
-
-#### **5.3. Herramientas de Interrogación DNS**
-
-A pesar de que el resolver DNS realiza su trabajo automáticamente, existen varias herramientas que permiten a los administradores y usuarios realizar consultas DNS manualmente para obtener información detallada sobre la resolución de nombres y diagnosticar problemas.
-
-##### **5.3.1. NSLOOKUP**
-
-`nslookup` es una herramienta de línea de comandos disponible en la mayoría de los sistemas operativos, utilizada para realizar consultas DNS y obtener información sobre servidores DNS y nombres de dominio.
-
-- **Modo interactivo**: Al ejecutar `nslookup` sin parámetros, el usuario entra en un modo interactivo en el que puede realizar varias consultas consecutivas y explorar diferentes tipos de registros DNS.
-- **Modo comando**: En este modo, el usuario puede ejecutar una consulta específica en una sola línea de comandos, lo que es útil para obtener rápidamente información sobre un dominio o un tipo de registro específico.
-
-**Ejemplo de uso**:
-```bash
-nslookup www.google.com
-```
-Este comando realiza una consulta para obtener la dirección IP asociada con el nombre de dominio `www.google.com`.
-
-##### **5.3.2. DIG**
-
-`dig` (Domain Information Groper) es una herramienta avanzada para realizar consultas DNS, principalmente disponible en sistemas Unix y Linux. Es más detallada y versátil que `nslookup`, y es la preferida por administradores de sistemas y redes debido a su salida detallada.
-
-- **Consultas básicas**: Permite realizar consultas específicas sobre dominios y tipos de registros (por ejemplo, A, MX, NS, etc.).
-- **Consultas inversas**: Con la opción `-x`, `dig` puede realizar consultas inversas, es decir, resolver una dirección IP a un nombre de dominio.
-
-**Sintaxis básica**:
-```bash
-dig www.example.com
+```text
+dig [@servidor] nombre [tipo] [opciones]
 ```
 
-- **Consulta a un servidor específico**: Puedes especificar qué servidor DNS consultar con `@servidor`.
+Los corchetes indican elementos opcionales. `@servidor` selecciona el DNS consultado. Si falta, se usa la configuración de resolución que utilice la herramienta.
 
-**Ejemplo**:
 ```bash
-dig @8.8.8.8 www.example.com
+dig google.com MX
+dig www.example.com A
+dig -x 192.0.2.10
+dig -h
 ```
-Esto realiza una consulta a los servidores DNS de Google (`8.8.8.8`) para el dominio `www.example.com`.
 
-##### **5.3.3. HOST**
+El ejemplo inverso usa una IP de documentación. No presupone que exista un PTR público para ella. Para consultar un servidor concreto, escribe `@` seguido de la IP real del DNS.
 
-`host` es otra herramienta disponible en sistemas Unix/Linux que se utiliza para consultas DNS. Es menos detallada que `dig`, pero ofrece una salida más sencilla para realizar consultas rápidas.
+En una respuesta, distingue el servidor consultado, el estado de la consulta, el tipo de registro y la sección de respuestas. `NOERROR` puede acompañar una respuesta sin registros del tipo solicitado. `NXDOMAIN` indica nombre inexistente. Un tiempo de espera agotado indica ausencia de respuesta a tiempo.
 
-- **Opciones**:
-  - `-a`: Muestra todos los registros DNS para un nombre de dominio dado.
-  - `-t`: Especifica el tipo de registro a consultar (CNAME, PTR, MX, etc.).
-  - `-l`: Lista todos los hosts en un dominio usando una transferencia de zona (AXFR).
+## host
 
-**Ejemplo de uso**:
+```text
+host [-t TIPO] nombre [servidor]
+```
+
 ```bash
 host www.example.com
+host -t MX google.com
+host 192.0.2.10
 ```
-Este comando realiza una consulta DNS para obtener la dirección IP del dominio `www.example.com`.
 
----
+En `host`, el servidor opcional se escribe sin `@`. Una IP como argumento permite solicitar la resolución inversa.
 
-#### **5.4. Funcionamiento Interno del Resolver DNS**
+Opciones de consulta adicional:
 
-El proceso que sigue el resolver para obtener una dirección IP para un nombre de dominio incluye varios pasos:
+| Opción | Función |
+|---|---|
+| `-t TIPO` | Solicita un tipo concreto de registro. |
+| `-v` | Muestra una salida más detallada. |
+| `-a` | Consulta ANY con salida detallada. No garantiza obtener todos los registros. |
+| `-l` | Solicita una transferencia AXFR de una zona, si el servidor la permite. No descubre todos los equipos de una red. |
+| `-T` | Utiliza TCP para la consulta. |
 
-1. **Consulta a la caché local**: El resolver primero verifica si ya tiene la respuesta almacenada en caché. Si es así, la devuelve directamente sin hacer más consultas.
-   
-2. **Consulta al servidor DNS configurado**: Si no encuentra la respuesta en la caché, el resolver envía una consulta al servidor DNS configurado en la red local. Este servidor puede ser uno proporcionado por el ISP o un servidor DNS personalizado, como Google DNS (8.8.8.8) o Cloudflare DNS (1.1.1.1).
+Una transferencia de zona requiere permiso del servidor. No equivale a una consulta ordinaria de un nombre.
 
-3. **Recepción de la respuesta**: El servidor DNS devuelve la dirección IP correspondiente al nombre de dominio solicitado, o un mensaje de error si el nombre de dominio no puede resolverse.
-
-4. **Almacenamiento en caché**: Si se obtiene una respuesta, el resolver la almacena en caché para consultas futuras, utilizando el valor TTL proporcionado por el servidor DNS.
-
----
-
-#### **5.5. Caché DNS y TTL**
-
-La **caché DNS** es esencial para mejorar el rendimiento de las consultas DNS. Cada vez que el resolver obtiene una respuesta, la almacena en caché por un período de tiempo definido por el **TTL (Time To Live)** del registro. Esto significa que si el mismo dominio es consultado varias veces dentro de ese período, el resolver puede proporcionar la respuesta directamente desde la caché, evitando nuevas consultas al servidor DNS.
-
-- **Ventajas**: Ahorra tiempo y reduce el tráfico en la red, ya que se evitan consultas innecesarias.
-- **Limitaciones**: Si la caché contiene información obsoleta, es posible que las consultas proporcionen respuestas incorrectas. En estos casos, es común que los administradores limpien manualmente la caché para forzar una nueva consulta al servidor DNS.
-
----
-
-### **5.6. Conclusión**
-
-El **resolver DNS** es el componente que permite a los dispositivos realizar consultas DNS de manera eficiente y transparente. Aunque la mayor parte del trabajo ocurre detrás de escena, las herramientas como `nslookup`, `dig` y `host` proporcionan a los usuarios y administradores la capacidad de realizar consultas manuales y resolver problemas relacionados con DNS. Además, la caché DNS mejora significativamente el rendimiento de la red, reduciendo el tiempo de consulta y el tráfico general.
+Referencia: [manuales oficiales de dig y host](https://bind9.readthedocs.io/en/stable/manpages.html).

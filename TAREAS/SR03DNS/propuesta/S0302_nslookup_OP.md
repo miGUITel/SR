@@ -1,210 +1,98 @@
-## 🧪 **Práctica 2 OPCIONAL — Funcionamiento básico de la resolución DNS desde el cliente**
+# 0302 NSLOOKUP: comprueba DNS
+
+Práctica inicial con **entrega opcional**.
 
 ### Objetivo
 
-Visualizar el proceso de resolución de nombres, comprobar el uso de la **caché DNS del cliente** e interpretar los **distintos tipos de respuesta** que devuelve `nslookup`.
+Observar la caché DNS de Windows y distinguir una consulta del sistema de una consulta explícita al servidor DNS. La caché guarda temporalmente información de resolución para poder reutilizarla.
 
----
+Trabaja en el cliente Windows, con conexión a la red y un DNS configurado. Abre una consola como administrador para limpiar la caché. Si has realizado la práctica de `hosts`, retira antes la entrada de prueba tal como indica su último paso.
 
-## Herramientas y comandos que se utilizarán
+### Procedimiento
 
-* `ipconfig /displaydns`
-* `ipconfig /flushdns`
-* `ping`
-* `nslookup`
+1. **Observa la caché inicial.** Ejecuta y guarda la captura antes de continuar:
 
----
+   ```powershell
+   ipconfig /displaydns
+   ```
 
-## Tareas a realizar (en orden)
+2. **Limpia la caché.** Ejecuta y comprueba el mensaje de confirmación:
 
-### 1. Consultar la caché DNS inicial
+   ```powershell
+   ipconfig /flushdns
+   ```
 
-Ejecuta en la consola:
+3. **Vuelve a observarla.** Ejecuta:
 
-```powershell
-ipconfig /displaydns
-```
+   ```powershell
+   ipconfig /displaydns
+   ```
 
-**Qué observar**
+   Guarda la captura y compárala con la inicial. Pueden permanecer entradas de `hosts` y aparecer otras por programas en segundo plano; no tiene por qué quedar vacía.
 
-* Aparecen entradas aunque no hayas hecho ninguna consulta manual.
-* El sistema ya ha resuelto nombres previamente.
+4. **Provoca resoluciones de nombres.** Ejecuta:
 
----
+   ```powershell
+   ping www.google.com
+   ping www.iesinfantaelena.com
+   ```
 
-### 2. Limpiar la caché DNS
+   **Fíjate primero en la IP que aparece junto al nombre.** Si ves una salida como «Haciendo ping a … [dirección IP]», el sistema ha resuelto el nombre y ya sabe a qué IP dirigir el ping. La resolución ha funcionado, aunque después aparezca «Tiempo de espera agotado»: lo que falta es la respuesta ICMP, que puede estar bloqueada. **No necesitas recibir respuestas al ping para completar esta práctica DNS.** Anota la IP obtenida; si no se obtiene ninguna, registra el mensaje y consúltalo con el profesor.
 
-Ejecuta:
+   La IP también puede proceder de una respuesta DNS guardada en caché; resolver el nombre no implica enviar una consulta nueva cada vez.
 
-```powershell
-ipconfig /flushdns
-```
+   **Variante opcional: acceder desde el navegador.** Abre `https://www.google.com` o `https://www.iesinfantaelena.com`. Para conectar con la web por su nombre, el navegador también necesita obtener la IP mediante resolución DNS, salvo que ya disponga de ella en caché. Puede usar su propia caché o DNS seguro, por lo que esa actividad no siempre aparecerá en `ipconfig /displaydns`. Para observar la caché de Windows en el paso siguiente, conserva la prueba con `ping` como referencia.
 
-**Qué observar**
+5. **Busca las entradas en caché.** Ejecuta:
 
-* El sistema muestra un mensaje confirmando que la caché se ha vaciado correctamente.
+   ```powershell
+   ipconfig /displaydns
+   ```
 
----
+   Localiza las entradas relacionadas con los nombres anteriores y guarda la captura. El TTL indica cuántos segundos puede seguir siendo válida una entrada en caché. Si no la encuentras, registra lo observado y consúltalo con el profesor.
 
-### 3. Volver a consultar la caché DNS
+6. **Repite la resolución.** Ejecuta:
 
-Ejecuta de nuevo:
+   ```powershell
+   ping www.google.com
+   ```
 
-```powershell
-ipconfig /displaydns
-```
+   El cliente puede reutilizar la información almacenada mientras sea válida. La rapidez del ping, por sí sola, no demuestra el uso de la caché.
 
-**Qué observar**
+7. **Consulta directamente al DNS.** Ejecuta:
 
-* La caché está vacía o contiene muchas menos entradas.
-* A partir de ahora, cualquier entrada nueva será consecuencia directa de tus acciones.
+   ```powershell
+   nslookup www.google.com
+   ```
 
----
+   Identifica el **servidor DNS consultado** y su dirección, al principio de la salida. Distingue esos datos del **nombre consultado y sus direcciones**, que aparecen en la respuesta. Guarda la captura completa.
 
-### 4. Forzar una resolución de nombre
+   `nslookup` consulta al servidor DNS y no comprueba las entradas de `hosts` ni la caché del cliente mostrada por `ipconfig`.
 
-Ejecuta:
+### Cómo interpretar la salida
 
-```powershell
-ping www.google.com 
-ping www.iesinfantaelena.com
-```
+Utiliza esta tabla para interpretar tu resultado. **No tienes que provocar todos los casos.** La respuesta autoritativa se comprobará más adelante con el DNS del laboratorio.
 
-**Qué observar**
+| Resultado | Interpretación |
+|---|---|
+| Respuesta no autoritativa | El servidor responde sin ser autoridad para ese nombre. Puede utilizar su caché o consultar otros DNS. |
+| Respuesta autoritativa | Procede de un servidor responsable de la zona. Se comprobará con la zona del laboratorio; la ausencia de «no autoritativa», por sí sola, no basta para interpretar cualquier salida. |
+| `Non-existent domain` / NXDOMAIN | Se ha recibido una respuesta DNS que indica que el nombre consultado no existe. No equivale a un problema de conexión. |
+| Tiempo de espera agotado / timeout | No ha llegado una respuesta a tiempo. Hay que revisar conectividad, DNS configurado, filtros y posibles problemas del servidor. |
 
-* Antes de enviar paquetes, el sistema resuelve el nombre a una dirección IP.
-* El éxito o fallo del ping no es lo importante, sino la resolución del nombre.
+### Entrega en PDF
 
----
+- Capturas de la caché antes y después de limpiarla.
+- Captura de las entradas tras los primeros pings.
+- Captura de `nslookup`, con el servidor y el resultado visibles.
+- Explicación del proceso en 2–3 líneas. Explica las incidencias observadas, si las hubo.
 
-### 5. Consultar la caché DNS tras la resolución
+### Rúbrica general
 
-Ejecuta:
-
-```powershell
-ipconfig /displaydns
-```
-
-**Qué observar**
-
-* Aparecen nuevas entradas relacionadas con `google.com`.
-* Se confirma que el sistema **almacena respuestas DNS en caché**.
-
----
-
-### 6. Repetir la resolución
-
-Ejecuta otra vez:
-
-```powershell
-ping www.google.com
-```
-
-**Qué observar**
-
-* La resolución suele ser inmediata.
-* El sistema reutiliza la información almacenada en caché.
-
----
-
-### 7. Consulta DNS explícita con `nslookup`
-
-Ejecuta:
-
-```powershell
-nslookup www.google.com
-```
-
----
-
-## Interpretación de los resultados de `nslookup` (tal como aparecen en consola)
-
-### 🔹 Respuesta **no autoritativa** (la más habitual)
-
-En la salida aparece una línea como esta:
-
-```text
-Respuesta no autoritativa:
-Nombre:    www.google.com
-Addresses: 142.250.184.36
-```
-
-📌 **Dónde fijarse**
-
-* En la línea **“Respuesta no autoritativa”**.
-* Significa que el servidor que responde **no es responsable directo del dominio**, solo actúa como intermediario.
-
----
-
-### 🔹 Respuesta **autoritativa**
-
-No aparece el texto “Respuesta no autoritativa”.
-
-Ejemplo típico:
-
-```text
-Nombre:    servidor.ejemplo.local
-Address:   192.168.1.10
-```
-
-📌 **Dónde fijarse**
-
-* Si **NO aparece** “Respuesta no autoritativa”, la respuesta es **autoritativa**.
-* El servidor DNS consultado **es responsable de esa zona**.
-
----
-
-### 🔹 El nombre no existe
-
-La consola muestra algo como:
-
-```text
-*** servidorDNS no encuentra www.ejemploqueNOexiste.com: Non-existent domain
-```
-
-📌 **Dónde fijarse**
-
-* En el texto **“no encuentra”** o **“Non-existent domain”**.
-* El DNS responde correctamente, pero **el nombre no está registrado**.
-
----
-
-### 🔹 Tiempo de espera agotado
-
-Ejemplo:
-
-```text
-Tiempo de espera agotado.
-```
-
-o
-
-```text
-*** Se agotó el tiempo de espera de la solicitud.
-```
-
-📌 **Dónde fijarse**
-
-* Mensaje de **timeout**.
-* El cliente **no ha podido contactar con el servidor DNS configurado**.
-
----
-
-## Entrega solicitada (EN PDF)
-
-* Captura de `ipconfig /displaydns` antes y después de limpiar la caché.
-* Captura de la caché tras el primer `ping`.
-* Captura del resultado de `nslookup`.
-* Explicación breve (2–3 líneas) del proceso completo.
-
----
-
-### Idea clave que debe quedar clara
-
-> *Cuando escribes un nombre, el sistema consulta un DNS,
-> guarda la respuesta en caché y la reutiliza mientras sea válida.*
->
-
-Feedback:
-Aunque ping no funcione (ping www.google.com) sí que realiza la petición al DNS y sí queda registrado en la caché del DNS
-Comprobar porqué en algunas máquinas la caché se llena justo después de flush (parece que tiene que ver con el archivo HOSTS)
+| Calificación | Criterio |
+|---|---|
+| 0 | **No entregado.** |
+| 3 | **La mayoría de las respuestas son incorrectas.** La tarea presenta errores importantes que muestran una comprensión insuficiente de los contenidos o dificultades para aplicar los procedimientos trabajados. |
+| 6 | **La mayoría de las respuestas son correctas.** Se demuestra una comprensión general de los contenidos y una aplicación adecuada de los procedimientos, aunque quedan errores u omisiones por corregir. |
+| 9 | **Todo correcto.** La tarea responde de forma completa y correcta a lo solicitado, con explicaciones claras y procedimientos bien aplicados. |
+| 10 | **Todo correcto y con una aportación extra.** Además de resolver correctamente la tarea, el alumno incorpora una aportación propia y pertinente que enriquece el trabajo, como un ejemplo, una comprobación adicional o una reflexión razonada. |

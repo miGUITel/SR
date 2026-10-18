@@ -64,13 +64,9 @@ El examen se anuncia sin enlace público. No añadir enlaces a exámenes ni solu
 
 # UT03 DNS
 
-[Apuntes](./UT03/SR03.md)
+[Recorrido de actividades y apuntes de UT03 DNS](./UT03/SR03.md)
 
-[Configuración de archivos de registros DNS en linux](./TAREAS/SR03DNS/SR03TA03_bind9files.md)
-
-[Guion TA04: DNS en WS19 - Crear servidores](./TAREAS/SR03DNS/SR03TA04_dns_win_1.md)
-
-[Guion TA04: DNS en WS19 - Configurar DNS](./TAREAS/SR03DNS/SR03TA04_dns_win_2.md)
+El recorrido sigue el índice de la PPT e identifica las prácticas iniciales, las cuatro fases de Windows y las ampliaciones opcionales. Los enunciados y las entregas se ofrecen desde Aula Virtual.
 
 # UT04 FTP
 
