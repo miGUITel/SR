@@ -70,15 +70,23 @@ El recorrido sigue el índice de la PPT e identifica las prácticas iniciales, l
 
 # UT04 FTP
 
-[Errores típicos en FTP IIS de WS](./TAREAS/SR0401_ftpWS/errores.md)
+Trabajamos el servicio FTP en Windows con tres tareas: **0401 instalación básica**, **0402 modos activo/pasivo** y **0403 usuarios y acceso anónimo**. Los guiones y las entregas se ofrecen desde Aula Virtual.
 
-[Comandos básicos](./UT04_FTP/SR04_comandosFTP.md)
+## Apuntes y consulta
 
-[Elementos y conexiones](./UT04_FTP/SR04_elementosYconexiones.md)
+- [Elementos y conexiones](./UT04_FTP/SR04_elementosYconexiones.md)
+- [Modo activo, pasivo y cortafuegos](./UT04_FTP/SR04_pSeguridad_activo.md)
+- [Comandos básicos](./UT04_FTP/SR04_comandosFTP.md)
+- [Respuestas FTP](./UT04_FTP/UT04_códigosEstado.md)
+- [Usuarios, permisos y límites en IIS](./UT04_FTP/SR04_usuarios_permisos_limites.md)
+- [Diagnóstico rápido de FTP](./UT04_FTP/SR04_diagnosticoFTP.md)
 
-[Problema MODO ACTIVO](./UT04_FTP/SR04_pSeguridad_activo.md)
+## Ampliación opcional: Ubuntu
 
-[Guía instalación proftpd](./UT04_FTP/UT04_instalar_proftpd.md)
+Materiales anteriores pendientes de revisión y prueba para la ampliación 0404.
+
+- [Instalación de ProFTPD](./UT04_FTP/UT04_instalar_proftpd.md)
+- [Acceso anónimo en ProFTPD](./UT04_FTP/UT04_configurar_anonimo.md)
 
 # UT05 WEB
 

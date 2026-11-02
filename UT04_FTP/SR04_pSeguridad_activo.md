@@ -1,13 +1,27 @@
-El problema de seguridad relacionado con el uso del modo activo en FTP, que podría motivar a un cliente a evitar este modo y preferir el modo pasivo, se basa principalmente en la forma en que se establecen las conexiones de datos.
+### Modo activo, pasivo y cortafuegos
+
+Activo y pasivo cambian quién inicia la **conexión de datos**. La conexión de control la inicia siempre el cliente hacia el servidor, normalmente al puerto TCP 21.
 
 ### 1. **Conexiones en el Modo Activo**
-En el modo activo, el cliente abre un puerto y espera que el servidor FTP inicie la conexión de datos hacia ese puerto. Esto implica:
-- **Riesgo de Ataques**: Como el cliente debe abrir un puerto y estar a la espera de conexiones entrantes, esto puede ser aprovechado por un atacante que quiera enviar tráfico malicioso al cliente.
-- **Restricciones de Firewall**: La mayoría de los clientes se ejecutan detrás de un firewall que bloquea conexiones entrantes no solicitadas. Esto puede impedir la operación correcta del modo activo, ya que las conexiones de datos provenientes del servidor se bloquean por razones de seguridad.
 
-### 2. **Modo Pasivo como Alternativa Segura**
-El modo pasivo resuelve estos problemas al hacer que el cliente inicie todas las conexiones (tanto de control como de datos), lo cual es más seguro y funciona mejor con firewalls y NAT. En este modo:
-- El cliente se conecta al servidor, y el servidor proporciona un puerto al cual el cliente se conectará para la transferencia de datos.
-- Esto reduce significativamente los riesgos de exposición del cliente a ataques o intrusiones no deseadas.
+En activo, el cliente anuncia su dirección y puerto mediante `PORT` o `EPRT` y espera que el servidor inicie la conexión de datos. El cortafuegos del cliente debe permitir esa entrada desde el servidor. Si hay NAT, también debe poder alcanzarse la dirección y el puerto anunciados.
 
-Por lo tanto, el principal problema de seguridad en el modo activo es la vulnerabilidad que se crea al tener que abrir un puerto en el cliente para recibir conexiones entrantes, lo cual podría ser explotado por atacantes.
+Si puedes identificarte, pero falla el listado o la transferencia solo en activo, revisa la dirección anunciada y las reglas de entrada del cliente.
+
+### 2. **Modo Pasivo y Cortafuegos**
+
+En pasivo, el servidor anuncia dónde escucha mediante la respuesta a `PASV` o `EPSV`, y el cliente inicia la conexión de datos. Suele facilitar el uso de clientes situados detrás de un cortafuegos o NAT, pero requiere permitir la entrada al rango pasivo del servidor y, cuando proceda, configurar su publicación a través del NAT.
+
+Si falla solo en pasivo, revisa el rango configurado en el servidor, sus reglas de entrada y la dirección anunciada.
+
+| Canal en el laboratorio 0402 | Quién inicia → dónde se conecta |
+| --- | --- |
+| Control, en ambos modos | Cliente → servidor, TCP `21`. |
+| Datos pasivos | Cliente → servidor, TCP `50000–50049`. |
+| Datos activos con FileZilla | Servidor → cliente, TCP `51000–51049`. |
+
+Los dos rangos de datos son decisiones de nuestro laboratorio, no puertos fijos del protocolo. `ftp.exe` elige su puerto de datos activo y utiliza la regla específica prevista en 0402; no hereda el rango de FileZilla. Mantén activo el cortafuegos y sigue las reglas limitadas a las IP del guion.
+
+**Cambiar a pasivo no cifra FTP ni cambia los permisos.** FTP simple envía credenciales y datos sin cifrar en ambos modos. Por eso las prácticas se realizan en una red interna con cuentas de laboratorio.
+
+Referencias: [Microsoft Learn: rango pasivo de IIS](https://learn.microsoft.com/en-us/iis/configuration/system.ftpserver/firewallsupport), [RFC 2428, EPRT/EPSV](https://www.rfc-editor.org/rfc/rfc2428) y [RFC 2577, privacidad en FTP](https://www.rfc-editor.org/rfc/rfc2577).
