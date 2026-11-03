@@ -49,9 +49,7 @@ Abre **Windows PowerShell como administrador dentro del servidor** y ejecuta:
 Install-WindowsFeature -Name Web-Server,Web-FTP-Server,Web-Mgmt-Console -IncludeManagementTools
 ```
 
-![Ejemplo del resultado de la instalación del servicio FTP](antiguas/SR0401_ftpWS/image-5.png)
-
-Las imágenes proceden del laboratorio anterior: usa los nombres y rutas de este guion, aunque los ejemplos de las capturas sean distintos.
+![alt text](image.png)
 
 Comprueba los componentes y el servicio:
 
@@ -61,6 +59,8 @@ Get-Service -Name FTPSVC
 ```
 
 Los componentes deben aparecer instalados. Si `FTPSVC` existe pero está detenido, inícialo:
+
+![alt text](image-1.png)
 
 ```powershell
 Start-Service -Name FTPSVC
@@ -90,6 +90,8 @@ Conserva la contraseña para las siguientes prácticas. **No la incluyas en la m
 5. Concede a `ftpbase` **Modificar**. Conserva las entradas de administración del sistema.
 
 **Comprueba:** has concedido permiso sobre la carpeta publicada. Después habrá que permitir también el acceso en el servicio FTP: ambas configuraciones deben ser coherentes.
+
+![alt text](image-2.png)
 
 ### 3.3. Preparar una carpeta para actuar como cliente
 
@@ -128,6 +130,8 @@ Aunque todo esté en la misma VM, `C:\FTP\Empresa` será la carpeta del **servid
 
 📸 **Captura 2:** el sitio `FTP_EMPRESA` en IIS y su configuración básica. Acompáñala con una tabla breve de nombre del sitio, ruta, puerto, autenticación y usuario permitido.
 
+![alt text](image-3.png)
+
 ## 5. Comprobar el servicio desde el servidor
 
 ### 5.1. Conectar y comprobar la carpeta remota
@@ -140,6 +144,8 @@ ftp 127.0.0.1
 ```
 
 En esta comprobación usamos la dirección local IPv4 para conectar con el servicio instalado en la misma VM. Introduce el usuario **`FTP-SRV\ftpbase`** y su contraseña de laboratorio. La contraseña no se muestra mientras la escribes.
+
+![alt text](image-4.png)
 
 Cuando aparezca el indicador `ftp>`, ejecuta estas órdenes **una por una**:
 
