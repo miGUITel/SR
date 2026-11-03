@@ -17,10 +17,10 @@ Si falla solo en pasivo, revisa el rango configurado en el servidor, sus reglas 
 | Canal en el laboratorio 0402 | Quién inicia → dónde se conecta |
 | --- | --- |
 | Control, en ambos modos | Cliente → servidor, TCP `21`. |
-| Datos pasivos | Cliente → servidor, TCP `50000–50049`. |
-| Datos activos con FileZilla | Servidor → cliente, TCP `51000–51049`. |
+| Datos pasivos | Cliente → puerto TCP anunciado por el servidor. |
+| Datos activos con `ftp.exe` | Servidor → puerto TCP anunciado por el cliente. |
 
-Los dos rangos de datos son decisiones de nuestro laboratorio, no puertos fijos del protocolo. `ftp.exe` elige su puerto de datos activo y utiliza la regla específica prevista en 0402; no hereda el rango de FileZilla. Mantén activo el cortafuegos y sigue las reglas limitadas a las IP del guion.
+En 0402 se compara FileZilla en pasivo con `ftp.exe` en activo, aprovechando la configuración existente cuando funciona. Los puertos de datos se negocian; no hay que fijar rangos personalizados para realizar la comparación. Mantén activo el cortafuegos y consulta con el profesor cualquier ajuste necesario.
 
 **Cambiar a pasivo no cifra FTP ni cambia los permisos.** FTP simple envía credenciales y datos sin cifrar en ambos modos. Por eso las prácticas se realizan en una red interna con cuentas de laboratorio.
 

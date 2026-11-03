@@ -19,6 +19,6 @@ Estas órdenes se escriben en el cliente interactivo `ftp.exe`, después de inic
 
 `lcd` actúa en tu equipo; `cd`, en el servidor. Las carpetas locales deben existir antes de utilizarlas.
 
-`get` y `put` indican el sentido del archivo, no el modo activo o pasivo. En este laboratorio se utiliza `ftp.exe` en activo; para pasivo sigue la opción FileZilla o `curl.exe` indicada en 0402. La sintaxis de `curl.exe` es diferente.
+`get` y `put` indican el sentido del archivo, no el modo activo o pasivo. En 0402 se utiliza `ftp.exe` en activo y FileZilla en pasivo.
 
 Referencia: [Microsoft Learn: cliente FTP](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ftp), [lcd](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ftp-lcd), [binary](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ftp-binary) y [mkdir](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ftp-mkdir).
