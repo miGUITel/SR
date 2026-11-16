@@ -10,33 +10,35 @@
     - [9. Configurar Autenticación para HTTP (sitio2.net)](#9-configurar-autenticación-para-http-sitio2net)
     - [10. Modificar el Archivo de Hosts](#10-modificar-el-archivo-de-hosts)
     - [11. Pruebas de Conexión](#11-pruebas-de-conexión)
-      - [**11.1. Pruebas con `curl` (línea de comandos)**](#111-pruebas-con-curl-línea-de-comandos)
-      - [**11.2. Pruebas con navegador web**](#112-pruebas-con-navegador-web)
-      - [**11.3. Pruebas desde otro cliente de la red**](#113-pruebas-desde-otro-cliente-de-la-red)
+      - [**11.1. Pruebas con navegador web**](#111-pruebas-con-navegador-web)
+      - [**11.2. Pruebas desde otro cliente de la red**](#112-pruebas-desde-otro-cliente-de-la-red)
         - [**a) Comprobación de resolución de nombres**](#a-comprobación-de-resolución-de-nombres)
-        - [**b) Pruebas con `curl` desde el otro equipo**](#b-pruebas-con-curl-desde-el-otro-equipo)
-        - [**c) Pruebas con navegador desde el otro equipo**](#c-pruebas-con-navegador-desde-el-otro-equipo)
+        - [**b) Pruebas con navegador desde el otro equipo**](#b-pruebas-con-navegador-desde-el-otro-equipo)
     - [12. Comprobar el registro de conexiones](#12-comprobar-el-registro-de-conexiones)
     - [QUÉ DEBO ENTREGAR 📸:](#qué-debo-entregar-)
 
 # Guion para la Instalación de un Servidor Web en Windows Server 2019
 
 ### 1. Instalar IIS con PowerShell
->Asegúrate de que tienes conexión a internet
    - Abre PowerShell como administrador.
    - Ejecuta el siguiente comando para instalar el servidor web (IIS):
      ```powershell
-     Install-WindowsFeature -Name Web-Server -IncludeManagementTools -IncludeAllSubFeature
+     Install-WindowsFeature -Name Web-Server,Web-Basic-Auth -IncludeManagementTools
      ```
-   - Ejecuta el siguiente comando para reiniciar el servidor web (IIS):
+   - Comprueba que el resultado de la instalación es correcto. Ejecuta el siguiente comando para reiniciar el servidor web (IIS):
      ```powershell
      iisreset
      ```
 ![alt text](5.1.png)
+
+> La captura muestra una instalación con más componentes. El comando de esta práctica instala IIS y la autenticación básica.
+
+   - Abre `http://localhost` en el servidor y comprueba que se muestra la página inicial de IIS. Después, en el Administrador de IIS, selecciona **Sitios → Default Web Site → Detener**. Así evitas que el sitio predeterminado sirva por HTTP los archivos que vas a guardar en `wwwroot` para el sitio protegido.
+
 ### 2. Crear un Usuario de Windows
    - Abre **Administración de Equipos**.
    - Ve a **Usuarios y Grupos Locales** y crea un nuevo usuario con tus INICIALES.
-   - Establece una contraseña y configura el usuario con permisos básicos para fines de administración.
+   - Establece una contraseña para la práctica y deja al usuario como cuenta local estándar, sin permisos de administrador ni cambio de contraseña obligatorio en el siguiente inicio.
   ![alt text](5.2.png)
 
 ### 3. Crear Directorios para los Sitios Web en wwwroot
@@ -108,6 +110,7 @@ New-SelfSignedCertificate -DnsName "www.sitio1.local","sitio1.local" -CertStoreL
      - **IP**: `All Unassigned`
      - **Puerto**: `443`
      - **Host name**: `sitio1.local`
+     - Marca **Requerir indicación de nombre de servidor (SNI)**.
      - Asocia el certificado autofirmado creado previamente.
 ![alt text](<5.60 crear sitio web 1.png>)
 
@@ -125,7 +128,7 @@ New-SelfSignedCertificate -DnsName "www.sitio1.local","sitio1.local" -CertStoreL
 ### 8. Configurar Autenticación para HTTPS (sitio1.local)
    - Selecciona `sitio1` en **Administrador de IIS**.
    - Haz clic en **Autenticación** y desactiva **Autenticación Anónima**.
-   - Activa **Autenticación básica** para que solo los usuarios del servidor puedan acceder.
+   - Activa **Autenticación básica**. En las pruebas, usa la cuenta local que creaste en el paso 2.
 ![alt text](<5.70 configurar acceso sitio 1.png>)
 ![alt text](<5.71 habilitar autentica básica.png>)
 
@@ -135,7 +138,7 @@ New-SelfSignedCertificate -DnsName "www.sitio1.local","sitio1.local" -CertStoreL
 ![alt text](<5.72 habilitar autentica anonimo.png>)
 
 ### 10. Modificar el Archivo de Hosts
-   - Abre el archivo `hosts` ubicado en `C:\Windows\System32\drivers\etc\hosts` con **permisos de administrador**.
+   - En el **servidor**, abre el archivo `hosts` ubicado en `C:\Windows\System32\drivers\etc\hosts` con **permisos de administrador**.
    - Añade las siguientes líneas: (con los nombres de host que correspondan a tu escenario)
      ```plaintext
      127.0.0.1   sitio1.local 
@@ -146,63 +149,38 @@ New-SelfSignedCertificate -DnsName "www.sitio1.local","sitio1.local" -CertStoreL
 
 ### 11. Pruebas de Conexión
 
-Una vez configurados ambos sitios, es necesario realizar varias comprobaciones para asegurarse de que el servidor web funciona correctamente. Se deben realizar pruebas tanto con **curl** como mediante un **navegador web**.
-
----
-
-#### **11.1. Pruebas con `curl` (línea de comandos)**
-
-Estas pruebas permiten verificar el funcionamiento del servidor sin depender del navegador y ayudan a detectar errores de autenticación o configuración de puertos.
-
-**a) Acceso al sitio HTTPS autenticado (`sitio1.local`)**
-
-Ejecuta en PowerShell o CMD:
-
-```cmd
-curl -u USUARIO:PASSWORD https://sitio1.local
-```
-
-* Debe pedir credenciales si no se proporcionan.
-* Tras autenticarse correctamente, debe mostrar el contenido del archivo `index.html`.
-* Si aparece un aviso de certificado no confiable, es normal porque el certificado es autofirmado.
-
-**b) Acceso al sitio HTTP anónimo (`sitio2.net`)**
-
-```cmd
-curl http://sitio2.net
-```
-
-* Debe mostrar el contenido del `index.html` sin pedir credenciales.
-* Si no aparece salida, revisa el puerto 80, el hostname y el archivo `hosts`.
-
----
-
-#### **11.2. Pruebas con navegador web**
+#### **11.1. Pruebas con navegador web**
 
 Ahora comprueba el funcionamiento desde el propio servidor utilizando un navegador.
 
 **a) Acceso a `https://sitio1.local`**
 
-* El navegador debe advertir sobre el certificado autofirmado (comportamiento normal).
-* Tras continuar, debe solicitar usuario y contraseña.
-* Una vez autenticado, debe mostrarse la página del sitio1.
+* Comprueba que la dirección usa HTTPS y que el certificado incluye `sitio1.local` entre sus nombres válidos.
+* Si el navegador avisa de que el certificado autofirmado no es de confianza, compara su huella con la del certificado asignado en IIS. Puedes consultar la huella en **Certificados del servidor** en IIS, en la pestaña **Detalles** del certificado. Usa el mismo algoritmo en ambas consultas. Si el nombre o la huella difieren, corrige el certificado, el enlace o la URL antes de introducir credenciales.
+* Si el navegador de laboratorio bloquea el acceso por falta de confianza, exporta solo el certificado público del servidor (`.cer`, sin clave privada). Una vez verificada la huella, impórtalo en el almacén de confianza del cliente de laboratorio. En Windows, usa **Entidades de certificación raíz de confianza** del usuario actual. Vuelve a abrir el sitio.
+* Accede con la cuenta que creaste usando el formato `NOMBRE_DEL_SERVIDOR\usuario` y comprueba que se muestra la página del sitio1.
 
 **b) Acceso a `http://sitio2.net`**
 
 * Debe mostrarse directamente la página del sitio2 sin pedir credenciales.
 * Debes comprobar que el contenido coincide con el HTML que creaste.
+
+> Algunas de las capturas siguientes muestran un error de nombre del certificado. Si aparece durante tu prueba, corrígelo antes de continuar.
+
 ![alt text](<5.90 conectar local.png>)
 ![alt text](<5.92 httpS.png>)
 ![alt text](<5.91 httpS.png>)
 ![alt text](<5.93 conectar net.png>)
 
-#### **11.3. Pruebas desde otro cliente de la red**
+#### **11.2. Pruebas desde otro cliente de la red**
 
-Para comprobar que los sitios web no funcionan únicamente en local, es necesario realizar las mismas pruebas desde **otro equipo conectado a la misma red** (Windows, Linux o incluso otra máquina virtual).
+Repite las pruebas desde **otro equipo con acceso a la red de laboratorio del servidor**. En VirtualBox, si el cliente es otra máquina virtual, podéis usar la misma **Red interna** o la misma red **Solo anfitrión**. Si el cliente es el equipo anfitrión, usa **Solo anfitrión**. En el archivo de nombres del cliente usa la IP del servidor en esa red.
 
 ##### **a) Comprobación de resolución de nombres**
 
-Ejecuta:
+En el archivo `hosts` del **equipo cliente**, asocia `sitio1.local` y `sitio2.net` a la IP de la máquina virtual servidora. Usa los mismos nombres que en el paso 10 y sustituye `127.0.0.1` por esa IP en ambas entradas.
+
+Ejecuta en el cliente:
 
 ```cmd
 ping sitio1.local
@@ -210,55 +188,32 @@ ping sitio2.net
 ```
 
 * Deben resolver a la IP del servidor.
-* No importa si el ping no recibe respuesta: lo importante es que el nombre se resuelva.
+* Para esta comprobación, fíjate en la IP que muestra el comando. El firewall puede bloquear la respuesta al ping.
 
-Opcionalmente:
-
-```cmd
-nslookup sitio1.local
-```
-
----
-
-##### **b) Pruebas con `curl` desde el otro equipo**
-
-**HTTPS con autenticación:**
-
-```cmd
-curl -u USUARIO:PASSWORD https://sitio1.local
-```
-
-**HTTP anónimo:**
-
-```cmd
-curl http://sitio2.net
-```
-
-Si todo está bien configurado:
-
-* `sitio1.local` debe requerir credenciales.
-* `sitio2.net` debe responder sin autenticación.
-
----
-
-##### **c) Pruebas con navegador desde el otro equipo**
+##### **b) Pruebas con navegador desde el otro equipo**
 
 **Acceso HTTPS autenticado:**
 
-* Abrir `https://sitio1.local`
-* Continuar pese al aviso de certificado no confiable.
-* Introducir usuario y contraseña.
-* Ver la página del sitio1.
+* Abre `https://sitio1.local` y comprueba la conexión HTTPS y el certificado como en el paso 11.1.
+* Verifica que solicita credenciales. Entra como `NOMBRE_DEL_SERVIDOR\usuario` y comprueba que se muestra la página del sitio1.
 
 **Acceso HTTP anónimo:**
 
 * Abrir `http://sitio2.net`
 * Ver la página sin autenticación.
 
+**Si funciona en el servidor y falla desde el cliente**, comprueba la conexión a los puertos web. Desde un cliente Windows, ejecuta en PowerShell:
+
+```powershell
+Test-NetConnection sitio2.net -Port 80
+Test-NetConnection sitio1.local -Port 443
+```
+
+Si `TcpTestSucceeded` es `False`, revisa que el nombre resuelve a la IP correcta, que los equipos comparten la red de laboratorio y que las reglas de entrada permiten los puertos TCP 80 y 443 para esa red en el perfil activo del firewall del servidor.
 
 ### 12. Comprobar el registro de conexiones
 
-En el directorio `C:\inetpub\logs\LogFiles` encontrarás los archivos de log agrupados por nombre del sitio y fecha.
+En el directorio `C:\inetpub\logs\LogFiles` encontrarás los archivos de log agrupados por identificador del sitio (`W3SVC` seguido del ID) y fecha.
 
 ![alt text](image-3.png)
 
@@ -361,6 +316,6 @@ donde **X** es el número de la captura según aparece en esta lista.
 
 **Logs del servidor web**
 
-**12.** Captura abriendo el **archivo de log más reciente** (u_exYYYYMMDD.log), donde se vea al menos una entrada `GET` hacia alguno de los sitios.
+**12.** Captura del registro de IIS donde se vea una petición `GET` de tu prueba desde el cliente, con su IP (`c-ip`), el recurso (`cs-uri-stem`) y el estado (`sc-status`). Acompaña la captura con una frase que indique qué pidió el navegador y qué significa el código que devolvió IIS.
 **Archivo:** `nombreAlumno12.png`
 
