@@ -55,6 +55,9 @@ En **FTP-CLI**:
 
 **Comprueba:** has listado, subido y descargado. En pasivo, **el cliente inicia también la conexión de datos**.
 
+> Interfax de Filezilla
+> ![alt text](image-5.png)
+
 ## 3. Probar desde consola en activo
 
 Utiliza **FTP-CLI** y la misma cuenta. El cliente `ftp.exe` de Windows trabaja en activo: no hay que configurar el modo activo de FileZilla.
