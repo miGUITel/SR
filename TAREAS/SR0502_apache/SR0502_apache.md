@@ -22,9 +22,7 @@
   - [15. **Conexión desde cliente web con un navegador moderno**](#15-conexión-desde-cliente-web-con-un-navegador-moderno)
   - [16. **Revisión de logs de Apache**](#16-revisión-de-logs-de-apache)
   - [ENTREGAS:](#entregas)
-  - [17. **Volver a red estática en red interna (resumen)**](#17-volver-a-red-estática-en-red-interna-resumen)
-    - [1) **Restaurar la copia del archivo original (recomendado)**](#1-restaurar-la-copia-del-archivo-original-recomendado)
-    - [2) **Si no hay copia, reescribir el archivo con IP estática**](#2-si-no-hay-copia-reescribir-el-archivo-con-ip-estática)
+  - [17. **Restaurar la configuración de red original**](#17-restaurar-la-configuración-de-red-original)
 
 
 # 📝 **Guion para la práctica: Instalación de Apache y configuración de dos sitios virtuales en Ubuntu Server**
@@ -37,28 +35,28 @@
 
 ## 1. **Configuración previa de red en la máquina virtual**
 
-Antes de instalar Apache, configura la red para permitir acceso a Internet y pruebas desde otra máquina.
+Antes de instalar Apache, comprueba que la máquina virtual puede acceder a los repositorios de Ubuntu y que el cliente puede llegar a la IP del servidor. Si la red del laboratorio ya lo permite, úsala y pasa al paso 2.
 
 ### 1.1. **Configuración de red por DHCP (modo puente en VirtualBox)**
 
-* Configura la red de la MV en **modo puente** para recibir IP desde el router.
-* Edita el archivo de *netplan*:
-* (El nombre de archivo `01-netcfg.yaml` puede ser distinto, comprueba previamente cómo se llama en tu máquina)
+Si necesitas usar temporalmente el **modo puente** con DHCP, anota la configuración original del adaptador de VirtualBox antes de cambiarla. En la consola de la máquina virtual, identifica la interfaz y el archivo de Netplan que la configura.
 
 ```bash
-ls /etc/netplan/ #comprueba cómo se llama el archivo .yaml en tu caso
-sudo cp /etc/netplan/50-cloud.init.yaml /etc/netplan/archivo.DHCP.ORIGINAL
-sudo nano /etc/netplan/50-cloud.init.yaml
+ip -br a
+ls /etc/netplan/
 ```
 
-**Contenido para DHCP:**
+Sustituye `archivo-real.yaml` por el nombre del archivo que has identificado. Guarda esta copia para restaurarla en el paso 17. Si ya tienes la copia original, consérvala.
+
+```bash
+sudo cp -i /etc/netplan/archivo-real.yaml /etc/netplan/archivo-real.yaml.ORIGINAL
+sudo nano /etc/netplan/archivo-real.yaml
+```
+
+Dentro de `ethernets`, sustituye la configuración estática de la interfaz que vas a cambiar por este bloque. Usa el nombre real de la interfaz y conserva el resto del archivo.
 
 ```yaml
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp1s0:
+    enp0s3: # Ejemplo. Sustituye por tu interfaz.
       dhcp4: true
 ```
 ![alt text](image-11.png)
@@ -68,12 +66,7 @@ Aplica:
 sudo netplan apply
 ```
 
-Comprueba:
-
-```bash
-ip a
-ping 8.8.8.8
-```
+Comprueba con `ip -br a` que la interfaz ha recibido una IP. Usa la IP que alcanza el cliente en las pruebas del guion.
 
 ---
 
@@ -215,28 +208,32 @@ Contenido:
 
 ## 7. **Habilitar este sitio y desactivar el sitio por defecto**
 
-Por último queremos desactivar el sitio original, con la publicidad de apache (000-default.conf) y activar el nuestro (sitio1.conf)
-Para que los cambios tengan efecto debemos recargar apache `reload`
-Si ha habido algún fallo y apache no está activo, debemos reactivarlo: `systemctl start apache2`.
+Activa `sitio1.conf` y mantén `000-default.conf` activo hasta completar la prueba de selección por nombre.
 
 ```bash
 sudo a2ensite sitio1.conf
-sudo a2dissite 000-default.conf
-sudo systemctl reload apache2
-# alternativa
-sudo systemctl start apache2
+sudo apache2ctl configtest && sudo systemctl reload apache2
 ```
 
-Comprueba que no hay errores:
+Si Apache está detenido y la sintaxis es correcta, inícialo con `sudo systemctl start apache2`. Comprueba el estado con `sudo systemctl status apache2`.
+
+En el archivo `hosts` del **cliente**, asocia `sitio1.local` con la IP del servidor. En el paso 14 tienes la ruta del archivo en Linux y Windows. Desde el navegador del cliente, abre estas dos direcciones:
+
+- `http://IP_DEL_SERVIDOR/` muestra la página predeterminada que personalizaste.
+- `http://sitio1.local/` muestra la página del sitio anónimo que creaste en el paso 5.
+
+Ambas peticiones llegan a la misma IP y al puerto 80. Comprueba qué sitio está configurado por defecto con `sudo apache2ctl -S`.
+
+> Entrega dos capturas:
+> 1. Archivo de configuración del sitio.
+> 2. Servidor con `systemctl status` y su IP, y las dos páginas abiertas desde el cliente. Deja visibles las direcciones para que se pueda comparar la selección por IP y por nombre.
+
+Después de la prueba, desactiva el sitio predeterminado y comprueba que `http://sitio1.local/` sigue mostrando la página del sitio anónimo.
 
 ```bash
-sudo systemctl status apache2
+sudo a2dissite 000-default.conf
+sudo apache2ctl configtest && sudo systemctl reload apache2
 ```
-> Entrega dos capturas:
-> 1. Archivo de configuración del sisito
-> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde el cliente y mostrando la ip)
->
-> .
 
 # **PARTE 2b — Sitio con acceso autenticado y HTTPS**
 
@@ -295,10 +292,10 @@ sudo adduser usuario1
 
 ## 10. **Creación del certificado digital autofirmado**
 
-Instala OpenSSL:
+Instala el paquete `ssl-cert`, que proporciona `make-ssl-cert`.
 
 ```bash
-sudo apt install openssl -y
+sudo apt install ssl-cert -y
 ```
 
 Genera certificado autofirmado usando el método clásico de Ubuntu:
@@ -306,6 +303,14 @@ Genera certificado autofirmado usando el método clásico de Ubuntu:
 ```bash
 sudo make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/ssl/private/sitio2_cert
 ```
+
+Escribe `sitio2.local` como nombre de host. Si se solicitan nombres alternativos, incluye `DNS:sitio2.local`. Comprueba que el certificado incluye `sitio2.local` entre sus nombres DNS y anota su huella SHA-256 para verificarlo en el cliente.
+
+```bash
+sudo openssl x509 -in /etc/ssl/private/sitio2_cert -noout -ext subjectAltName -sha256 -fingerprint
+```
+
+> Las capturas ilustran el procedimiento con un nombre de ejemplo. Usa `sitio2.local` en tu configuración.
 
 ![alt text](image-3.png)
 ![alt text](image-4.png)
@@ -354,6 +359,8 @@ Contenido:
 </VirtualHost>
 ```
 
+> La captura muestra una configuración de ejemplo. Usa el nombre y la ruta del certificado indicados en el bloque anterior.
+
 ![alt text](image-6.png)
 
 ---
@@ -362,7 +369,7 @@ Contenido:
 
 ```bash
 sudo a2ensite sitio2.conf
-sudo systemctl reload apache2
+sudo apache2ctl configtest && sudo systemctl reload apache2
 ```
 
 Verifica:
@@ -370,6 +377,8 @@ Verifica:
 ```bash
 sudo apache2ctl -M
 ```
+
+Comprueba que aparecen `authnz_external_module` y `ssl_module`.
 
 ---
 
@@ -407,7 +416,7 @@ Editar:
 C:\Windows\System32\drivers\etc\hosts
 ```
 
-Añadir:
+Conserva la entrada de `sitio1.local` que añadiste en el paso 7 y añade la de `sitio2.local`. Los dos nombres deben apuntar a la IP del servidor que alcanza el cliente.
 
 ```
 [IP] sitio1.local
@@ -420,72 +429,34 @@ Añadir:
 
 Accede a tus sitios desde un navegador en un cliente que esté en la misma red.
 
+- Abre `http://sitio1.local/` y comprueba que se muestra el sitio anónimo.
+- Abre `https://sitio2.local/` y comprueba que el certificado corresponde a ese nombre. Si aparece un aviso de confianza por ser autofirmado, compara su huella con la anotada en el paso 10. Corrige cualquier discrepancia antes de introducir credenciales.
+- Verifica que el sitio HTTPS solicita credenciales. Accede con el usuario creado en el paso 9 y comprueba que se muestra la página del sitio autenticado.
+
 ---
 
 ## 16. **Revisión de logs de Apache**
 
-Consulta el contenido del aschivo `/var/log/apache2/other_vhost_access.log`
+Consulta el registro de acceso que esté configurado. Si se usa el registro común de sitios virtuales, abre `/var/log/apache2/other_vhosts_access.log`. Busca la petición que hiciste desde el cliente.
 
 [ampliacion](../../SR05WEB/SR0504_USwebLog.md)
 
 ## ENTREGAS:
 
 > Entrega tres capturas:
-> 1. Archivo de configuración del sitio cifrado
+> 1. Archivo de configuración del sitio cifrado y salida de `apache2ctl -M` donde se vean los módulos de autenticación externa y SSL.
 > 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde un navegador del cliente y mostrando la ip)
 > 3. Contenido del log de apache con los registros más recientes, en el que se vea la conexión desde el cliente de la captura anterior.
 >
 > .
-## 17. **Volver a red estática en red interna (resumen)**
+## 17. **Restaurar la configuración de red original**
 
-Cuando cambies la MV a **Red interna**, debes **restaurar la configuración de IP estática** en *netplan*.
-Hay dos opciones:
-
----
-
-### 1) **Restaurar la copia del archivo original (recomendado)**
-
-Si hiciste copia antes:
+Si cambiaste la red en el paso 1.1, recupera la configuración original del adaptador en VirtualBox. En la consola de la máquina virtual, restaura **la misma copia del archivo de Netplan** que guardaste al inicio. Sustituye `archivo-real.yaml` por el nombre que usaste.
 
 ```bash
-sudo cp /etc/netplan/01-netcfg.yaml.ESTATICA.ORIGINAL /etc/netplan/01-netcfg.yaml
+sudo cp /etc/netplan/archivo-real.yaml.ORIGINAL /etc/netplan/archivo-real.yaml
 sudo netplan apply
+ip -br a
 ```
 
----
-
-### 2) **Si no hay copia, reescribir el archivo con IP estática**
-
-Editar:
-
-```bash
-sudo nano /etc/netplan/01-netcfg.yaml
-```
-
-Contenido recomendado:
-
-```yaml
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp1s0:
-      dhcp4: false
-      addresses:
-        - 192.168.50.10/24
-      gateway4: 192.168.50.1
-      nameservers:
-        addresses:
-          - 1.1.1.1
-          - 8.8.8.8
-```
-
-Aplicar cambios:
-
-```bash
-sudo netplan apply
-```
-
----
-
-Esto es lo único imprescindible para retornar la máquina a red estática en red interna.
+Comprueba que la máquina recupera la IP y la conectividad de la red original. Si cambia la IP del servidor, actualiza las dos entradas del archivo `hosts` del cliente.
