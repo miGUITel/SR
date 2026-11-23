@@ -14,7 +14,7 @@ Para la práctica 0502 se recomienda puente con DHCP y SSH, una vez comprobado q
 
 ## Preparar un clon nuevo
 
-Al [crear el clon enlazado](./01_preparar_entorno_virtual.md#2-crear-un-clon-enlazado), solicita nuevas direcciones MAC. Completa también las instrucciones de primer arranque proporcionadas con la máquina para preparar su identidad interna (`machine-id`) y sus claves de host SSH. Estas claves permiten reconocer al servidor cuando conectas por SSH.
+Al [crear el clon enlazado](./01_preparar_entorno_virtual.md#2-crear-un-clon-enlazado), solicita nuevas direcciones MAC. Completa el [primer arranque de un clon de Ubuntu Server](./01_preparar_entorno_virtual.md#primer-arranque-de-un-clon-de-ubuntu-server) para generar su identidad interna (`machine-id`) y sus claves de host SSH. Estas claves permiten reconocer al servidor cuando conectas por SSH.
 
 La preparación de identidad se realiza una vez al crear cada clon. Conserva después ese clon como máquina de trabajo para la práctica.
 
