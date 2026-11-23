@@ -240,9 +240,7 @@ En el directorio `C:\inetpub\logs\LogFiles` encontrarás los archivos de log agr
 
 ### QUÉ DEBO ENTREGAR 📸: 
 
-Cada captura debe llamarse:
-**`nombreAlumnoX.png`**
-donde **X** es el número de la captura según aparece en esta lista.
+Una documento pdf con las siguientes capturas:
 
 ---
 
