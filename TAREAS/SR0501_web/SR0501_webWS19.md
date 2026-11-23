@@ -247,7 +247,7 @@ Una documento pdf con las siguientes capturas:
 **Certificado autofirmado**
 
 **1.** Captura del **Administrador de IIS → Certificados del servidor** mostrando el certificado autofirmado creado.
-**Archivo:** `nombreAlumno1.png`
+
 
 ---
 
@@ -261,10 +261,10 @@ Una documento pdf con las siguientes capturas:
 * Certificado asignado
 * Ruta física correcta
 
-**Archivo:** `nombreAlumno2.png`
+
 
 **3.** Captura del sitio `sitio1` ya creado y visible en la lista de sitios de IIS.
-**Archivo:** `nombreAlumno3.png`
+
 
 ---
 
@@ -277,23 +277,23 @@ Una documento pdf con las siguientes capturas:
 * Host `sitio2.net`
 * Ruta física correcta
 
-**Archivo:** `nombreAlumno4.png`
+
 
 **5.** Captura del sitio `sitio2` ya creado y visible en la lista de sitios de IIS.
-**Archivo:** `nombreAlumno5.png`
+
 
 ---
 
 **Pruebas con navegador (servidor)**
 
 **6.** Captura del navegador accediendo a `https://sitio1.local` mostrando **el cuadro de autenticación**.
-**Archivo:** `nombreAlumno6.png`
+
 
 **7.** Captura del navegador mostrando la página **tras autenticarse** en `sitio1`.
-**Archivo:** `nombreAlumno7.png`
+
 
 **8.** Captura del navegador accediendo a `http://sitio2.net` mostrando la página sin autenticación.
-**Archivo:** `nombreAlumno8.png`
+
 
 ---
 
@@ -302,18 +302,14 @@ Una documento pdf con las siguientes capturas:
 (PC, máquina virtual o cualquier otro equipo de la red)
 
 **9.** Captura de `ping sitio1.local` y `ping sitio2.net` mostrando que resuelven el nombre.
-**Archivo:** `nombreAlumno9.png`
+
 
 **10.** Captura del navegador desde otro equipo accediendo a `https://sitio1.local`.
-**Archivo:** `nombreAlumno10.png`
 
 **11.** Captura del navegador desde otro equipo accediendo a `http://sitio2.net`.
-**Archivo:** `nombreAlumno11.png`
 
 ---
 
 **Logs del servidor web**
 
 **12.** Captura del registro de IIS donde se vea una petición `GET` de tu prueba desde el cliente, con su IP (`c-ip`), el recurso (`cs-uri-stem`) y el estado (`sc-status`). Acompaña la captura con una frase que indique qué pidió el navegador y qué significa el código que devolvió IIS.
-**Archivo:** `nombreAlumno12.png`
-
