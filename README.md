@@ -117,6 +117,9 @@ Materiales anteriores pendientes de revisión y prueba para la ampliación 0404.
 [Agentes del servicio MTA, MDA, MUA](./SR07_MAIL/SR01_agentes.md)
 
 # CONSEJOS GENERALES
+
+[Acceder a Ubuntu Server y comprobar la conexión SSH](./UT01B/05_comprobar_conectividad_y_ssh.md)
+
 [Editar archivos de configuración en linux](./UT00_editar_conf.md)
 
 [Conectar DISCO USB a virtual box](./UT00/SR00_vBox_conectar_USB.md)

@@ -35,38 +35,22 @@
 
 ## 1. **Configuración previa de red en la máquina virtual**
 
-Antes de instalar Apache, comprueba que la máquina virtual puede acceder a los repositorios de Ubuntu y que el cliente puede llegar a la IP del servidor. Si la red del laboratorio ya lo permite, úsala y pasa al paso 2.
+Antes de instalar Apache, prepara la conexión entre Ubuntu Server y el equipo cliente. Para esta práctica se recomienda **modo puente con DHCP y administración por SSH desde el equipo físico**. Ese equipo servirá también como cliente web.
+
+La guía [Comprobar conectividad y SSH](../../UT01B/05_comprobar_conectividad_y_ssh.md) explica la preparación inicial del clon y las tres formas de trabajo disponibles. Si ya tienes una conexión operativa, comprueba el acceso al servidor y a los repositorios y continúa con el paso 2.
 
 ### 1.1. **Configuración de red por DHCP (modo puente en VirtualBox)**
 
-Si necesitas usar temporalmente el **modo puente** con DHCP, anota la configuración original del adaptador de VirtualBox antes de cambiarla. En la consola de la máquina virtual, identifica la interfaz y el archivo de Netplan que la configura.
+1. Anota la configuración original y guarda la copia de Netplan siguiendo [Antes de cambiar la red](../../UT01B/05_comprobar_conectividad_y_ssh.md#antes-de-cambiar-la-red). Conserva esa copia para el paso 17 si el cambio es temporal.
+2. Configura el adaptador puente y DHCP siguiendo [Puente y SSH](../../UT01B/05_comprobar_conectividad_y_ssh.md#puente-y-ssh).
+3. Instala o comprueba SSH y abre la conexión desde el equipo físico siguiendo el [apartado de SSH](../../UT01B/05_comprobar_conectividad_y_ssh.md#3-comprobar-ssh).
+4. Anota la IP del servidor que alcanza el cliente. Utiliza esa IP en SSH y en las pruebas web.
 
-```bash
-ip -br a
-ls /etc/netplan/
-```
+La captura siguiente muestra un ejemplo de DHCP en Netplan. Adapta el nombre de interfaz a tu máquina.
 
-Sustituye `archivo-real.yaml` por el nombre del archivo que has identificado. Guarda esta copia para restaurarla en el paso 17. Si ya tienes la copia original, consérvala.
-
-```bash
-sudo cp -i /etc/netplan/archivo-real.yaml /etc/netplan/archivo-real.yaml.ORIGINAL
-sudo nano /etc/netplan/archivo-real.yaml
-```
-
-Dentro de `ethernets`, sustituye la configuración estática de la interfaz que vas a cambiar por este bloque. Usa el nombre real de la interfaz y conserva el resto del archivo.
-
-```yaml
-    enp0s3: # Ejemplo. Sustituye por tu interfaz.
-      dhcp4: true
-```
 ![alt text](image-11.png)
-Aplica:
 
-```bash
-sudo netplan apply
-```
-
-Comprueba con `ip -br a` que la interfaz ha recibido una IP. Usa la IP que alcanza el cliente en las pruebas del guion.
+En los pasos 7 y 14, modifica el archivo `hosts` del **equipo físico**, donde abrirás el navegador. Asocia `sitio1.local` y `sitio2.local` a la IP del servidor.
 
 ---
 
@@ -451,7 +435,7 @@ Consulta el registro de acceso que esté configurado. Si se usa el registro com�
 > .
 ## 17. **Restaurar la configuración de red original**
 
-Si cambiaste la red en el paso 1.1, recupera la configuración original del adaptador en VirtualBox. En la consola de la máquina virtual, restaura **la misma copia del archivo de Netplan** que guardaste al inicio. Sustituye `archivo-real.yaml` por el nombre que usaste.
+Si cambiaste temporalmente la red en el paso 1.1, recupera la configuración original del adaptador en VirtualBox al terminar las pruebas. En la consola de la máquina virtual, restaura **la misma copia del archivo de Netplan** que guardaste al inicio. Sustituye `archivo-real.yaml` por el nombre que usaste.
 
 ```bash
 sudo cp /etc/netplan/archivo-real.yaml.ORIGINAL /etc/netplan/archivo-real.yaml
