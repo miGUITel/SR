@@ -125,6 +125,13 @@ Una red interna o Host-Only sin router permite la comunicación local con direcc
 
 ## 3. Comprobar SSH
 
+Comprueba su estado y la escucha en el puerto TCP 22.
+
+```bash
+sudo systemctl status ssh
+sudo ss -lntp '( sport = :22 )'
+```
+
 En Ubuntu Server, instala OpenSSH Server si falta.
 
 ```bash
@@ -132,12 +139,7 @@ sudo apt update
 sudo apt install openssh-server
 ```
 
-Comprueba su estado y la escucha en el puerto TCP 22.
 
-```bash
-sudo systemctl status ssh
-sudo ss -lntp '( sport = :22 )'
-```
 
 En versiones de Ubuntu con activación por socket, `ssh.socket` puede estar escuchando y activar el servicio al llegar la primera conexión. Puedes comprobarlo con `sudo systemctl status ssh.socket`. Si el puerto 22 está escuchando, prueba la conexión desde el cliente. Si falta la escucha, inicia SSH con `sudo systemctl start ssh` y repite la comprobación.
 
