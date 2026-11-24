@@ -1,8 +1,28 @@
 - [📝 **Guion para la práctica: Instalación de Apache y configuración de dos sitios virtuales en Ubuntu Server**](#-guion-para-la-práctica-instalación-de-apache-y-configuración-de-dos-sitios-virtuales-en-ubuntu-server)
 - [**PARTE 1 — Instalación de Apache y personalización del sitio por defecto**](#parte-1--instalación-de-apache-y-personalización-del-sitio-por-defecto)
+  - [1. **Configuración previa de red en la máquina virtual**](#1-configuración-previa-de-red-en-la-máquina-virtual)
+    - [1.1. **Configuración de red por DHCP (modo puente en VirtualBox)**](#11-configuración-de-red-por-dhcp-modo-puente-en-virtualbox)
+  - [2. **Instalación del servidor web Apache**](#2-instalación-del-servidor-web-apache)
+  - [3. **Comprobación del servicio**](#3-comprobación-del-servicio)
+  - [Aquí tienes más información sobre la configuración de apache](#aquí-tienes-más-información-sobre-la-configuración-de-apache)
+  - [4. **Personalización del sitio por defecto**](#4-personalización-del-sitio-por-defecto)
 - [**PARTE 2 — Convivencia de dos sitios virtuales**](#parte-2--convivencia-de-dos-sitios-virtuales)
 - [**PARTE 2a — Sitio con acceso anónimo (HTTP)**](#parte-2a--sitio-con-acceso-anónimo-http)
+  - [5. **Creación del directorio y contenido del sitio anónimo**](#5-creación-del-directorio-y-contenido-del-sitio-anónimo)
+  - [6. **Creación del VirtualHost del sitio anónimo**](#6-creación-del-virtualhost-del-sitio-anónimo)
+  - [7. **Habilitar este sitio y desactivar el sitio por defecto**](#7-habilitar-este-sitio-y-desactivar-el-sitio-por-defecto)
 - [**PARTE 2b — Sitio con acceso autenticado y HTTPS**](#parte-2b--sitio-con-acceso-autenticado-y-https)
+  - [8. **Creación del directorio y contenido del sitio autenticado**](#8-creación-del-directorio-y-contenido-del-sitio-autenticado)
+  - [9. **Instalación de módulos de autenticación externa**](#9-instalación-de-módulos-de-autenticación-externa)
+  - [10. **Creación del certificado digital autofirmado**](#10-creación-del-certificado-digital-autofirmado)
+  - [11. **Creación del sitio autenticado (HTTPS + Basic Auth + pwauth)**](#11-creación-del-sitio-autenticado-https--basic-auth--pwauth)
+  - [12. **Habilitar el sitio autenticado**](#12-habilitar-el-sitio-autenticado)
+  - [13. **Consulta de sitios y comprobación de errores**](#13-consulta-de-sitios-y-comprobación-de-errores)
+  - [14. **Configuración del archivo hosts en el cliente**](#14-configuración-del-archivo-hosts-en-el-cliente)
+  - [15. **Conexión desde cliente web con un navegador moderno**](#15-conexión-desde-cliente-web-con-un-navegador-moderno)
+  - [16. **Revisión de logs de Apache**](#16-revisión-de-logs-de-apache)
+  - [ENTREGAS:](#entregas)
+  - [17. **Restaurar la configuración de red original**](#17-restaurar-la-configuración-de-red-original)
 
 
 # 📝 **Guion para la práctica: Instalación de Apache y configuración de dos sitios virtuales en Ubuntu Server**
@@ -407,10 +427,19 @@ Consulta el registro de acceso que esté configurado. Si se usa el registro com�
 
 ## ENTREGAS:
 
-> Entrega tres capturas:
-> 1. Archivo de configuración del sitio cifrado y salida de `apache2ctl -M` donde se vean los módulos de autenticación externa y SSL.
-> 2. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde un navegador del cliente y mostrando la ip)
-> 3. Contenido del log de apache con los registros más recientes, en el que se vea la conexión desde el cliente de la captura anterior.
+> **Entrega seis capturas:**
+> 
+> 1. Parte 1: 4 captura del sitio original modificado.
+> 
+> 2. Archivo de configuración del sitio cifrado y salida de `apache2ctl -M` donde se vean los módulos de autenticación externa y SSL.
+> 
+> 3. Parte 2a - 7: Archivo de configuración del sitio 1
+> 
+> 4. Parte 2a - 7: Servidor con `systemctl status` y su IP, y las dos páginas abiertas desde el cliente. Deja visibles las direcciones en el navegador para que se pueda comparar la selección por IP y por nombre.
+> 
+> 5. Acceso al sitio desde un cliente en la misma red (a un lado el servidor, con `systemctl status` y mostrando la ip y, al otro lado, el acceso desde un navegador del cliente y mostrando la ip)
+> 
+> 6. Contenido del log de apache con los registros más recientes, en el que se vea la conexión desde el cliente de la captura anterior.
 
 
 ## 17. **Restaurar la configuración de red original**
