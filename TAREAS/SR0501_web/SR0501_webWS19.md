@@ -301,7 +301,7 @@ Una documento pdf con las siguientes capturas:
 
 (PC, máquina virtual o cualquier otro equipo de la red)
 
-**9.** Captura de `ping sitio1.local` y `ping sitio2.net` mostrando que resuelven el nombre.
+**9.** Captura **en el cliente** de `ping sitio1.local` y `ping sitio2.net` mostrando que resuelven el nombre a la misma ip, que es la del servidor.
 
 
 **10.** Captura del navegador desde otro equipo accediendo a `https://sitio1.local`.

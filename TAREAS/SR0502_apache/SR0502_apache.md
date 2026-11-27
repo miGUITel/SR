@@ -429,7 +429,7 @@ Consulta el registro de acceso que esté configurado. Si se usa el registro com�
 
 > **Entrega seis capturas:**
 > 
-> 1. Parte 1: 4 captura del sitio original modificado.
+> 1. Parte 1 - 4: captura del sitio original modificado.
 > 
 > 2. Archivo de configuración del sitio cifrado y salida de `apache2ctl -M` donde se vean los módulos de autenticación externa y SSL.
 > 
